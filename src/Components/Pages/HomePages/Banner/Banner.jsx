@@ -123,7 +123,7 @@ const Banner = () => {
                                     </div>
                                     <div className='text-center space-y-2'>
                                         <button
-                                            className='bg-[#d1fae5] text-[#059669] font-poppins font-medium text-base border border-dashed border-green-700 py-1.5 px-4 rounded-lg'
+                                            className='bg-[#d1fae5] text-[#059669] font-poppins font-medium text-sm border border-dashed border-green-700 py-1.5 px-4 rounded-lg'
                                             onClick={handleCopy}>
                                             {coupon.couponCode}
                                         </button>
