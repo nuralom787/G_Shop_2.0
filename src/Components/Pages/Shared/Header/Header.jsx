@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <section className='sticky top-0 z-20'>
             {/* Header */}
-            <div className="bg-[#00a63e]">
+            <div className="bg-[#63e075]">
                 <div className="max-w-screen-2xl mx-auto px-6 text-[#151515] py-4 flex justify-between items-center gap-10">
                     <img className="w-16" src={logo} alt="" />
                     <form className="w-full bg-white rounded-md inline-flex justify-between items-center">
@@ -47,25 +47,27 @@ const Header = () => {
             </div>
 
             {/* Navigation Bar */}
-            <div className="max-w-screen-2xl mx-auto px-6 bg-white text-[#151515] py-4 flex justify-between items-center">
-                <div className="space-x-6 font-semibold font-poppins text-sm">
-                    <div className="dropdown">
-                        <div tabIndex={0} role="button" className="hover:text-[#00a63e] cursor-pointer inline-flex items-center gap-2">
-                            Category
-                            <IoIosArrowDown />
+            <div className="bg-white">
+                <div className="max-w-screen-2xl mx-auto px-6 text-[#151515] py-4 flex justify-between items-center">
+                    <div className="space-x-6 font-semibold font-poppins text-sm">
+                        <div className="dropdown">
+                            <div tabIndex={0} role="button" className="hover:text-[#63e075] cursor-pointer inline-flex items-center gap-2">
+                                Category
+                                <IoIosArrowDown />
+                            </div>
+                            <ul tabIndex={0} className="dropdown-content menu bg-white rounded-box z-1 w-full p-2 shadow-sm">
+                                <li><a>Item 1</a></li>
+                                <li><a>Item 2</a></li>
+                            </ul>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content menu bg-white rounded-box z-1 w-full p-2 shadow-sm">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
-                        </ul>
+                        <NavLink className="hover:text-[#63e075] duration-300" to="/">About Us</NavLink>
+                        <NavLink className="hover:text-[#63e075] duration-300" to="/">Contact Us</NavLink>
+                        <NavLink className="hover:text-[#63e075] duration-300" to="/">Trams & Conditions</NavLink>
                     </div>
-                    <NavLink className="hover:text-[#00a63e] duration-300" to="/">About Us</NavLink>
-                    <NavLink className="hover:text-[#00a63e] duration-300" to="/">Contact Us</NavLink>
-                    <NavLink className="hover:text-[#00a63e] duration-300" to="/">Trams & Conditions</NavLink>
-                </div>
-                <div className="space-x-6 font-semibold font-poppins text-sm">
-                    <NavLink className="hover:text-[#00a63e] duration-300" to="/">Privacy Policy</NavLink>
-                    <NavLink className="hover:text-[#00a63e] duration-300" to="/">Refound Policy</NavLink>
+                    <div className="space-x-6 font-semibold font-poppins text-sm">
+                        <NavLink className="hover:text-[#63e075] duration-300" to="/">Privacy Policy</NavLink>
+                        <NavLink className="hover:text-[#63e075] duration-300" to="/">Refound Policy</NavLink>
+                    </div>
                 </div>
             </div>
         </section>

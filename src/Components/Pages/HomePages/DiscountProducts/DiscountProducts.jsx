@@ -19,7 +19,7 @@ const DiscountProducts = () => {
                 {isPending || isError ?
                     <div className="flex justify-center items-center my-32">
                         <ScaleLoader
-                            color={"#00a63e"}
+                            color={"#63e075"}
                             loading={true}
                             size={500}
                             aria-label="Loading Spinner"
@@ -31,7 +31,7 @@ const DiscountProducts = () => {
                         {
                             discountedProducts?.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                 <NavLink to="/">
-                                    <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#00a63e] text-xs">
+                                    <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#63e075] text-xs">
                                         Stock: <span className="text-red-700">{product.quantity}</span>
                                     </p>
                                     {product.discount > 0 && <p className="absolute top-2 right-2 bg-orange-500 px-3 py-1 rounded-full text-white text-xs">

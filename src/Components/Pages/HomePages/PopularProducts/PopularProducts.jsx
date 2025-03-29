@@ -19,7 +19,7 @@ const PopularProducts = () => {
                 {isPending || isError ?
                     <div className="flex justify-center items-center my-32">
                         <ScaleLoader
-                            color={"#00a63e"}
+                            color={"#63e075"}
                             loading={true}
                             size={500}
                             aria-label="Loading Spinner"
@@ -31,7 +31,7 @@ const PopularProducts = () => {
                         {
                             products.products.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                 <NavLink to="/">
-                                    <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#00a63e] text-xs">
+                                    <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#63e075] text-xs">
                                         Stock: <span className="text-red-700">{product.quantity}</span>
                                     </p>
                                     {product.discount > 0 && <p className="absolute top-2 right-2 bg-orange-500 px-3 py-1 rounded-full text-white text-xs">
@@ -52,7 +52,7 @@ const PopularProducts = () => {
                     </div>
                 }
             </div>
-            <div className="bg-[#00a63e] p-14 rounded-lg">
+            <div className="bg-[#63e075] p-14 rounded-lg">
                 <div className="bg-white p-14 rounded-lg flex justify-between items-center gap-14">
                     <div className="font-poppins text-[#151515] space-y-2">
                         <h3 className="text-lg">Organic Products and Food</h3>
@@ -61,7 +61,7 @@ const PopularProducts = () => {
                             There are many products you will find in our shop, Choose your daily necessary product from our G-shop
                             and get some special offers. See Our latest discounted products from here and get a special discount.
                         </p>
-                        <button className="bg-[#00a63e] text-white font-semibold text-xs px-6 py-2 mt-6 rounded-full cursor-pointer">Download App</button>
+                        <button className="bg-[#63e075] text-white font-semibold text-xs px-6 py-2 mt-6 rounded-full cursor-pointer">Download App</button>
                     </div>
                     <img className="w-lg" src={delivery} alt="" />
                 </div>

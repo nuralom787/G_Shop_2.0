@@ -15,7 +15,7 @@ const Categories = () => {
                 {isPending || isError ?
                     <div className="flex justify-center items-center my-32">
                         <ScaleLoader
-                            color={"#00a63e"}
+                            color={"#63e075"}
                             loading={true}
                             size={500}
                             aria-label="Loading Spinner"

@@ -85,7 +85,7 @@ const Banner = () => {
                         {isPending || isError ?
                             <div className="flex justify-center items-center my-32">
                                 <ScaleLoader
-                                    color={"#00a63e"}
+                                    color={"#63e075"}
                                     loading={true}
                                     size={500}
                                     aria-label="Loading Spinner"
@@ -141,7 +141,7 @@ const Banner = () => {
                     <h1 className='text-xl font-bold text-green-600'>100% Natural Quality Organic Product</h1>
                     <p className='font-medium text-sm text-gray-500'>See Our latest discounted products from here and get a special discount product</p>
                 </div>
-                <button className='font-semibold text-sm text-white bg-[#00a63e] px-5 py-2 rounded-full cursor-pointer'>
+                <button className='font-semibold text-sm text-white bg-[#63e075] px-5 py-2 rounded-full cursor-pointer'>
                     Shop Now
                 </button>
             </div>
