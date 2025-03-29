@@ -1,18 +1,18 @@
 import { ScaleLoader } from "react-spinners";
 import useProducts from "../../../../Hooks/useProducts";
 import { NavLink } from "react-router";
-import delivery from '../../../Images/delivery.svg';
 
-const PopularProducts = () => {
+const DiscountProducts = () => {
     const [products, , isPending, isError] = useProducts();
-
+    const discountedProducts = products?.products?.filter(product => product.discount > 0);
+    console.log(discountedProducts);
 
     return (
         <section className="max-w-screen-2xl mx-auto px-6">
             <div className="font-poppins text-center">
-                <h2 className="text-2xl text-[#151515] font-semibold leading-10">Popular Products for Daily Shopping</h2>
+                <h2 className="text-2xl text-[#151515] font-semibold leading-10">Latest Discounted Products</h2>
                 <p className="text-base text-gray-500 font-medium">
-                    See all our popular products in this week. You can choose your daily needs <br /> products from this list and get some special offer with free shipping
+                    See Our latest discounted products below. Choose your daily needs from here <br /> and get a special discount with free shipping.
                 </p>
             </div>
             <div className="py-14">
@@ -29,7 +29,7 @@ const PopularProducts = () => {
                     :
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                         {
-                            products.products.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
+                            discountedProducts?.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                 <NavLink to="/">
                                     <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#00a63e] text-xs">
                                         Stock: <span className="text-red-700">{product.quantity}</span>
@@ -43,7 +43,7 @@ const PopularProducts = () => {
                                     <div className="font-poppins text-[#151515] px-4 pb-4">
                                         <h3 className="font-light text-sm hover:underline">{product.title}</h3>
                                         <h1 className="font-semibold text-xl leading-10">
-                                            ${product.price.toFixed(2)} {product.discount > 0 && <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>}
+                                            ${product.price.toFixed(2)} <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
                                         </h1>
                                     </div>
                                 </NavLink>
@@ -52,22 +52,8 @@ const PopularProducts = () => {
                     </div>
                 }
             </div>
-            <div className="bg-[#00a63e] p-14 rounded-lg">
-                <div className="bg-white p-14 rounded-lg flex justify-between items-center gap-14">
-                    <div className="font-poppins text-[#151515] space-y-2">
-                        <h3 className="text-lg">Organic Products and Food</h3>
-                        <h1 className="text-2xl font-bold">Quick Delivery to Your Home</h1>
-                        <p className="text-sm">
-                            There are many products you will find in our shop, Choose your daily necessary product from our G-shop
-                            and get some special offers. See Our latest discounted products from here and get a special discount.
-                        </p>
-                        <button className="bg-[#00a63e] text-white font-semibold text-xs px-6 py-2 mt-6 rounded-full cursor-pointer">Download App</button>
-                    </div>
-                    <img className="w-lg" src={delivery} alt="" />
-                </div>
-            </div>
         </section>
     );
 };
 
-export default PopularProducts;
+export default DiscountProducts;
