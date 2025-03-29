@@ -5,7 +5,6 @@ import { NavLink } from "react-router";
 const DiscountProducts = () => {
     const [products, , isPending, isError] = useProducts();
     const discountedProducts = products?.products?.filter(product => product.discount > 0);
-    console.log(discountedProducts);
 
     return (
         <section className="max-w-screen-2xl mx-auto px-6">

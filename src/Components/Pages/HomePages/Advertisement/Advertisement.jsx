@@ -4,6 +4,7 @@ import appStore from '../../../Images/app-store.svg';
 import playStore from '../../../Images/play-store.svg';
 
 
+
 const Advertisement = () => {
     return (
         <section className='bg-gray-200'>
@@ -19,9 +20,6 @@ const Advertisement = () => {
                         </div>
                     </div>
                     <img className='w-md' src={logo5} alt="" />
-                </div>
-                <div className='bg-white'>
-
                 </div>
             </div>
         </section>
