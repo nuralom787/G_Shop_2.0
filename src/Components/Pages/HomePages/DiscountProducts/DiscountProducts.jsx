@@ -36,8 +36,8 @@ const DiscountProducts = () => {
                                     {product.discount > 0 && <p className="absolute top-2 right-2 bg-orange-500 px-3 py-1 rounded-full text-white text-xs">
                                         {product.discount.toFixed(2)}% Off
                                     </p>}
-                                    <div className="bg-white rounded-md p-2">
-                                        <img className="w-40 mx-auto" src={product.image} alt="" />
+                                    <div className="bg-white rounded-md p-2 flex">
+                                        <img className="w-40 mx-auto grow" src={product.image} alt="" />
                                     </div>
                                     <div className="font-poppins text-[#151515] px-4 pb-4">
                                         <h3 className="font-light text-sm hover:underline">{product.title}</h3>

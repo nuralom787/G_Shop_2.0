@@ -66,13 +66,28 @@ const Banner = () => {
                         emulateTouch={true}
                         showThumbs={false}
                     >
-                        <div>
+                        <div className='relative'>
+                            <div className='font-poppins w-3/6 absolute top-1/5 left-14 text-start space-y-4'>
+                                <h1 className='font-extrabold text-3xl text-[#151515]'>The Best Quality Products Guaranteed!</h1>
+                                <p className='text-gray-700 text-base'>Intrinsicly fashion performance based products rather than accurate benefits...</p>
+                                <button className='font-semibold text-sm text-white px-6 py-3 rounded-md bg-[#63e075] cursor-pointer'>Shop Now</button>
+                            </div>
                             <img src={slider1} alt="" />
                         </div>
-                        <div>
+                        <div className='relative'>
+                            <div className='font-poppins w-3/6 absolute top-1/5 left-14 text-start space-y-4'>
+                                <h1 className='font-extrabold text-3xl text-[#151515]'>Best Different Type of Grocery Store</h1>
+                                <p className='text-gray-700 text-base'>Intrinsicly fashion performance based products rather than accurate benefits...</p>
+                                <button className='font-semibold text-sm text-white px-6 py-3 rounded-md bg-[#63e075] cursor-pointer'>Shop Now</button>
+                            </div>
                             <img src={slider2} alt="" />
                         </div>
-                        <div>
+                        <div className='relative'>
+                            <div className='font-poppins w-3/6 absolute top-1/5 left-14 text-start space-y-4'>
+                                <h1 className='font-extrabold text-3xl text-[#151515]'>Best Different Type of Grocery Store</h1>
+                                <p className='text-gray-700 text-base'>Intrinsicly fashion performance based products rather than accurate benefits...</p>
+                                <button className='font-semibold text-sm text-white px-6 py-3 rounded-md bg-[#63e075] cursor-pointer'>Shop Now</button>
+                            </div>
                             <img src={slider3} alt="" />
                         </div>
                     </Carousel>
