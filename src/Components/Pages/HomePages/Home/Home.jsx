@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 import PopularProducts from '../PopularProducts/PopularProducts';
@@ -7,6 +7,11 @@ import Advertisement from '../Advertisement/Advertisement';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
+
     return (
         <section className='bg-gray-100 space-y-16'>
             <Helmet>
@@ -16,7 +21,6 @@ const Home = () => {
             <Categories />
             <PopularProducts />
             <DiscountProducts />
-            <Advertisement />
         </section>
     );
 };

@@ -1,12 +1,15 @@
 import { useParams } from "react-router";
 import useProduct from "../../../../Hooks/useProduct";
 import { ScaleLoader } from "react-spinners";
+import { useEffect } from "react";
 
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, , isPending, isError] = useProduct(id);
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
 
     return (
         <section className="bg-gray-300 py-10">
