@@ -26,8 +26,8 @@ function useCart() {
 
 
     // Add or increment a product
-    const addToCart = (productId) => {
-        setCart(prev => ({ ...prev, [productId]: (prev[productId] || 0) + 1 }));
+    const addToCart = (productId, quantity) => {
+        setCart(prev => ({ ...prev, [productId]: (prev[productId] || 0) + quantity }));
     };
 
 
