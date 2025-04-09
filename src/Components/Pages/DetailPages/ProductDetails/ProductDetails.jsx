@@ -4,13 +4,19 @@ import { ScaleLoader } from "react-spinners";
 import { useEffect, useState } from "react";
 import useCart from "../../../../Hooks/useCart";
 import useProducts from "../../../../Hooks/useProducts";
+import { FiTruck } from "react-icons/fi";
+import { IoHomeOutline } from "react-icons/io5";
+import { PiCurrencyDollarDuotone } from "react-icons/pi";
+import { IoRepeat } from "react-icons/io5";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { CiLocationOn } from "react-icons/ci";
+
 
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, , isPending, isError] = useProduct(id);
     const [products] = useProducts();
-    const relatedProduct = products?.products?.filter(pt => pt.parent === product.parent);
-    console.log(relatedProduct)
+    const relatedProduct = products?.products?.filter(pt => pt?.parent === product?.parent);
     const { addToCart } = useCart();
     const [newQuantity, setNewQuantity] = useState(1);
 
@@ -97,8 +103,33 @@ const ProductDetails = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                <div>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, quam ab? Sed dolore a ducimus iste ipsum. Modi possimus veniam voluptas, nobis ab consequatur unde exercitationem quae itaque, quos, temporibus fugit voluptatem quo velit impedit ipsa ullam praesentium quam earum rem distinctio illo. Accusamus natus illum, impedit atque commodi fugiat.</p>
+                                <div className="bg-gray-300 rounded-lg px-6 py-10">
+                                    <ul>
+                                        <li className="flex items-center gap-4 font-poppins py-4">
+                                            <FiTruck className="text-gray-400 text-2xl" />
+                                            <p className="text-sm font-light text-gray-600 text-start">Free shipping applies to all orders over shipping €100</p>
+                                        </li>
+                                        <li className="flex items-center gap-4 font-poppins py-4">
+                                            <IoHomeOutline className="text-gray-400 text-2xl" />
+                                            <p className="text-sm font-light text-gray-600 text-start">Home Delivery within 1 Hour</p>
+                                        </li>
+                                        <li className="flex items-center gap-4 font-poppins py-4">
+                                            <PiCurrencyDollarDuotone className="text-gray-400 text-2xl" />
+                                            <p className="text-sm font-light text-gray-600 text-start">Cash on Delivery Available</p>
+                                        </li>
+                                        <li className="flex items-center gap-4 font-poppins py-4">
+                                            <IoRepeat className="text-gray-400 text-2xl" />
+                                            <p className="text-sm font-light text-gray-600 text-start">7 Days returns money back guarantee</p>
+                                        </li>
+                                        <li className="flex items-center gap-4 font-poppins py-4">
+                                            <MdOutlineWbSunny className="text-gray-400 text-2xl" />
+                                            <p className="text-sm font-light text-gray-600 text-start">Guaranteed 100% organic from natural products.</p>
+                                        </li>
+                                        <li className="flex items-center gap-4 font-poppins py-4">
+                                            <CiLocationOn className="text-gray-400 text-2xl" />
+                                            <p className="text-sm font-light text-gray-600 text-start">Delivery from our pick point.</p>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -115,8 +146,28 @@ const ProductDetails = () => {
                                     />
                                 </div>
                                 :
-                                <div>
-
+                                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                                    {
+                                        relatedProduct.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
+                                            <NavLink className="group" to={`/product/${product._id}`}>
+                                                <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#63e075] text-xs z-10">
+                                                    Stock: <span className="text-red-700">{product.quantity}</span>
+                                                </p>
+                                                {product.discount > 0 && <p className="absolute top-2 right-2 bg-orange-500 px-3 py-1 rounded-full text-white text-xs z-10">
+                                                    {product.discount.toFixed(2)}% Off
+                                                </p>}
+                                                <div className="bg-white rounded-md p-2 flex">
+                                                    <img className="w-40 h-44 mx-auto grow scale-90 group-hover:scale-100 duration-300" src={product.image} alt="" />
+                                                </div>
+                                                <div className="font-poppins text-[#151515] px-4 pb-4">
+                                                    <h3 className="font-light text-sm group-hover:underline">{product.title}</h3>
+                                                    <h1 className="font-semibold text-xl leading-10">
+                                                        ${product.price.toFixed(2)} {product.discount > 0 && <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>}
+                                                    </h1>
+                                                </div>
+                                            </NavLink>
+                                        </div>)
+                                    }
                                 </div>
                             }
                         </div>
