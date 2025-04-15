@@ -1,5 +1,7 @@
 import { ScaleLoader } from "react-spinners";
 import useCategories from "../../../../Hooks/useCategories";
+import { NavLink } from "react-router";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Categories = () => {
     const [categories, , isPending, isError] = useCategories();
@@ -25,22 +27,27 @@ const Categories = () => {
                     :
                     <ul className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-0.5">
                         {
-                            categories?.categories?.map(category => <li className="flex items-center gap-3 p-4 bg-white" key={category._id}>
-                                <img className="w-9" src={category.icon} alt="" />
-                                <div className="font-poppins">
-                                    <h3 className="text-sm text-[#151515]">{category.parent}</h3>
-                                    <ul className="">
-                                        {
-                                            category.children.slice(0, 3).map(item => <li
-                                                key={item}
-                                                className="text-gray-500 text-xs"
-                                            >
-                                                {item}
-                                            </li>)
-                                        }
-                                    </ul>
-                                </div>
-                            </li>)
+                            categories?.categories?.map(category => <NavLink
+                                key={category._id}
+                                to={`/category=${category.parent}&_id=${category._id}`}
+                                className="bg-gray-300 p-4 group"
+                            >
+                                <li className="flex items-center gap-3">
+                                    <img className="w-9" src={category.icon} alt="" />
+                                    <div className="font-poppins">
+                                        <h3 className="text-sm text-[#151515] group-hover:text-[#8B4513]">{category.parent}</h3>
+                                        <ul className="">
+                                            {
+                                                category.children.slice(0, 3).map(item => <li key={item} className="text-gray-500 text-xs hover:text-[#8B4513] hover:ms-2 duration-300">
+                                                    <NavLink to={`/category/item=${item}`} className="flex items-center gap-0.5 py-0.5">
+                                                        <IoIosArrowForward /> {item}
+                                                    </NavLink>
+                                                </li>)
+                                            }
+                                        </ul>
+                                    </div>
+                                </li>
+                            </NavLink>)
                         }
                     </ul>
                 }

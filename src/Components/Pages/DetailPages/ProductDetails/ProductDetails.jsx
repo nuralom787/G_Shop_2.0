@@ -2,7 +2,6 @@ import { NavLink, useParams } from "react-router";
 import useProduct from "../../../../Hooks/useProduct";
 import { ScaleLoader } from "react-spinners";
 import { useEffect, useState } from "react";
-import useCart from "../../../../Hooks/useCart";
 import useProducts from "../../../../Hooks/useProducts";
 import { FiTruck } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
@@ -10,6 +9,7 @@ import { PiCurrencyDollarDuotone } from "react-icons/pi";
 import { IoRepeat } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
+import { Helmet } from "react-helmet-async";
 
 
 const ProductDetails = () => {
@@ -17,7 +17,6 @@ const ProductDetails = () => {
     const [product, , isPending, isError] = useProduct(id);
     const [products] = useProducts();
     const relatedProduct = products?.products?.filter(pt => pt?.parent === product?.parent);
-    const { addToCart } = useCart();
     const [newQuantity, setNewQuantity] = useState(1);
 
     useEffect(() => {
@@ -44,6 +43,9 @@ const ProductDetails = () => {
 
     return (
         <section className="bg-gray-300 py-10">
+            <Helmet>
+                <title>G-Shop | {isPending || isError ? " " : product?.title}</title>
+            </Helmet>
             <section className="max-w-screen-2xl mx-auto px-6">
                 {isPending || isError ?
                     <div className="flex justify-center items-center my-32">
@@ -86,7 +88,8 @@ const ProductDetails = () => {
                                         </div>
                                         <button
                                             className='px-4 py-4 bg-gray-800 hover:bg-gray-900 duration-500 cursor-pointer rounded-md text-sm font-extrabold text-white'
-                                            onClick={() => addToCart(product._id, newQuantity)}>
+                                        // onClick={() => addToCart(product._id, newQuantity)}
+                                        >
                                             Add To Cart
                                         </button>
                                     </div>

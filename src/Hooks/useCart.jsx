@@ -1,76 +1,18 @@
-import { useState, useEffect } from 'react';
-
-const CART_KEY = 'cart';
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
 function useCart() {
-    const [cart, setCart] = useState({});
+    const axiosSecure = useAxiosSecure();
 
-    // Load cart from localStorage on mount
-    useEffect(() => {
-        const storedCart = localStorage.getItem(CART_KEY);
-        if (storedCart) {
-            setCart(JSON.parse(storedCart));
+    const { data: carts, refetch, isPending, isError } = useQuery({
+        queryKey: ['carts'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/carts?email=alamn7150@gmail.com`);
+            return res.data;
         }
-    }, []);
+    });
 
-
-
-
-    // Sync cart with localStorage whenever it changes
-    useEffect(() => {
-        localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    }, [cart]);
-
-
-
-
-
-    // Add or increment a product
-    const addToCart = (productId, quantity) => {
-        setCart(prev => ({ ...prev, [productId]: (prev[productId] || 0) + quantity }));
-    };
-
-
-
-
-    // Decrease quantity or remove if zero
-    const decreaseQuantity = (productId) => {
-        setCart(prev => {
-            if (!prev[productId]) return prev;
-
-            const updated = { ...prev };
-            updated[productId] -= 1;
-            if (updated[productId] <= 0) {
-                delete updated[productId];
-            }
-            return updated;
-        });
-    };
-
-
-
-
-    // Remove product completely
-    const removeFromCart = (productId) => {
-        setCart(prev => {
-            const updated = { ...prev };
-            delete updated[productId];
-            return updated;
-        });
-    };
-
-    // Clear the entire cart
-    // const clearCart = () => {
-    //     setCart({});
-    // };
-
-    return {
-        cart,
-        addToCart,
-        decreaseQuantity,
-        removeFromCart,
-        // clearCart
-    };
-}
+    return [carts, refetch, isPending, isError];
+};
 
 export default useCart;
