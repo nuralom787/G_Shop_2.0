@@ -29,7 +29,7 @@ const Categories = () => {
                         {
                             categories?.categories?.map(category => <NavLink
                                 key={category._id}
-                                to={`/category=${category.parent}&_id=${category._id}`}
+                                to={`/search?category=${encodeURIComponent(category.parent)}&_id=${category._id}`}
                                 className="bg-gray-300 p-4 group"
                             >
                                 <li className="flex items-center gap-3">
@@ -39,7 +39,7 @@ const Categories = () => {
                                         <ul className="">
                                             {
                                                 category.children.slice(0, 3).map(item => <li key={item} className="text-gray-500 text-xs hover:text-[#8B4513] hover:ms-2 duration-300">
-                                                    <NavLink to={`/category/item=${item}`} className="flex items-center gap-0.5 py-0.5">
+                                                    <NavLink to={`/search?category=${encodeURIComponent(category.parent)}&item=${encodeURIComponent(item)}`} className="flex items-center gap-0.5 py-0.5">
                                                         <IoIosArrowForward /> {item}
                                                     </NavLink>
                                                 </li>)

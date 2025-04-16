@@ -5,6 +5,7 @@ import Main from './Components/Pages/Main/Main';
 import Home from './Components/Pages/HomePages/Home/Home';
 import './App.css';
 import ProductDetails from './Components/Pages/DetailPages/ProductDetails/ProductDetails';
+import Search from './Components/Pages/Search/Search';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path='/' element={<Main />}>
               <Route path='/' element={<Home />}></Route>
               <Route path='/product/:id' element={<ProductDetails />}></Route>
+              <Route path='/search' element={<Search />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>
