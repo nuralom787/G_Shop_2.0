@@ -30,7 +30,7 @@ const Categories = () => {
                             categories?.categories?.map(category => <NavLink
                                 key={category._id}
                                 to={`/search?category=${encodeURIComponent(category.parent)}&_id=${category._id}`}
-                                className="bg-gray-300 p-4 group"
+                                className="bg-white p-4 group"
                             >
                                 <li className="flex items-center gap-3">
                                     <img className="w-9" src={category.icon} alt="" />
