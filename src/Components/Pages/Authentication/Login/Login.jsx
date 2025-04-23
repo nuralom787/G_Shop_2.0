@@ -69,20 +69,20 @@ const Login = () => {
                     </div>
                     <div className="card-body p-0 text-[#151515]">
                         <form onSubmit={handleSubmit(onSubmit)} className="fieldset">
-                            <label className="label text-base font-normal">Email</label>
+                            <label className="label text-base font-normal mt-2.5">Email</label>
                             <input
-                                {...register("email")}
+                                {...register("email", { required: true })}
                                 type="email"
-                                className="px-5 py-3 rounded outline-0 focus:outline-1 outline-[#63e075] duration-150 bg-white border border-gray-300 mb-2.5 text-base"
+                                className="px-5 py-3 rounded outline-0 focus:outline-1 outline-[#63e075] duration-150 bg-white border border-gray-300 text-base"
                                 placeholder="Email" />
-                            {errors.email && <span className="text-red-600">This field is required *</span>}
-                            <label className="label text-base font-normal">Password</label>
+                            {errors.email && <span className="text-red-600 text-start text-sm">Email is required *</span>}
+                            <label className="label text-base font-normal mt-2.5">Password</label>
                             <input
-                                {...register("password")}
+                                {...register("password", { required: true })}
                                 type="password"
-                                className="px-5 py-3 rounded outline-0 focus:outline-1 outline-[#63e075] duration-150 bg-white border border-gray-300 mb-2.5 text-base"
+                                className="px-5 py-3 rounded outline-0 focus:outline-1 outline-[#63e075] duration-150 bg-white border border-gray-300 text-base"
                                 placeholder="Password" />
-                            {errors.password && <span className="text-red-600">This field is required *</span>}
+                            {errors.password && <span className="text-red-600 text-start text-sm">Password is required *</span>}
                             <div className='text-end'>
                                 <Link to={"/"} className="hover:underline text-sm">Forgot password?</Link>
                             </div>
