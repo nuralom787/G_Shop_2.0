@@ -6,6 +6,10 @@ import Home from './Components/Pages/HomePages/Home/Home';
 import './App.css';
 import ProductDetails from './Components/Pages/DetailPages/ProductDetails/ProductDetails';
 import Search from './Components/Pages/Search/Search';
+import Login from './Components/Pages/Authentication/Login/Login';
+import Register from './Components/Pages/Authentication/Register/Register';
+import AuthProvider from './Provider/AuthProvider';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -13,17 +17,22 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Main />}>
-              <Route path='/' element={<Home />}></Route>
-              <Route path='/product/:id' element={<ProductDetails />}></Route>
-              <Route path='/search' element={<Search />}></Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </HelmetProvider>
+      <AuthProvider>
+        <HelmetProvider>
+          <ToastContainer />
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Main />}>
+                <Route path='/' element={<Home />}></Route>
+                <Route path='/product/:id' element={<ProductDetails />}></Route>
+                <Route path='/search' element={<Search />}></Route>
+                <Route path='/user/login' element={<Login />}></Route>
+                <Route path='/user/register' element={<Register />}></Route>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </HelmetProvider>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }

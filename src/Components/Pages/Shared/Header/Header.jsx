@@ -5,12 +5,19 @@ import logo from '../../../Images/logo.jpg';
 import { NavLink } from "react-router";
 import useCategories from "../../../../Hooks/useCategories";
 import useCart from "../../../../Hooks/useCart";
+import { useContext } from "react";
+import { AuthContext } from "../../../../Provider/AuthProvider";
 
 
 const Header = () => {
+    const { user } = useContext(AuthContext);
     const [categories] = useCategories();
     const [cart] = useCart();
 
+
+    const getInitial = () => {
+        return user?.email ? user?.email.charAt(0).toUpperCase() : '?';
+    };
 
     return (
         <section className='sticky top-0 z-20'>
@@ -40,13 +47,29 @@ const Header = () => {
                     </form>
                     <ul className="col-span-2 flex justify-end items-center gap-10 text-white text-3xl">
                         <li className="relative cursor-pointer">
-                            <FiShoppingCart />
+                            <FiShoppingCart className="text-4xl" />
                             <p className="absolute -top-2 -right-2 inline-flex items-center justify-center bg-red-600 text-white text-sm p-3 h-5 w-5 rounded-full">
                                 {cart?.length || 0}
                             </p>
                         </li>
                         <li className="cursor-pointer">
-                            <FaRegUser />
+                            {user?.email ?
+                                <div>
+                                    {user?.photoURL ?
+                                        (<img
+                                            src={user.photoURL}
+                                            alt={user.displayName}
+                                            className="w-11 h-11 rounded-full object-cover"
+                                        />)
+                                        :
+                                        <div className="w-11 h-11 rounded-full bg-gray-300 flex items-center justify-center text-black text-xl font-bold">
+                                            {getInitial(name)}
+                                        </div>
+                                    }
+                                </div>
+                                :
+                                <FaRegUser className="text-3xl" />
+                            }
                         </li>
                     </ul>
                 </div>

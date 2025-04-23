@@ -45,7 +45,7 @@ const Search = () => {
 
     // Sort Products.
     const sortData = (value) => {
-        console.log(value)
+        // console.log(value)
         if (value === "asc") {
             const sortProducts = [...matchProduct].sort((a, b) => a.price - b.price);
             setMatchProduct(sortProducts);

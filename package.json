@@ -13,12 +13,15 @@
     "@tanstack/react-query": "^5.69.0",
     "axios": "^1.8.4",
     "copy-to-clipboard": "^3.3.3",
+    "firebase": "^11.6.0",
     "react": "^18.3.1",
     "react-countdown": "^2.3.6",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
+    "react-hook-form": "^7.56.1",
     "react-responsive-carousel": "^3.2.23",
     "react-spinners": "^0.15.0",
+    "react-toastify": "^11.0.5",
     "swiper": "^11.2.6"
   },
   "devDependencies": {

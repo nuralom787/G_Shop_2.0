@@ -42,8 +42,8 @@ const Banner = () => {
         }
     };
 
-    const handleCopy = (e) => {
-        console.log(e.target.text);
+    const handleCopy = () => {
+        // console.log(e.target.text);
         // const isCopied = copy(text);
         // if (isCopied) {
         //     alert('Text copied to clipboard!');
