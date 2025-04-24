@@ -9,12 +9,15 @@ import useCategories from "../../../Hooks/useCategories";
 import { useLocation } from "react-router";
 import useProducts from "../../../Hooks/useProducts";
 import { ScaleLoader } from "react-spinners";
+import { Helmet } from "react-helmet-async";
+import noFound from '../../Images/notFound.svg';
 
 const Search = () => {
     // Get Search Queries.
     const { search } = useLocation();
     const queryParams = new URLSearchParams(search);
 
+    const searchText = decodeURIComponent(queryParams.get('search'));
     const category = decodeURIComponent(queryParams.get('category'));
     const _id = queryParams.get('_id');
     const item = queryParams.get('item');
@@ -27,20 +30,20 @@ const Search = () => {
 
     // Load Match Products.
     useEffect(() => {
-        // if (text.text && !catParent.catParent && !catChildren.catChildren) {
-        //     const matchProducts = products.filter(product => product.title.toLowerCase().includes(text.text.toLowerCase()))
-        //     setMatchProduct(matchProducts);
-        // }
+        if (searchText) {
+            const matchProducts = products?.products?.filter(product => product.title.toLowerCase().includes(searchText.toLowerCase()))
+            setMatchProduct(matchProducts);
+        }
         if (category && _id) {
             const matchProducts = products?.products?.filter(product => product.parent === category);
             setMatchProduct(matchProducts);
         }
-        else if (category && item) {
+        if (category && item) {
             const matchProducts = products?.products?.filter(product => product.children === item);
             setMatchProduct(matchProducts);
         }
         window.scrollTo(0, 0);
-    }, [products, category, _id, item]);
+    }, [searchText, products, category, _id, item]);
 
 
     // Sort Products.
@@ -57,6 +60,9 @@ const Search = () => {
 
     return (
         <section className="bg-gray-300 py-10">
+            <Helmet>
+                <title>G-Shop | {_id ? category : item || searchText}</title>
+            </Helmet>
             <section className="max-w-screen-2xl mx-auto px-6 font-poppins">
                 {/* Search Banner */}
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 font-poppins text-center">
@@ -138,27 +144,36 @@ const Search = () => {
                                 />
                             </div>
                             :
-                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
-                                {
-                                    matchProduct?.map(product => <div className="bg-white rounded-md relative" key={product._id}>
-                                        <Link className="group" to={`/product/${product._id}`}>
-                                            <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#63e075] text-xs z-10">
-                                                Stock: <span className="text-red-700">{product.quantity}</span>
-                                            </p>
-                                            {product.discount > 0 && <p className="absolute top-2 right-2 bg-orange-500 px-3 py-1 rounded-full text-white text-xs z-10">
-                                                {product.discount.toFixed(2)}% Off
-                                            </p>}
-                                            <div className="bg-white rounded-md p-2 flex">
-                                                <img className="w-40 h-44 mx-auto grow scale-90 group-hover:scale-100 duration-300" src={product.image} alt="" />
-                                            </div>
-                                            <div className="font-poppins text-[#151515] px-4 pb-4">
-                                                <h3 className="font-light text-sm group-hover:underline">{product.title}</h3>
-                                                <h1 className="font-semibold text-xl leading-10">
-                                                    ${product.price.toFixed(2)} <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
-                                                </h1>
-                                            </div>
-                                        </Link>
-                                    </div>)
+                            <div>
+                                {!matchProduct?.length ?
+                                    <div className="text-center font-poppins my-14">
+                                        <img src={noFound} alt="" className="w-80 h-80 mx-auto" />
+                                        <h1 className="text-[#151515] text-xl font-medium">Sorry, we can not find any product 😞</h1>
+                                    </div>
+                                    :
+                                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                                        {
+                                            matchProduct?.map(product => <div className="bg-white rounded-md relative" key={product._id}>
+                                                <Link className="group" to={`/product/${product._id}`}>
+                                                    <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#63e075] text-xs z-10">
+                                                        Stock: <span className="text-red-700">{product.quantity}</span>
+                                                    </p>
+                                                    {product.discount > 0 && <p className="absolute top-2 right-2 bg-orange-500 px-3 py-1 rounded-full text-white text-xs z-10">
+                                                        {product.discount.toFixed(2)}% Off
+                                                    </p>}
+                                                    <div className="bg-white rounded-md p-2 flex">
+                                                        <img className="w-40 h-44 mx-auto grow scale-90 group-hover:scale-100 duration-300" src={product.image} alt="" />
+                                                    </div>
+                                                    <div className="font-poppins text-[#151515] px-4 pb-4">
+                                                        <h3 className="font-light text-sm group-hover:underline">{product.title}</h3>
+                                                        <h1 className="font-semibold text-xl leading-10">
+                                                            ${product.price.toFixed(2)} <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
+                                                        </h1>
+                                                    </div>
+                                                </Link>
+                                            </div>)
+                                        }
+                                    </div>
                                 }
                             </div>
                         }

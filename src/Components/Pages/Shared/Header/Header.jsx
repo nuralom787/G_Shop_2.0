@@ -2,19 +2,34 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import logo from '../../../Images/logo.jpg';
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import useCategories from "../../../../Hooks/useCategories";
 import useCart from "../../../../Hooks/useCart";
 import { useContext } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
+import { useForm } from "react-hook-form";
 
 
 const Header = () => {
     const { user } = useContext(AuthContext);
     const [categories] = useCategories();
     const [cart] = useCart();
+    const { register, handleSubmit, reset } = useForm();
+    const navigate = useNavigate();
 
 
+    const onSubmit = (data) => {
+        if (data.search === "") {
+            navigate('/');
+        }
+        else {
+            navigate(`/search?search=${encodeURIComponent(data.search)}`);
+        }
+        reset();
+    };
+
+
+    // Set User Name First Letter as there image if image is null.
     const getInitial = () => {
         return user?.email ? user?.email.charAt(0).toUpperCase() : '?';
     };
@@ -25,20 +40,16 @@ const Header = () => {
             <div className="bg-[#63e075]">
                 <div className="max-w-screen-2xl mx-auto px-6 text-[#151515] py-4 grid grid-cols-10 gap-10">
                     <img className="w-16 col-span-2" src={logo} alt="" />
-                    <form className="col-span-6 w-full bg-white rounded-md inline-flex justify-between items-center">
+                    <form onSubmit={handleSubmit(onSubmit)} className="col-span-6 w-full bg-white rounded-md inline-flex justify-between items-center">
                         <label htmlFor="search" className="grow">
                             <input
+                                {...register("search")}
                                 className="w-full grow px-6 py-4 rounded-md outline-0 bg-white text-[#151515] font-semibold"
                                 type="search"
-                                name="search"
-                                id="search"
                                 placeholder="Search for any products..."
                             />
                         </label>
-                        <button
-                            aria-label="Search"
-                            type="submit"
-                            className="px-6 py-4 cursor-pointer">
+                        <button type="submit" className="px-6 py-4 cursor-pointer">
                             <svg stroke="currentColor" fill="#151515" strokeWidth="0" viewBox="0 0 512 512" height="1.5rem" width="1.5rem" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="none" strokeMiterlimit="10" strokeWidth="32" d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"></path>
                                 <path fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M338.29 338.29L448 448"></path>

@@ -40,7 +40,6 @@ const Login = () => {
 
     // Handle Login With Google Function.
     const handleGoogleLogin = () => {
-        setLoading(true);
         GoogleLogin()
             .then(result => {
                 navigate(from, { replace: true });
@@ -48,14 +47,12 @@ const Login = () => {
                     position: "top-center",
                     autoClose: 2500
                 });
-                setLoading(false);
             })
             .catch(err => {
                 toast.error(err.message, {
                     position: "top-center",
                     autoClose: 2500
                 });
-                setLoading(false);
             })
     };
 
@@ -102,15 +99,9 @@ const Login = () => {
                         </form>
                     </div>
                     <div className="divider my-5 text-black before:bg-black after:bg-black">OR</div>
-                    {loading ?
-                        <button disabled className="bg-blue-500 px-6 py-3 rounded inline-flex justify-center items-center gap-3 w-full">
-                            <span className="loading loading-spinner loading-md"></span> Processing...
-                        </button>
-                        :
-                        <button onClick={handleGoogleLogin} className="bg-blue-500 hover:bg-blue-700 duration-300 px-6 py-3 rounded inline-flex justify-center items-center gap-3 w-full cursor-pointer">
-                            <FaGoogle /> Login With Google
-                        </button>
-                    }
+                    <button onClick={handleGoogleLogin} className="bg-blue-500 hover:bg-blue-700 duration-300 px-6 py-3 rounded inline-flex justify-center items-center gap-3 w-full cursor-pointer">
+                        <FaGoogle /> Login With Google
+                    </button>
                 </div>
             </section>
         </section>

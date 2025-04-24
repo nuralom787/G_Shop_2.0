@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
+import { LuLock } from "react-icons/lu";
+import { FiUser } from "react-icons/fi";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
@@ -39,9 +41,13 @@ const InfoNav = () => {
                     <li className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">My Account</li>
                     <span>|</span>
                     {user?.email ?
-                        <button onClick={handleLogout} className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">Logout</button>
+                        <button onClick={handleLogout} className="hover:text-[#28A745] font-poppins cursor-pointer duration-300 inline-flex items-center gap-1">
+                            <LuLock /> Logout
+                        </button>
                         :
-                        <Link to="/user/login" className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">Login</Link>
+                        <Link to="/user/login" className="hover:text-[#28A745] font-poppins cursor-pointer duration-300 inline-flex items-center gap-1">
+                            <FiUser /> Login
+                        </Link>
                     }
                 </ul>
             </div>
