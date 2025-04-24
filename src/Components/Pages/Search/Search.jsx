@@ -24,6 +24,7 @@ const Search = () => {
 
     // ---------------------------------
     const [matchProduct, setMatchProduct] = useState([]);
+    const [visibleCount, setVisibleCount] = useState(18);
     const [categories, , isPending, isError] = useCategories();
     const [products, , pPending] = useProducts();
 
@@ -43,6 +44,7 @@ const Search = () => {
             setMatchProduct(matchProducts);
         }
         window.scrollTo(0, 0);
+        setVisibleCount(18);
     }, [searchText, products, category, _id, item]);
 
 
@@ -57,6 +59,13 @@ const Search = () => {
             setMatchProduct(sortProducts);
         }
     };
+
+
+    // Load More Function.
+    const loadMore = () => {
+        setVisibleCount((prev) => prev + 18);
+    };
+
 
     return (
         <section className="bg-gray-300 py-10">
@@ -153,7 +162,7 @@ const Search = () => {
                                     :
                                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                                         {
-                                            matchProduct?.map(product => <div className="bg-white rounded-md relative" key={product._id}>
+                                            matchProduct?.slice(0, visibleCount).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                                 <Link className="group" to={`/product/${product._id}`}>
                                                     <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#63e075] text-xs z-10">
                                                         Stock: <span className="text-red-700">{product.quantity}</span>
@@ -173,6 +182,11 @@ const Search = () => {
                                                 </Link>
                                             </div>)
                                         }
+                                    </div>
+                                }
+                                {visibleCount < matchProduct?.length &&
+                                    <div className="text-center font-poppins my-10">
+                                        <button className="px-6 py-3 rounded-md bg-[#63e075] hover:bg-[#00a63e] duration-300 font-medium text-base cursor-pointer" onClick={loadMore}>Load More</button>
                                     </div>
                                 }
                             </div>
