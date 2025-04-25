@@ -10,6 +10,7 @@ import { IoRepeat } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
 import { Helmet } from "react-helmet-async";
+import useAddToCart from "../../../../Hooks/useAddToCart";
 
 
 const ProductDetails = () => {
@@ -18,6 +19,7 @@ const ProductDetails = () => {
     const [products] = useProducts();
     const relatedProduct = products?.products?.filter(pt => pt?.parent === product?.parent);
     const [newQuantity, setNewQuantity] = useState(1);
+    const { addToCart } = useAddToCart(product, newQuantity);
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -38,7 +40,6 @@ const ProductDetails = () => {
         const updateQuantity = newQuantity + 1;
         setNewQuantity(updateQuantity);
     };
-
 
 
     return (
@@ -88,7 +89,7 @@ const ProductDetails = () => {
                                         </div>
                                         <button
                                             className='px-4 py-4 bg-gray-800 hover:bg-gray-900 duration-500 cursor-pointer rounded-md text-sm font-extrabold text-white'
-                                        // onClick={() => addToCart(product._id, newQuantity)}
+                                            onClick={addToCart}
                                         >
                                             Add To Cart
                                         </button>
