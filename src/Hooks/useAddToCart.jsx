@@ -28,12 +28,12 @@ const useAddToCart = (product, quantity) => {
             const data = { email, item };
             axiosSecure.patch("/carts", data)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     toast.success("Item Added Successfully!", { position: "top-center" });
                     refetch();
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    // console.log(err.message);
                 })
         }
     };
