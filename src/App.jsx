@@ -10,6 +10,9 @@ import Login from './Components/Pages/Authentication/Login/Login';
 import Register from './Components/Pages/Authentication/Register/Register';
 import AuthProvider from './Provider/AuthProvider';
 import { ToastContainer } from 'react-toastify';
+import Dashboard from './Components/Pages/UserAccount/Dashboard/Dashboard';
+import Orders from './Components/Pages/UserAccount/Orders/Orders';
+import Cart from './Components/Pages/Cart/Cart';
 
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/product/:id' element={<ProductDetails />}></Route>
                 <Route path='/search' element={<Search />}></Route>
+                <Route path='/user/cart' element={<Cart />}></Route>
+                <Route path='/user/dashboard' element={<Dashboard />}></Route>
+                <Route path='/user/orders' element={<Orders />}></Route>
                 <Route path='/user/login' element={<Login />}></Route>
                 <Route path='/user/register' element={<Register />}></Route>
               </Route>
