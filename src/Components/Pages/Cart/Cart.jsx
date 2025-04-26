@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import useCart from "../../../Hooks/useCart";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { ScaleLoader } from "react-spinners";
 
 const Cart = () => {
+    const [loading, setLoading] = useState(false);
     const { user } = useContext(AuthContext);
     const [cart, refetch, isPending, isError] = useCart();
     const axiosSecure = useAxiosSecure();
@@ -15,23 +16,29 @@ const Cart = () => {
         const data = { email, id };
 
         if (e === "-1") {
+            setLoading(true);
             axiosSecure.patch('/carts/quantity?quantity=-1', data)
                 .then(res => {
                     console.log(res.data);
                     refetch()
+                    setLoading(false);
                 })
                 .catch(err => {
                     console.log(err.message);
+                    setLoading(false);
                 })
         }
         else {
+            setLoading(true);
             axiosSecure.patch('/carts/quantity?quantity=+1', data)
                 .then(res => {
                     console.log(res.data);
                     refetch()
+                    setLoading(false);
                 })
                 .catch(err => {
                     console.log(err.message);
+                    setLoading(false);
                 })
         }
     };
@@ -52,6 +59,11 @@ const Cart = () => {
                     </div>
                     :
                     <div>
+                        {loading &&
+                            <div className="fixed inset-0 z-50 bg-black opacity-40 flex items-center justify-center">
+                                <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                        }
                         <ul>
                             {
                                 cart?.cart?.map(product => <li
