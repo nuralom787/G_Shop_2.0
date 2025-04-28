@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import useProduct from "../../../../Hooks/useProduct";
 import { ScaleLoader } from "react-spinners";
 import { useEffect, useState } from "react";
@@ -22,8 +22,9 @@ const ProductDetails = () => {
     const { addToCart } = useAddToCart(product, newQuantity);
 
     useEffect(() => {
-        window.scrollTo(0, 0)
-    }, []);
+        window.scrollTo(0, 0);
+        setNewQuantity(1);
+    }, [id]);
 
 
     // Handle Cart Quantity Plus.
@@ -96,7 +97,7 @@ const ProductDetails = () => {
                                     </div>
                                     <div className="space-y-3">
                                         <p className="font-medium text-sm">
-                                            Category: <NavLink to={"/"} className="text-[#151515] hover:text-[#63e075] underline cursor-pointer"> {product.parent}</NavLink>
+                                            Category: <Link to={`/search?category=${encodeURIComponent(product.parent)}&_id=${product._id}`} className="text-[#151515] hover:text-[#63e075] underline cursor-pointer"> {product.parent}</Link>
                                         </p>
                                         <ul className="flex items-center gap-3">
                                             {
@@ -153,7 +154,7 @@ const ProductDetails = () => {
                                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                                     {
                                         relatedProduct.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
-                                            <NavLink className="group" to={`/product/${product._id}`}>
+                                            <Link className="group" to={`/product/${product._id}`}>
                                                 <p className="absolute top-2 left-2 bg-gray-200 px-3 py-1 rounded-full text-[#63e075] text-xs z-10">
                                                     Stock: <span className="text-red-700">{product.quantity}</span>
                                                 </p>
@@ -169,7 +170,7 @@ const ProductDetails = () => {
                                                         ${product.price.toFixed(2)} {product.discount > 0 && <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>}
                                                     </h1>
                                                 </div>
-                                            </NavLink>
+                                            </Link>
                                         </div>)
                                     }
                                 </div>
