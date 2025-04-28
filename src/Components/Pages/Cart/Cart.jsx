@@ -11,6 +11,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -120,6 +121,9 @@ const Cart = () => {
 
     return (
         <section className="bg-gray-300 py-10">
+            <Helmet>
+                <title>G-Shop | Cart</title>
+            </Helmet>
             <section className="max-w-screen-2xl mx-auto px-6 font-poppins">
                 {isPending || isError ?
                     <div className="flex justify-center items-center my-32">

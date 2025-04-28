@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
+
 const Orders = () => {
     return (
-        <div>
-
-        </div>
+        <section>
+            <Helmet>
+                <title>G-Shop | Orders</title>
+            </Helmet>
+        </section>
     );
 };
 

@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
+
 const Dashboard = () => {
     return (
-        <div>
-
-        </div>
+        <section>
+            <Helmet>
+                <title>G-Shop | Dashboard</title>
+            </Helmet>
+        </section>
     );
 };
 
