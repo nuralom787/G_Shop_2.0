@@ -1,16 +1,18 @@
 import { Helmet } from "react-helmet-async";
+import { NavLink } from "react-router";
 
-const Orders = () => {
+const MyAccount = () => {
     return (
         <section>
             <Helmet>
-                <title>G-Shop | Orders</title>
+                <title>G-Shop | My Account</title>
             </Helmet>
             <div>
-                <h1>Orders</h1>
+
+                <h1>My Account</h1>
             </div>
         </section>
     );
 };
 
-export default Orders;
+export default MyAccount;

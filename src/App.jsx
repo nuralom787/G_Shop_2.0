@@ -3,16 +3,17 @@ import { QueryClient, QueryClientProvider, } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Main from './Components/Pages/Main/Main';
 import Home from './Components/Pages/HomePages/Home/Home';
-import './App.css';
 import ProductDetails from './Components/Pages/DetailPages/ProductDetails/ProductDetails';
 import Search from './Components/Pages/Search/Search';
 import Login from './Components/Pages/Authentication/Login/Login';
 import Register from './Components/Pages/Authentication/Register/Register';
 import AuthProvider from './Provider/AuthProvider';
 import { ToastContainer } from 'react-toastify';
-import Dashboard from './Components/Pages/UserAccount/Dashboard/Dashboard';
+import MyAccount from './Components/Pages/UserAccount/MyAccount/MyAccount';
 import Orders from './Components/Pages/UserAccount/Orders/Orders';
 import Cart from './Components/Pages/Cart/Cart';
+import './App.css';
+import Dashboard from './Components/Pages/UserAccount/Dashboard/Dashboard';
 
 
 function App() {
@@ -30,7 +31,10 @@ function App() {
                 <Route path='/product/:id' element={<ProductDetails />}></Route>
                 <Route path='/search' element={<Search />}></Route>
                 <Route path='/user/cart' element={<Cart />}></Route>
-                <Route path='/user/dashboard' element={<Dashboard />}></Route>
+                <Route path='/user' element={<Dashboard />}>
+                  <Route path='/user/my-account' element={<MyAccount />}></Route>
+                  <Route path='/user/orders' element={<Orders />}></Route>
+                </Route>
                 <Route path='/user/orders' element={<Orders />}></Route>
                 <Route path='/user/login' element={<Login />}></Route>
                 <Route path='/user/register' element={<Register />}></Route>

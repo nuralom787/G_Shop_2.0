@@ -66,7 +66,7 @@ const Header = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/user/dashboard">
+                            <Link to="/user/my-account">
                                 {user?.email ?
                                     <div>
                                         {user?.photoURL ?

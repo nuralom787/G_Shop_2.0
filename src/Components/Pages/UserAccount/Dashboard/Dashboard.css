@@ -1,0 +1,5 @@
+.navigation .active,
+ul li .active {
+    color: var(--color-green-600);
+
+}

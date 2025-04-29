@@ -34,11 +34,17 @@ const InfoNav = () => {
                     <MdOutlinePhoneInTalk /> We are available 24/7, Need help? <a href="tel:+880123456789" className="text-[#28A745] font-semibold hover:underline">+880 12345-6789</a>
                 </span>
                 <ul className="flex items-center gap-2 text-xs">
-                    <li className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">About Us</li>
+                    <li className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">
+                        <Link to="/">About Us</Link>
+                    </li>
                     <span>|</span>
-                    <li className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">Contact Us</li>
+                    <li className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">
+                        <Link to="/">Contact Us</Link>
+                    </li>
                     <span>|</span>
-                    <li className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">My Account</li>
+                    <li className="hover:text-[#28A745] font-poppins cursor-pointer duration-300">
+                        <Link to="/user/my-account">My Account</Link>
+                    </li>
                     <span>|</span>
                     {user?.email ?
                         <button onClick={handleLogout} className="hover:text-[#28A745] font-poppins cursor-pointer duration-300 inline-flex items-center gap-1">
