@@ -11,7 +11,7 @@ const Dashboard = () => {
         <section className="bg-gray-300 py-10">
             <section className="max-w-screen-2xl mx-auto px-6 font-poppins">
                 <div className="flex items-start gap-8 text-[#151515]">
-                    {/*  */}
+                    {/* Navigation Panel. */}
                     <div className="bg-white w-1/4 p-6 rounded-md sticky top-36 navigation font-inter">
                         <NavLink to="/user/my-account" className="font-semibold text-lg">My Account</NavLink>
                         <ul className="ms-5 my-2">
@@ -27,7 +27,7 @@ const Dashboard = () => {
                         <button onClick={LogoutUser} className="font-semibold text-lg cursor-pointer">Logout</button>
                     </div>
 
-                    {/*  */}
+                    {/* Outlet */}
                     <div className="bg-white w-3/4 p-6 rounded-md">
                         <Outlet />
                     </div>

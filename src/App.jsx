@@ -14,6 +14,7 @@ import Orders from './Components/Pages/UserAccount/Orders/Orders';
 import Cart from './Components/Pages/Cart/Cart';
 import './App.css';
 import Dashboard from './Components/Pages/UserAccount/Dashboard/Dashboard';
+import PrivetRoute from './PrivetRoute/PrivetRoute';
 
 
 function App() {
@@ -30,12 +31,11 @@ function App() {
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/product/:id' element={<ProductDetails />}></Route>
                 <Route path='/search' element={<Search />}></Route>
-                <Route path='/user/cart' element={<Cart />}></Route>
-                <Route path='/user' element={<Dashboard />}>
+                <Route path='/user/cart' element={<PrivetRoute><Cart /></PrivetRoute>}></Route>
+                <Route path='/user' element={<PrivetRoute><Dashboard /></PrivetRoute>}>
                   <Route path='/user/my-account' element={<MyAccount />}></Route>
                   <Route path='/user/orders' element={<Orders />}></Route>
                 </Route>
-                <Route path='/user/orders' element={<Orders />}></Route>
                 <Route path='/user/login' element={<Login />}></Route>
                 <Route path='/user/register' element={<Register />}></Route>
               </Route>
