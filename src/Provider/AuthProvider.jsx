@@ -2,6 +2,8 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import { createContext, useEffect, useState } from "react";
 import auth from '../../src/Firebase/firebase.init';
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext(null);
 
@@ -10,6 +12,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
 
     // Current User State Observer.
@@ -24,7 +27,27 @@ const AuthProvider = ({ children }) => {
                         // console.log(res.data);
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
-                        }
+                        };
+
+                        // Store User Details In Database.
+                        const account = currentUser.providerData[0].providerId;
+                        const userDetails = {
+                            displayName: currentUser.displayName,
+                            phoneNumber: currentUser.phoneNumber,
+                            email: currentUser.email,
+                            photoURL: currentUser.photoURL,
+                            accountType: account === "google.com" ? "Google" : "Email&Password",
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString(),
+                        };
+                        axiosSecure.post('/customers/add', userDetails)
+                            .then(res => {
+                                // console.log(res.data);
+                                // toast.success("user Information saved in database", { position: "top-center", autoClose: 2500 });
+                            })
+                            .catch(err => {
+                                // console.log(err.message);
+                            })
                     })
                     .catch(err => {
                         // console.log(err.message);
