@@ -26,7 +26,7 @@ const Search = () => {
     const [matchProduct, setMatchProduct] = useState([]);
     const [visibleCount, setVisibleCount] = useState(18);
     const [categories, , isPending, isError] = useCategories();
-    const [products, , pPending] = useProducts();
+    const [products, , pPending, pError] = useProducts();
 
 
     // Load Match Products.
@@ -142,7 +142,7 @@ const Search = () => {
                         </select>
                     </div>
                     <div className="mt-4">
-                        {pPending ?
+                        {pPending || pError ?
                             <div className="flex justify-center items-center my-32">
                                 <ScaleLoader
                                     color={"#63e075"}

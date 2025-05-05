@@ -16,10 +16,10 @@ const Dashboard = () => {
                         <NavLink to="/user/my-account" className="font-semibold text-lg">My Account</NavLink>
                         <ul className="ms-5 my-2">
                             <li className="text-sm text-gray-500 leading-7 hover:text-cyan-600 w-fit">
-                                <NavLink to="/user/my-account/profile">My Profile</NavLink>
+                                <NavLink to="/user/profile">My Profile</NavLink>
                             </li>
                             <li className="text-sm text-gray-500 leading-7 hover:text-cyan-600 w-fit">
-                                <NavLink to="/user/my-account/addresses">Address Book</NavLink>
+                                <NavLink to="/user/addresses">Address Book</NavLink>
                             </li>
                         </ul>
                         <NavLink to="/user/orders" className="font-semibold text-lg">My Orders</NavLink>
