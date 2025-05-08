@@ -1,0 +1,986 @@
+[
+    {
+        "id": "01",
+        "division": "Dhaka",
+        "banglaName": "ঢাকা",
+        "shortName": "DHK",
+        "districts": [
+            {
+                "district": "Dhaka",
+                "upazilas": [
+                    {
+                        "upazila": "Dhamrai",
+                        "thanas": [
+                            "Dhamrai Thana"
+                        ],
+                        "postOffices": [
+                            "Dhamrai 1350"
+                        ]
+                    },
+                    {
+                        "upazila": "Dohar",
+                        "thanas": [
+                            "Dohar Thana"
+                        ],
+                        "postOffices": [
+                            "Dohar 1330"
+                        ]
+                    },
+                    {
+                        "upazila": "Keraniganj",
+                        "thanas": [
+                            "Keraniganj Thana"
+                        ],
+                        "postOffices": [
+                            "Keraniganj 1310"
+                        ]
+                    },
+                    {
+                        "upazila": "Nawabganj",
+                        "thanas": [
+                            "Nawabganj Thana"
+                        ],
+                        "postOffices": [
+                            "Nawabganj 1320"
+                        ]
+                    },
+                    {
+                        "upazila": "Savar",
+                        "thanas": [
+                            "Savar Model Thana"
+                        ],
+                        "postOffices": [
+                            "Savar 1340"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Gazipur",
+                "upazilas": [
+                    {
+                        "upazila": "Gazipur Sadar",
+                        "thanas": [
+                            "Gazipur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Gazipur 1700"
+                        ]
+                    },
+                    {
+                        "upazila": "Tongi",
+                        "thanas": [
+                            "Tongi Thana"
+                        ],
+                        "postOffices": [
+                            "Tongi 1710"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Kishoreganj",
+                "upazilas": [
+                    {
+                        "upazila": "Kishoreganj Sadar",
+                        "thanas": [
+                            "Kishoreganj Thana"
+                        ],
+                        "postOffices": [
+                            "Kishoreganj 2300"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Manikganj",
+                "upazilas": [
+                    {
+                        "upazila": "Manikganj Sadar",
+                        "thanas": [
+                            "Manikganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Manikganj 1800"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Munshiganj",
+                "upazilas": [
+                    {
+                        "upazila": "Munshiganj Sadar",
+                        "thanas": [
+                            "Munshiganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Munshiganj 1500"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Narayanganj",
+                "upazilas": [
+                    {
+                        "upazila": "Narayanganj Sadar",
+                        "thanas": [
+                            "Narayanganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Narayanganj 1400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Narsingdi",
+                "upazilas": [
+                    {
+                        "upazila": "Narsingdi Sadar",
+                        "thanas": [
+                            "Narsingdi Thana"
+                        ],
+                        "postOffices": [
+                            "Narsingdi 1600"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Faridpur",
+                "upazilas": [
+                    {
+                        "upazila": "Faridpur Sadar",
+                        "thanas": [
+                            "Faridpur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Faridpur 7800"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Gopalganj",
+                "upazilas": [
+                    {
+                        "upazila": "Gopalganj Sadar",
+                        "thanas": [
+                            "Gopalganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Gopalganj 8100"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Madaripur",
+                "upazilas": [
+                    {
+                        "upazila": "Madaripur Sadar",
+                        "thanas": [
+                            "Madaripur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Madaripur 7900"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Rajbari",
+                "upazilas": [
+                    {
+                        "upazila": "Rajbari Sadar",
+                        "thanas": [
+                            "Rajbari Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Rajbari 7700"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Shariatpur",
+                "upazilas": [
+                    {
+                        "upazila": "Shariatpur Sadar",
+                        "thanas": [
+                            "Shariatpur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Shariatpur 8000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Tangail",
+                "upazilas": [
+                    {
+                        "upazila": "Tangail Sadar",
+                        "thanas": [
+                            "Tangail Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Tangail 1900"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "division": "Chattogram",
+        "districts": [
+            {
+                "district": "Bandarban",
+                "upazilas": [
+                    {
+                        "upazila": "Bandarban Sadar",
+                        "thanas": [
+                            "Bandarban Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Bandarban 4600"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Brahmanbaria",
+                "upazilas": [
+                    {
+                        "upazila": "Brahmanbaria Sadar",
+                        "thanas": [
+                            "Brahmanbaria Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Brahmanbaria 3400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Chandpur",
+                "upazilas": [
+                    {
+                        "upazila": "Chandpur Sadar",
+                        "thanas": [
+                            "Chandpur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Chandpur 3600"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Chattogram",
+                "upazilas": [
+                    {
+                        "upazila": "Chattogram Sadar",
+                        "thanas": [
+                            "Kotwali Thana"
+                        ],
+                        "postOffices": [
+                            "Chattogram GPO 4000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Cumilla",
+                "upazilas": [
+                    {
+                        "upazila": "Cumilla Sadar",
+                        "thanas": [
+                            "Cumilla Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Cumilla 3500"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Cox's Bazar",
+                "upazilas": [
+                    {
+                        "upazila": "Cox's Bazar Sadar",
+                        "thanas": [
+                            "Cox's Bazar Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Cox's Bazar 4700"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Feni",
+                "upazilas": [
+                    {
+                        "upazila": "Feni Sadar",
+                        "thanas": [
+                            "Feni Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Feni 3900"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Khagrachari",
+                "upazilas": [
+                    {
+                        "upazila": "Khagrachari Sadar",
+                        "thanas": [
+                            "Khagrachari Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Khagrachari 4400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Lakshmipur",
+                "upazilas": [
+                    {
+                        "upazila": "Lakshmipur Sadar",
+                        "thanas": [
+                            "Lakshmipur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Lakshmipur 3700"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Noakhali",
+                "upazilas": [
+                    {
+                        "upazila": "Noakhali Sadar",
+                        "thanas": [
+                            "Noakhali Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Noakhali 3800"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Rangamati",
+                "upazilas": [
+                    {
+                        "upazila": "Rangamati Sadar",
+                        "thanas": [
+                            "Rangamati Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Rangamati 4500"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "division": "Khulna",
+        "districts": [
+            {
+                "district": "Bagerhat",
+                "upazilas": [
+                    {
+                        "upazila": "Bagerhat Sadar",
+                        "thanas": [
+                            "Bagerhat Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Bagerhat 9300"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Chuadanga",
+                "upazilas": [
+                    {
+                        "upazila": "Chuadanga Sadar",
+                        "thanas": [
+                            "Chuadanga Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Chuadanga 7200"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Jashore",
+                "upazilas": [
+                    {
+                        "upazila": "Jashore Sadar",
+                        "thanas": [
+                            "Jashore Kotwali Thana"
+                        ],
+                        "postOffices": [
+                            "Jashore 7400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Jhenaidah",
+                "upazilas": [
+                    {
+                        "upazila": "Jhenaidah Sadar",
+                        "thanas": [
+                            "Jhenaidah Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Jhenaidah 7300"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Khulna",
+                "upazilas": [
+                    {
+                        "upazila": "Khulna Sadar",
+                        "thanas": [
+                            "Khulna Kotwali Thana"
+                        ],
+                        "postOffices": [
+                            "Khulna GPO 9000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Kushtia",
+                "upazilas": [
+                    {
+                        "upazila": "Kushtia Sadar",
+                        "thanas": [
+                            "Kushtia Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Kushtia 7000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Magura",
+                "upazilas": [
+                    {
+                        "upazila": "Magura Sadar",
+                        "thanas": [
+                            "Magura Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Magura 7600"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Meherpur",
+                "upazilas": [
+                    {
+                        "upazila": "Meherpur Sadar",
+                        "thanas": [
+                            "Meherpur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Meherpur 7100"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Narail",
+                "upazilas": [
+                    {
+                        "upazila": "Narail Sadar",
+                        "thanas": [
+                            "Narail Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Narail 7500"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Satkhira",
+                "upazilas": [
+                    {
+                        "upazila": "Satkhira Sadar",
+                        "thanas": [
+                            "Satkhira Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Satkhira 9400"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "division": "Rajshahi",
+        "districts": [
+            {
+                "district": "Bogura",
+                "upazilas": [
+                    {
+                        "upazila": "Bogura Sadar",
+                        "thanas": [
+                            "Bogura Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Bogura 5800"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Joypurhat",
+                "upazilas": [
+                    {
+                        "upazila": "Joypurhat Sadar",
+                        "thanas": [
+                            "Joypurhat Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Joypurhat 5900"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Naogaon",
+                "upazilas": [
+                    {
+                        "upazila": "Naogaon Sadar",
+                        "thanas": [
+                            "Naogaon Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Naogaon 6500"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Natore",
+                "upazilas": [
+                    {
+                        "upazila": "Natore Sadar",
+                        "thanas": [
+                            "Natore Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Natore 6400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Chapainawabganj",
+                "upazilas": [
+                    {
+                        "upazila": "Chapainawabganj Sadar",
+                        "thanas": [
+                            "Chapainawabganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Chapainawabganj 6300"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Pabna",
+                "upazilas": [
+                    {
+                        "upazila": "Pabna Sadar",
+                        "thanas": [
+                            "Pabna Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Pabna 6600"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Rajshahi",
+                "upazilas": [
+                    {
+                        "upazila": "Rajshahi Sadar",
+                        "thanas": [
+                            "Boalia Thana"
+                        ],
+                        "postOffices": [
+                            "Rajshahi GPO 6000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Sirajganj",
+                "upazilas": [
+                    {
+                        "upazila": "Sirajganj Sadar",
+                        "thanas": [
+                            "Sirajganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Sirajganj 6700"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "division": "Barishal",
+        "districts": [
+            {
+                "district": "Barguna",
+                "upazilas": [
+                    {
+                        "upazila": "Barguna Sadar",
+                        "thanas": [
+                            "Barguna Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Barguna 8700"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Barishal",
+                "upazilas": [
+                    {
+                        "upazila": "Barishal Sadar",
+                        "thanas": [
+                            "Kotwali Model Thana"
+                        ],
+                        "postOffices": [
+                            "Barishal GPO 8200"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Bhola",
+                "upazilas": [
+                    {
+                        "upazila": "Bhola Sadar",
+                        "thanas": [
+                            "Bhola Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Bhola 8300"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Jhalokati",
+                "upazilas": [
+                    {
+                        "upazila": "Jhalokati Sadar",
+                        "thanas": [
+                            "Jhalokati Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Jhalokati 8400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Patuakhali",
+                "upazilas": [
+                    {
+                        "upazila": "Patuakhali Sadar",
+                        "thanas": [
+                            "Patuakhali Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Patuakhali 8600"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Pirojpur",
+                "upazilas": [
+                    {
+                        "upazila": "Pirojpur Sadar",
+                        "thanas": [
+                            "Pirojpur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Pirojpur 8500"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "division": "Sylhet",
+        "districts": [
+            {
+                "district": "Habiganj",
+                "upazilas": [
+                    {
+                        "upazila": "Habiganj Sadar",
+                        "thanas": [
+                            "Habiganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Habiganj 3300"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Moulvibazar",
+                "upazilas": [
+                    {
+                        "upazila": "Moulvibazar Sadar",
+                        "thanas": [
+                            "Moulvibazar Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Moulvibazar 3200"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Sunamganj",
+                "upazilas": [
+                    {
+                        "upazila": "Sunamganj Sadar",
+                        "thanas": [
+                            "Sunamganj Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Sunamganj 3000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Sylhet",
+                "upazilas": [
+                    {
+                        "upazila": "Sylhet Sadar",
+                        "thanas": [
+                            "Kotwali Model Thana"
+                        ],
+                        "postOffices": [
+                            "Sylhet GPO 3100"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "division": "Rangpur",
+        "districts": [
+            {
+                "district": "Dinajpur",
+                "upazilas": [
+                    {
+                        "upazila": "Dinajpur Sadar",
+                        "thanas": [
+                            "Dinajpur Kotwali Thana"
+                        ],
+                        "postOffices": [
+                            "Dinajpur 5200"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Gaibandha",
+                "upazilas": [
+                    {
+                        "upazila": "Gaibandha Sadar",
+                        "thanas": [
+                            "Gaibandha Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Gaibandha 5700"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Kurigram",
+                "upazilas": [
+                    {
+                        "upazila": "Kurigram Sadar",
+                        "thanas": [
+                            "Kurigram Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Kurigram 5600"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Lalmonirhat",
+                "upazilas": [
+                    {
+                        "upazila": "Lalmonirhat Sadar",
+                        "thanas": [
+                            "Lalmonirhat Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Lalmonirhat 5500"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Nilphamari",
+                "upazilas": [
+                    {
+                        "upazila": "Nilphamari Sadar",
+                        "thanas": [
+                            "Nilphamari Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Nilphamari 5300"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Panchagarh",
+                "upazilas": [
+                    {
+                        "upazila": "Panchagarh Sadar",
+                        "thanas": [
+                            "Panchagarh Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Panchagarh 5000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Rangpur",
+                "upazilas": [
+                    {
+                        "upazila": "Rangpur Sadar",
+                        "thanas": [
+                            "Kotwali Thana"
+                        ],
+                        "postOffices": [
+                            "Rangpur GPO 5400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Thakurgaon",
+                "upazilas": [
+                    {
+                        "upazila": "Thakurgaon Sadar",
+                        "thanas": [
+                            "Thakurgaon Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Thakurgaon 5100"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "division": "Mymensingh",
+        "districts": [
+            {
+                "district": "Jamalpur",
+                "upazilas": [
+                    {
+                        "upazila": "Jamalpur Sadar",
+                        "thanas": [
+                            "Jamalpur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Jamalpur 2000"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Mymensingh",
+                "upazilas": [
+                    {
+                        "upazila": "Mymensingh Sadar",
+                        "thanas": [
+                            "Kotwali Model Thana"
+                        ],
+                        "postOffices": [
+                            "Mymensingh 2200"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Netrokona",
+                "upazilas": [
+                    {
+                        "upazila": "Netrokona Sadar",
+                        "thanas": [
+                            "Netrokona Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Netrokona 2400"
+                        ]
+                    }
+                ]
+            },
+            {
+                "district": "Sherpur",
+                "upazilas": [
+                    {
+                        "upazila": "Sherpur Sadar",
+                        "thanas": [
+                            "Sherpur Sadar Thana"
+                        ],
+                        "postOffices": [
+                            "Sherpur 2100"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

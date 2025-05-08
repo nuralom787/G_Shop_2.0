@@ -32,7 +32,7 @@ const MyAccount = () => {
                         <div>
                             <h3 className="mb-4 font-semibold text-[#151515] text-lg">
                                 Personal Profile
-                                <span className="font-semibold text-sm text-cyan-600 ms-2 ps-2 border-s-2 border-s-gray-400"><Link to="/">EDIT</Link></span>
+                                <span className="font-semibold text-sm text-cyan-600 ms-2 ps-2 border-s-2 border-s-gray-400"><Link to="/user/profile">EDIT</Link></span>
                             </h3>
                             <p>{account?.displayName}</p>
                             <p>{account?.email?.split('@')[0].slice(0, 2) + '*'.repeat(account?.email?.split('@')[0].length - 2) + '@' + account?.email?.split('@')[1]}</p>
@@ -55,7 +55,7 @@ const MyAccount = () => {
                         <div>
                             <h3 className="mb-4 font-semibold text-[#151515] text-lg">
                                 Address Book
-                                <span className="font-semibold text-sm text-cyan-600 ms-2 ps-2 border-s-2 border-s-gray-400"><Link to="/">ADD</Link></span>
+                                <span className="font-semibold text-sm text-cyan-600 ms-2 ps-2 border-s-2 border-s-gray-400"><Link to="/user/addresses">ADD</Link></span>
                             </h3>
                             <div className="flex flex-col md:flex-row">
                                 <div className="grow">

@@ -17,6 +17,7 @@ import Dashboard from './Components/Pages/UserAccount/Dashboard/Dashboard';
 import PrivetRoute from './PrivetRoute/PrivetRoute';
 import Profile from './Components/Pages/UserAccount/Profile/Profile';
 import Addresses from './Components/Pages/UserAccount/Addresses/Addresses';
+import AddAddress from './Components/Pages/UserAccount/AddAddress/AddAddress';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
                   <Route path='/user/my-account' element={<MyAccount />}></Route>
                   <Route path='/user/profile' element={<Profile />}></Route>
                   <Route path='/user/addresses' element={<Addresses />}></Route>
+                  <Route path='/user/addresses/add-address' element={<AddAddress />}></Route>
                   <Route path='/user/orders' element={<Orders />}></Route>
                 </Route>
                 <Route path='/user/login' element={<Login />}></Route>
