@@ -26,7 +26,32 @@ const Addresses = () => {
                         </div>
                     </div>
                     :
-                    <div></div>
+                    <div className="overflow-x-auto">
+                        <table className="table dark:bg-white">
+                            <thead className="dark:text-black bg-gray-200">
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Address</th>
+                                    <th>Post Code</th>
+                                    <th>Phone Number</th>
+                                </tr>
+                            </thead>
+                            <tbody className="">
+                                {
+                                    account.addresses.map((address, idx) => <tr key={idx}>
+                                        <td>{address.fullName}</td>
+                                        <td>{address.address}</td>
+                                        <td>{address.region}, {address.city}, {address.zone}</td>
+                                        <td>{address.phoneNumber}</td>
+                                        <td><Link to="/" className='text-cyan-500 font-semibold'>EDIT</Link></td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
+                        <div className='py-6 mx-4 mt-2'>
+                            <Link to="/user/addresses/add-address" className='block w-fit duration-300 uppercase bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2.5 rounded font-semibold text-sm'>+ Add New Address</Link>
+                        </div>
+                    </div>
                 }
             </div>
         </section>

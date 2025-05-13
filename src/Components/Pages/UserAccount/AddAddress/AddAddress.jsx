@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm, Controller } from "react-hook-form";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddAddress = () => {
-    const { register, handleSubmit, control, formState: { errors }, setError } = useForm();
+    const { register, handleSubmit, control, formState: { errors }, setError, resetField } = useForm();
 
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [regions, setRegions] = useState([]);
     const [region, setRegion] = useState("");
@@ -18,7 +25,7 @@ const AddAddress = () => {
 
 
     useEffect(() => {
-        axiosPublic.get("/api/v1/region")
+        axiosPublic.get("/api/region")
             .then(res => {
                 // console.log(res.data);
                 setRegions(res.data);
@@ -35,7 +42,7 @@ const AddAddress = () => {
         setZones([]);
         setZone("");
         setRegion(e.target.options[e.target.selectedIndex].text);
-        axiosPublic.get(`/api/v1/city?addressId=${e.target.value}`)
+        axiosPublic.get(`/api/city?addressId=${e.target.value}`)
             .then(res => {
                 // console.log(res.data);
                 setCites(res.data);
@@ -51,8 +58,9 @@ const AddAddress = () => {
         setLoading(true);
         setZones([]);
         setZone("");
+        resetField("address", { keepError: true })
         setCity(e.target.options[e.target.selectedIndex].text);
-        axiosPublic.get(`/api/v1/zone?addressId=${e.target.value}`)
+        axiosPublic.get(`/api/zone?addressId=${e.target.value}`)
             .then(res => {
                 // console.log(res.data);
                 setZones(res.data);
@@ -75,9 +83,28 @@ const AddAddress = () => {
         if (!zone) {
             return setError("zone")
         }
+        if (!data.address) {
+            return setError("address")
+        }
         data.region = region
         data.city = city
-        console.log(data)
+        console.log(data);
+        setLoading(true);
+
+        // Store Data in Database.
+        axiosSecure.put(`/customer/add/address?user=${user.email}`, data)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    setLoading(false);
+                    toast.success("Address Added Successfully!");
+                    navigate("/user/addresses")
+                }
+            })
+            .catch(err => {
+                setLoading(false);
+                console.log(err);
+            });
     };
 
 
@@ -98,27 +125,27 @@ const AddAddress = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="px-12 pb-12 pt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <label>
-                            <p className="text-xs font-medium text-gray-600 my-1.5">Full Name</p>
+                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.fullName && "text-red-500"}`}>Full Name</p>
                             <input
                                 {...register("fullName", { required: true })}
                                 className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.fullName && "border-red-500"}`}
                                 placeholder="Enter your Full-name"
                                 type="text"
                             />
-                            {errors.fullName && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this empty.</span>}
+                            {errors.fullName && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
                         </label>
                         <label>
-                            <p className="text-xs font-medium text-gray-600 my-1.5">Phone Number</p>
+                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.phoneNumber && "text-red-500"}`}>Phone Number</p>
                             <input
                                 {...register("phoneNumber", { required: true })}
                                 className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.phoneNumber && "border-red-500"}`}
                                 placeholder="Please enter your phone number"
                                 type="number"
                             />
-                            {errors.phoneNumber && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this empty.</span>}
+                            {errors.phoneNumber && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
                         </label>
                         <label>
-                            <p className="text-xs font-medium text-gray-600 my-1.5">Province / Region</p>
+                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.region && "text-red-500"}`}>Province / Region</p>
                             <Controller
                                 name="region"
                                 control={control}
@@ -144,10 +171,10 @@ const AddAddress = () => {
                                     </select>
                                 )}
                             />
-                            {errors.region && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this empty.</span>}
+                            {errors.region && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
                         </label>
                         <label>
-                            <p className="text-xs font-medium text-gray-600 my-1.5">City</p>
+                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.city && "text-red-500"}`}>City</p>
                             <Controller
                                 name="city"
                                 control={control}
@@ -174,10 +201,10 @@ const AddAddress = () => {
                                     </select>
                                 )}
                             />
-                            {errors.city && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this empty.</span>}
+                            {errors.city && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
                         </label>
                         <label>
-                            <p className="text-xs font-medium text-gray-600 my-1.5">Zone</p>
+                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.zone && "text-red-500"}`}>Zone</p>
                             <Controller
                                 name="zone"
                                 control={control}
@@ -204,12 +231,31 @@ const AddAddress = () => {
                                     </select>
                                 )}
                             />
-                            {errors.zone && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this empty.</span>}
+                            {errors.zone && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
+                        </label>
+                        <label>
+                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.address && "text-red-500"}`}>Address</p>
+                            <input
+                                {...register("address", { required: true })}
+                                className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.address && "border-red-500"}`}
+                                placeholder="Please Enter your Address Details"
+                                type="text"
+                            />
+                            {errors.address && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
                         </label>
                     </div>
                     <div className="text-end px-12 py-8 space-x-4 font-inter">
-                        <button className="px-8 py-3 bg-gray-300 rounded border border-gray-400 text-gray-600 cursor-pointer text-sm font-semibold">Cancel</button>
-                        <button className="px-8 py-3 bg-orange-400 rounded border border-orange-400 text-white cursor-pointer text-sm font-semibold" type="submit">Save</button>
+                        <button
+                            onClick={() => window.history.back()}
+                            className="px-8 py-3 bg-gray-300 rounded border border-gray-400 text-gray-600 cursor-pointer text-sm font-semibold"
+                            type="button">
+                            Cancel
+                        </button>
+                        <button
+                            className="px-8 py-3 bg-orange-400 rounded border border-orange-400 text-white cursor-pointer text-sm font-semibold"
+                            type="submit">
+                            Save
+                        </button>
                     </div>
                 </form>
             </div>
