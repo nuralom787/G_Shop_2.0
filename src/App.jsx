@@ -18,6 +18,8 @@ import PrivetRoute from './PrivetRoute/PrivetRoute';
 import Profile from './Components/Pages/UserAccount/Profile/Profile';
 import Addresses from './Components/Pages/UserAccount/Addresses/Addresses';
 import AddAddress from './Components/Pages/UserAccount/AddAddress/AddAddress';
+import UpdateProfile from './Components/Pages/UserAccount/UpdatePages/UpdateProfile/UpdateProfile';
+import UpdateAddress from './Components/Pages/UserAccount/UpdatePages/UpdateAddress/UpdateAddress';
 
 
 function App() {
@@ -38,8 +40,10 @@ function App() {
                 <Route path='/user' element={<PrivetRoute><Dashboard /></PrivetRoute>}>
                   <Route path='/user/my-account' element={<MyAccount />}></Route>
                   <Route path='/user/profile' element={<Profile />}></Route>
+                  <Route path='/user/profile/update' element={<UpdateProfile />}></Route>
                   <Route path='/user/addresses' element={<Addresses />}></Route>
                   <Route path='/user/addresses/add-address' element={<AddAddress />}></Route>
+                  <Route path='/user/addresses/update' element={<UpdateAddress />}></Route>
                   <Route path='/user/orders' element={<Orders />}></Route>
                 </Route>
                 <Route path='/user/login' element={<Login />}></Route>

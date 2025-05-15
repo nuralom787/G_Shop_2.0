@@ -36,7 +36,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className='py-4 mx-4'>
-                <Link to="/" className='block w-fit duration-300 uppercase bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2.5 rounded font-semibold text-sm'>Edit Profile</Link>
+                <Link to="/user/profile/update" className='block w-fit duration-300 uppercase bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2.5 rounded font-semibold text-sm'>Edit Profile</Link>
             </div>
         </section>
     );
