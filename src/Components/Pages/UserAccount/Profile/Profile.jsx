@@ -28,7 +28,11 @@ const Profile = () => {
                 </div>
                 <div className='m-3 space-y-1.5'>
                     <span className='text-xs'>Birthday</span>
-                    {account?.dob ? <p className='font-semibold text-sm leading-8'>{account.dob}</p> : <p className='font-medium text-sm text-[#9e9e9e] leading-10'>Please enter your birthday</p>}
+                    {account?.dob ? <p className='font-semibold text-sm leading-8'>{new Date(account.dob).toLocaleDateString("en-BD", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                    })}</p> : <p className='font-medium text-sm text-[#9e9e9e] leading-10'>Please enter your birthday</p>}
                 </div>
                 <div className='m-3 space-y-1.5'>
                     <span className='text-xs'>Gender</span>

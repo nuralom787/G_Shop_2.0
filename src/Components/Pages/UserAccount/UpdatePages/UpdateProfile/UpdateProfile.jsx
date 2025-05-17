@@ -101,7 +101,7 @@ const UpdateProfile = () => {
                         <input
                             {...register("dob", { required: true })}
                             className="w-full border border-gray-600 px-5 py-1 outline-0 font-semibold text-sm leading-7 cursor-pointer"
-                            defaultValue={account?.dob}
+                            defaultValue={new Date(account?.dob).toISOString().split("T")[0]}
                             placeholder="Please Enter Your Date-of-birth"
                             type="date"
                         />

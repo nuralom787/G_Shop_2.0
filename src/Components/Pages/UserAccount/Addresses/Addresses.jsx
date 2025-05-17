@@ -43,7 +43,7 @@ const Addresses = () => {
                                         <td>{address.address}</td>
                                         <td>{address.region}, {address.city}, {address.zone}</td>
                                         <td>{address.phoneNumber}</td>
-                                        <td><Link to="/" className='text-cyan-500 font-semibold'>EDIT</Link></td>
+                                        <td><Link to={`/user/addresses/update/${address._id}`} className='text-cyan-500 font-semibold'>EDIT</Link></td>
                                     </tr>)
                                 }
                             </tbody>

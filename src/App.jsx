@@ -43,7 +43,7 @@ function App() {
                   <Route path='/user/profile/update' element={<UpdateProfile />}></Route>
                   <Route path='/user/addresses' element={<Addresses />}></Route>
                   <Route path='/user/addresses/add-address' element={<AddAddress />}></Route>
-                  <Route path='/user/addresses/update' element={<UpdateAddress />}></Route>
+                  <Route path='/user/addresses/update/:id' element={<UpdateAddress />}></Route>
                   <Route path='/user/orders' element={<Orders />}></Route>
                 </Route>
                 <Route path='/user/login' element={<Login />}></Route>
