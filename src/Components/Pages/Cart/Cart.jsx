@@ -36,12 +36,12 @@ const Cart = () => {
             setLoading(true);
             axiosSecure.patch('/carts/quantity?quantity=-1', data)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     refetch()
                     setLoading(false);
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    // console.log(err.message);
                     setLoading(false);
                 })
         }
@@ -49,12 +49,12 @@ const Cart = () => {
             setLoading(true);
             axiosSecure.patch('/carts/quantity?quantity=+1', data)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     refetch()
                     setLoading(false);
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    // console.log(err.message);
                     setLoading(false);
                 })
         }

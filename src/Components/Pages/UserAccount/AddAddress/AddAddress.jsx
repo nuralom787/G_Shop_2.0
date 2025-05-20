@@ -88,13 +88,13 @@ const AddAddress = () => {
         }
         data.region = region
         data.city = city
-        console.log(data);
+        // console.log(data);
         setLoading(true);
 
         // Store Data in Database.
         axiosSecure.put(`/customer/add/address?user=${user.email}`, data)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.modifiedCount > 0) {
                     setLoading(false);
                     toast.success("Address Added Successfully!");
@@ -103,7 +103,7 @@ const AddAddress = () => {
             })
             .catch(err => {
                 setLoading(false);
-                console.log(err);
+                // console.log(err);
             });
     };
 

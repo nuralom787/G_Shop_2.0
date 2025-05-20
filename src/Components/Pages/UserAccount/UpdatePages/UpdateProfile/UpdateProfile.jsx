@@ -17,7 +17,7 @@ const UpdateProfile = () => {
 
     const onSubmit = (data) => {
         data.dob = new Date(data.dob).toISOString();
-        console.log(data);
+        // console.log(data);
 
         Swal.fire({
             title: "Are you sure?",
@@ -32,7 +32,7 @@ const UpdateProfile = () => {
                 setLoading(true);
                 axiosSecure.put(`/customer/update/profile?email=${account.email}`, data)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         if (res.data.modifiedCount > 0) {
                             Swal.fire({
                                 title: "Updated!",
@@ -45,7 +45,7 @@ const UpdateProfile = () => {
                     })
                     .catch(err => {
                         setLoading(false);
-                        console.log(err);
+                        // console.log(err);
                     })
             }
         });

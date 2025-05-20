@@ -6,12 +6,19 @@ import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../../../Provider/AuthProvider";
 import { useNavigate, useParams } from "react-router";
 import useMyAccount from "../../../../../Hooks/useMyAccount";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const UpdateAddress = () => {
     const { id } = useParams();
     const [account] = useMyAccount();
     const currentAddress = account?.addresses?.find(address => address._id === id);
-    const { register, handleSubmit, control, formState: { errors }, setError, resetField } = useForm();
+    const { register, handleSubmit, control, formState: { errors }, setError, resetField } = useForm({
+        defaultValues: {
+            region: currentAddress?.region,
+            city: currentAddress?.city,
+        }
+    });
 
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
@@ -26,7 +33,7 @@ const UpdateAddress = () => {
     const [zone, setZone] = useState("");
 
 
-
+    // Load Region Information.
     useEffect(() => {
         axiosPublic.get("/api/region")
             .then(res => {
@@ -38,6 +45,7 @@ const UpdateAddress = () => {
             })
     }, []);
 
+    // Load City Information.
     const handleCityAddress = (e) => {
         setLoading(true);
         setCites([]);
@@ -57,6 +65,7 @@ const UpdateAddress = () => {
             })
     };
 
+    // Load Zone Information.
     const handleZoneAddress = (e) => {
         setLoading(true);
         setZones([]);
@@ -75,42 +84,80 @@ const UpdateAddress = () => {
             })
     };
 
-
+    // Update Information Function.
     const onSubmit = (data) => {
-        if (!city) {
+        if (region && !city && !zone) {
             return (
                 setError("city"),
                 setError("zone")
             )
-        }
-        if (!zone) {
-            return setError("zone")
-        }
-        if (!data.address) {
-            return setError("address")
-        }
-        data.region = region
-        data.city = city
-        console.log(data);
-        // setLoading(true);
+        };
+        data.region = region ? region : currentAddress.region
+        data.city = city ? city : currentAddress.city
+        data.zone = zone ? zone : currentAddress.zone
+        // console.log(data);
 
-        // // Store Data in Database.
-        // axiosSecure.put(`/customer/add/address?user=${user.email}`, data)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         if (res.data.modifiedCount > 0) {
-        //             setLoading(false);
-        //             toast.success("Address Added Successfully!");
-        //             navigate("/user/addresses")
-        //         }
-        //     })
-        //     .catch(err => {
-        //         setLoading(false);
-        //         console.log(err);
-        //     });
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to update your address information?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Update"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setLoading(true);
+
+                // Update Address Data in Database.
+                axiosSecure.put(`/customer/update/address?user=${user.email}&addressId=${currentAddress._id}`, data)
+                    .then(res => {
+                        // console.log(res.data);
+                        if (res.data.modifiedCount > 0) {
+                            setLoading(false);
+                            toast.success("Address Updated Successfully!");
+                            navigate("/user/addresses")
+                        }
+                    })
+                    .catch(err => {
+                        setLoading(false);
+                        // console.log(err);
+                    });
+            }
+        });
     };
 
+    // Delete Address Function.
+    const handleDeleteAddress = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to Delete this address information?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Delete It!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setLoading(true);
 
+                // Update Address Data in Database.
+                axiosSecure.delete(`/customer/delete/address?user=${user.email}&addressId=${currentAddress._id}`)
+                    .then(res => {
+                        // console.log(res.data);
+                        if (res.data.modifiedCount > 0) {
+                            setLoading(false);
+                            toast.success("Address Deleted Successfully!");
+                            navigate("/user/addresses")
+                        }
+                    })
+                    .catch(err => {
+                        setLoading(false);
+                        // console.log(err);
+                    });
+            }
+        });
+    };
 
 
     return (
@@ -118,8 +165,15 @@ const UpdateAddress = () => {
             <Helmet>
                 <title>G-Shop | Update Address</title>
             </Helmet>
-            <h3 className="mb-2 font-semibold text-[#151515] text-lg">Edit Address</h3>
-            <div className='divider before:bg-black after:bg-black my-2'></div>
+            <div className="flex justify-between items-center gap-5 px-6">
+                <h3 className="font-semibold text-[#151515] text-lg">Edit Address</h3>
+                <button
+                    className="bg-cyan-600 hover:bg-cyan-700 duration-300 px-4 py-1.5 rounded text-xs font-semibold text-white cursor-pointer"
+                    onClick={handleDeleteAddress}>
+                    Delete
+                </button>
+            </div>
+            <div className='divider before:bg-black after:bg-black my-1.5'></div>
             <div>
                 {loading &&
                     <div className="fixed inset-0 z-50 bg-black opacity-40 flex items-center justify-center">
@@ -179,66 +233,92 @@ const UpdateAddress = () => {
                             />
                             {errors.region && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
                         </label>
-                        <label>
-                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.city && "text-red-500"}`}>City</p>
-                            <Controller
-                                name="city"
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field }) => (
-                                    <select
-                                        {...field}
-                                        disabled={cites.length ? false : true}
-                                        onChange={(e) => {
-                                            field.onChange(e);
-                                            handleZoneAddress(e);
-                                        }}
-                                        className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.city && "border-red-500"} ${cites.length ? "cursor-pointer" : "cursor-not-allowed"}`}
-                                    >
-                                        <option hidden>{currentAddress?.city}</option>
-                                        {
-                                            cites.map(city => <option
-                                                key={city.id}
-                                                value={city.id}
-                                            >
-                                                {city.name}
-                                            </option>)
-                                        }
-                                    </select>
-                                )}
-                            />
-                            {errors.city && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
-                        </label>
-                        <label>
-                            <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.zone && "text-red-500"}`}>Zone</p>
-                            <Controller
-                                name="zone"
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field }) => (
-                                    <select
-                                        {...field}
-                                        disabled={zones.length ? false : true}
-                                        onChange={(e) => {
-                                            field.onChange(e)
-                                            setZone(e.target.value)
-                                        }}
-                                        className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.zone && "border-red-500"} ${zones.length ? "cursor-pointer" : "cursor-not-allowed"}`}
-                                    >
-                                        <option hidden>{currentAddress?.zone}</option>
-                                        {
-                                            zones.map(zone => <option
-                                                key={zone.id}
-                                                value={zone.name}
-                                            >
-                                                {zone.name}
-                                            </option>)
-                                        }
-                                    </select>
-                                )}
-                            />
-                            {errors.zone && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
-                        </label>
+                        {cites.length ?
+                            <label>
+                                <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.city && "text-red-500"}`}>City</p>
+                                <Controller
+                                    name="city"
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field }) => (
+                                        <select
+                                            {...field}
+                                            disabled={cites.length ? false : true}
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                handleZoneAddress(e);
+                                            }}
+                                            className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.city && "border-red-500"} ${cites.length ? "cursor-pointer" : "cursor-not-allowed"}`}
+                                        >
+                                            <option hidden>Please Choose your city</option>
+                                            {
+                                                cites.map(city => <option
+                                                    key={city.id}
+                                                    value={city.id}
+                                                >
+                                                    {city.name}
+                                                </option>)
+                                            }
+                                        </select>
+                                    )}
+                                />
+                                {errors.city && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
+                            </label>
+                            :
+                            <label>
+                                <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.city && "text-red-500"}`}>City</p>
+                                <select
+                                    disabled={cites.length ? false : true}
+                                    className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.city && "border-red-500"} ${cites.length ? "cursor-pointer" : "cursor-not-allowed"}`}
+                                >
+                                    <option hidden>{currentAddress?.city}</option>
+                                </select>
+                                {errors.city && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
+                            </label>
+                        }
+                        {zones.length ?
+                            <label>
+                                <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.zone && "text-red-500"}`}>Zone</p>
+                                <Controller
+                                    name="zone"
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field }) => (
+                                        <select
+                                            {...field}
+                                            disabled={!zones.length}
+                                            onChange={(e) => {
+                                                field.onChange(e)
+                                                setZone(e.target.value)
+                                            }}
+                                            className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.zone && "border-red-500"} ${zones.length ? "cursor-pointer" : "cursor-not-allowed"}`}
+                                        >
+                                            <option hidden>Please Choose your zone</option>
+                                            {
+                                                zones.map(zone => <option
+                                                    key={zone.id}
+                                                    value={zone.name}
+                                                >
+                                                    {zone.name}
+                                                </option>)
+                                            }
+                                        </select>
+                                    )}
+                                />
+                                {errors.zone && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
+                            </label>
+                            :
+                            <label>
+                                <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.zone && "text-red-500"}`}>Zone</p>
+                                <select
+                                    disabled={!zones.length}
+                                    className={`px-6 py-2 outline-0 border border-gray-400 w-full text-sm ${errors.zone && "border-red-500"} ${zones.length ? "cursor-pointer" : "cursor-not-allowed"}`}
+                                >
+                                    <option hidden>{currentAddress?.zone}</option>
+                                </select>
+                                {errors.zone && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
+                            </label>
+                        }
                         <label>
                             <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.address && "text-red-500"}`}>Address</p>
                             <input
