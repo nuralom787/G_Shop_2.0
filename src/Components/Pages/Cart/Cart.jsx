@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useCart from "../../../Hooks/useCart";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -26,6 +26,21 @@ const Cart = () => {
 
     // Check if all products are selected
     const isAllSelected = selectedProducts.length === cart?.cart?.length;
+
+    // Load SelectedProduct Form LS.
+    useEffect(() => {
+        const stored = JSON.parse(localStorage.getItem('selectedProducts'));
+        if (stored.length) {
+            setSelectedProducts(stored);
+        }
+    }, []);
+
+
+    // Add or Remove SelectedProduct Form LS.
+    useEffect(() => {
+        localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+    }, [selectedProducts]);
+
 
     // Handle Product Quantity.
     const handleQuantity = (e, id) => {
@@ -76,11 +91,13 @@ const Cart = () => {
 
     // Handle single product checkbox
     const handleSelectProduct = (e, productId) => {
-        if (e.target.checked) {
-            setSelectedProducts(prev => [...prev, productId]);
-        } else {
-            setSelectedProducts(prev => prev.filter(id => id !== productId));
-        }
+        setSelectedProducts((prevSelected) => {
+            if (prevSelected.includes(productId)) {
+                return prevSelected.filter(id => id !== productId);
+            } else {
+                return [...prevSelected, productId];
+            }
+        });
     };
 
     // Handle Product Delete.
@@ -217,7 +234,7 @@ const Cart = () => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Link to="/" className="w-full inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">CONTINUE SHOPPING <RiShoppingBasketLine /></Link>
-                                <Link to="/" className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">PROCEED TO CHECKOUT <IoWalletOutline /></Link>
+                                <Link to="/user/checkout" className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">PROCEED TO CHECKOUT <IoWalletOutline /></Link>
                             </div>
                         </div>
                     </div>
