@@ -2,16 +2,28 @@ import { Helmet } from "react-helmet-async";
 import useMyAccount from "../../../Hooks/useMyAccount";
 import { ScaleLoader } from "react-spinners";
 import useCart from "../../../Hooks/useCart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { RiShoppingBasketLine } from "react-icons/ri";
 import { IoWalletOutline } from "react-icons/io5";
 
 const Checkout = () => {
     const [account, , isPending, isError] = useMyAccount();
-    const [cart, refetch, cartPending, cartError] = useCart();
-    const [loading, setLoading] = useState(false);
+    const [cart] = useCart();
+    const [selectedProductIds, setSelectedProductIds] = useState([]);
+    // const [loading, setLoading] = useState(false);
 
+    const selectedProducts = cart?.cart?.filter(item => selectedProductIds.includes(item._id));
+
+    // Load and Store Selected Product From LS.
+    useEffect(() => {
+        const stored = JSON.parse(localStorage.getItem("selectedProducts"));
+        if (stored.length) {
+            setSelectedProductIds(stored);
+        } else {
+            setSelectedProductIds([]);
+        }
+    }, []);
 
     return (
         <section className="bg-gray-300 py-10">
@@ -31,11 +43,11 @@ const Checkout = () => {
                     </div>
                     :
                     <div className="flex justify-between items-start gap-3">
-                        {loading &&
+                        {/* {loading &&
                             <div className="fixed inset-0 z-50 bg-black opacity-40 flex items-center justify-center">
                                 <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                             </div>
-                        }
+                        } */}
                         <div className="w-3/5 space-y-4 text-black">
                             {/* Shipping & Billing Options */}
                             <div className="bg-white px-4">
@@ -57,28 +69,17 @@ const Checkout = () => {
                             {/* Selected Products For Checkout */}
                             <ul className="bg-white p-4">
                                 {
-                                    cart?.cart?.map(product => <li
+                                    selectedProducts?.map(product => <li
                                         key={product._id}
                                         className="flex justify-between items-center gap-6 "
                                     >
                                         <div className="flex justify-start items-center gap-6 w-3/6">
-                                            <img src={product.image} alt="" className="w-14 h-14 rounded-full" />
+                                            <img src={product.image} alt="" className="w-16 h-16 rounded-full" />
                                             <div>
                                                 <h3 className="font-medium text-xl">{product.title}</h3>
                                                 <p className="text-sm font-semibold leading-8">Item Price: ${product.price.toFixed(2)}</p>
-                                                <p className="font-bold text-lg">${(product.price * product.quantity).toFixed(2)}</p>
                                             </div>
-                                        </div>
-                                        <div className="flex justify-start items-center gap-6 w-3/6">
-                                            <div className='border-2 border-gray-300 rounded-md flex justify-between items-center w-3/6'>
-                                                <button disabled={product.quantity === 1 && true} className={`px-4 py-4 border-r-2 border-gray-300 ${product.quantity === 1 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:text-red-700`} onClick={() => handleQuantity("-1", product._id)}>
-                                                    <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                                </button>
-                                                <p className="text-base font-semibold">{product.quantity}</p>
-                                                <button className="px-4 py-4 border-l-2 border-gray-300 hover:text-green-700 cursor-pointer" onClick={() => handleQuantity("+1", product._id)}>
-                                                    <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                                </button>
-                                            </div>
+                                            <p className="font-bold text-lg">${(product.price * product.quantity).toFixed(2)}</p>
                                         </div>
                                     </li>)
                                 }
