@@ -23,6 +23,8 @@ const useAddToCart = (product, quantity) => {
                 image: product.image,
                 title: product.title,
                 price: product.price,
+                originalPrice: product.originalPrice,
+                discount: product.discount,
                 quantity: quantity
             };
             const data = { email, item };

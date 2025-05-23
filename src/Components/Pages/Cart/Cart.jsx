@@ -30,7 +30,7 @@ const Cart = () => {
     // Load SelectedProduct Form LS.
     useEffect(() => {
         const stored = JSON.parse(localStorage.getItem('selectedProducts'));
-        if (stored.length) {
+        if (stored?.length) {
             setSelectedProducts(stored);
         }
     }, []);
@@ -160,37 +160,48 @@ const Cart = () => {
                             </div>
                         }
                         <ul className="w-3/5 space-y-2">
-                            <li className="text-black text-sm font-medium inline-flex items-center gap-2 w-full bg-white px-4 py-3">
+                            {/* <li className="text-black text-sm font-medium inline-flex items-center gap-2 w-full bg-white px-4 py-3">
                                 <input
                                     type="checkbox"
-                                    checked={isAllSelected}
+                                    checked={isAllSelected && cart.cartTotalItem > 0}
+                                    disabled={cart.cartTotalItem === 0}
                                     onChange={handleSelectAll}
                                     name="all" id="all"
-                                    className="appearance-none w-4 h-4 bg-white checked:bg-green-500 border-2 border-gray-300 rounded cursor-pointer"
+                                    className={`appearance-none w-4 h-4 bg-white checked:bg-green-500 border-2 border-gray-300 rounded ${cart.cartTotalItem <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}
                                 />
                                 Select All ({cart.cartTotalItem || 0} Item's)
-                            </li>
+                            </li> */}
                             {
                                 cart?.cart?.map(product => <li
                                     key={product._id}
                                     className="flex justify-between items-center gap-6 text-black bg-white px-4 py-6"
                                 >
-                                    <div className="flex justify-start items-center gap-6 w-3/6">
-                                        <input
+                                    <div className="flex justify-start items-center gap-6 w-4/6">
+                                        {/* <input
                                             type="checkbox"
                                             checked={selectedProducts.includes(product._id)}
                                             onChange={(e) => handleSelectProduct(e, product._id)}
                                             name={product.title} id={product._id}
-                                            className="appearance-none w-4 h-4 bg-white checked:bg-green-500 border-2 border-gray-300 rounded cursor-pointer" />
-                                        <img src={product.image} alt="" className="w-14 h-14 rounded-full" />
+                                            className="appearance-none w-4 h-4 bg-white checked:bg-green-500 border-2 border-gray-300 rounded cursor-pointer" /> */}
+                                        <img src={product.image} alt="" className="w-20 h-20 rounded-full border-4 border-gray-300" />
                                         <div>
-                                            <h3 className="font-medium text-xl">{product.title}</h3>
-                                            <p className="text-sm font-semibold leading-8">Item Price: ${product.price.toFixed(2)}</p>
-                                            <p className="font-bold text-lg">${(product.price * product.quantity).toFixed(2)}</p>
+                                            <h3 className="font-medium text-base">{product.title}</h3>
                                         </div>
                                     </div>
-                                    <div className="flex justify-start items-center gap-6 w-3/6">
-                                        <div className='border-2 border-gray-300 rounded-md flex justify-between items-center w-3/6'>
+                                    <div className="flex flex-col justify-center items-center w-2/6 space-y-2">
+                                        <p className="text-xl font-semibold text-[#00a63e]">${product.price.toFixed(2)}</p>
+                                        {product.originalPrice > product.price && <p className="text-base line-through leading-6">${(product.originalPrice).toFixed(2)}</p>}
+                                        <div className="inline-flex justify-end items-center gap-4 text-2xl">
+                                            {fab ?
+                                                <button onClick={handleFab} className="outline-0 cursor-pointer text-red-500"><FaHeart /></button>
+                                                :
+                                                <button onClick={handleFab} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><FaRegHeart /></button>
+                                            }
+                                            <button onClick={() => handleDelete(product._id)} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><RiDeleteBin5Line /></button>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-end items-center gap-6 w-2/6">
+                                        <div className='border-2 border-gray-300 rounded-md flex justify-between items-center w-full'>
                                             <button disabled={product.quantity === 1 && true} className={`px-4 py-4 border-r-2 border-gray-300 ${product.quantity === 1 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:text-red-700`} onClick={() => handleQuantity("-1", product._id)}>
                                                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                             </button>
@@ -198,14 +209,6 @@ const Cart = () => {
                                             <button className="px-4 py-4 border-l-2 border-gray-300 hover:text-green-700 cursor-pointer" onClick={() => handleQuantity("+1", product._id)}>
                                                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                             </button>
-                                        </div>
-                                        <div className="inline-flex justify-end items-center gap-4 text-2xl w-3/6">
-                                            {fab ?
-                                                <button onClick={handleFab} className="outline-0 cursor-pointer text-red-500"><FaHeart /></button>
-                                                :
-                                                <button onClick={handleFab} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><FaRegHeart /></button>
-                                            }
-                                            <button onClick={() => handleDelete(product._id)} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><RiDeleteBin5Line /></button>
                                         </div>
                                     </div>
                                 </li>)
@@ -216,7 +219,7 @@ const Cart = () => {
                             <div className="divider before:bg-black after:bg-black my-2"></div>
                             <div className="">
                                 <div className="flex justify-between items-center gap-2">
-                                    <p className="font-medium text-sm text-gray-600 leading-8">SubTotal</p>
+                                    <p className="font-medium text-sm text-gray-600 leading-8">SubTotal <span>({cart?.cart?.length} Items)</span></p>
                                     <p className="font-medium text-sm">${cart?.cartTotalPrice?.toFixed(2) || "00.00"}</p>
                                 </div>
                                 <div className="flex justify-between items-center gap-2">
