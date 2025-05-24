@@ -107,9 +107,9 @@ const Checkout = () => {
                             <div className="flex items-center gap-2">
                                 {/* <Link to="/" className="w-full inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">CONTINUE SHOPPING <RiShoppingBasketLine /></Link> */}
                                 <Link
-                                    to="/user/checkout"
+                                    to="/user/payment"
                                     className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">
-                                    PROCEED TO PAY <MdOutlinePayments />
+                                    PROCEED TO PAY <MdOutlinePayments className="text-xl" />
                                 </Link>
                             </div>
                         </div>
