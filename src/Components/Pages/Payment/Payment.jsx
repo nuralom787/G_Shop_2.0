@@ -7,6 +7,13 @@ import bkash from '../../Images/bkash.png';
 import nagad from '../../Images/nagad.png';
 import doller from '../../Images/dollar.png';
 import { useState } from "react";
+import CardPaymentForm from "../PayOptions/CardPaymentForm";
+import BkashPayment from "../PayOptions/Bkashpayment";
+import NagadPayment from "../PayOptions/NagadPayment";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PROMISE);
 
 const Payment = () => {
     const [account, , isPending, isError] = useMyAccount();
@@ -53,18 +60,15 @@ const Payment = () => {
                                 </button>
                             </div>
                             {method === "card" &&
-                                <div className="bg-white p-10">
-                                </div>
+                                <Elements stripe={stripePromise}>
+                                    <CardPaymentForm />
+                                </Elements>
                             }
                             {method === "bkash" &&
-                                <div className="bg-white p-10">
-
-                                </div>
+                                <BkashPayment />
                             }
                             {method === "nagad" &&
-                                <div className="bg-white p-10">
-
-                                </div>
+                                <NagadPayment />
                             }
                             {method === "cod" &&
                                 <div className="bg-white p-10">
