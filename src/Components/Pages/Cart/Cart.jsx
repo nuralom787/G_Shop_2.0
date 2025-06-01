@@ -12,16 +12,21 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useMyAccount from "../../../Hooks/useMyAccount";
+import { useForm } from "react-hook-form";
 
 
 
 const Cart = () => {
+    const { register, handleSubmit, reset } = useForm();
     const [fab, setFab] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const { user } = useContext(AuthContext);
     const [cart, refetch, isPending, isError] = useCart();
     const axiosSecure = useAxiosSecure();
+    const [account, , acisPending, acisError] = useMyAccount();
+    const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
 
 
     // Check if all products are selected
@@ -135,6 +140,31 @@ const Cart = () => {
         });
     };
 
+    // Handle Apply Coupon Code.
+    const applyCoupon = (data) => {
+        // console.log(data.couponCode, cart?.cartTotalPrice);
+        if (!cart?.cartTotalPrice) {
+            return toast.error("please add some product in your cart!!");
+        };
+
+        data.subtotal = cart?.cartTotalPrice;
+        data.email = account.email;
+
+        // Validate Coupon Code.
+        axiosSecure.post("/apply-coupon", data)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    toast.success(`Coupon code "${data.couponCode}" applied successfully.`, { position: "top-center", autoClose: 5000 });
+                    reset();
+                }
+            })
+            .catch(err => {
+                toast.error(err.response.data.message);
+            })
+    };
+
 
     return (
         <section className="bg-gray-300 py-10">
@@ -224,16 +254,27 @@ const Cart = () => {
                                 </div>
                                 <div className="flex justify-between items-center gap-2">
                                     <p className="font-medium text-sm text-gray-600 leading-8">Shipping Fee</p>
-                                    <p className="font-medium text-sm">$00.00</p>
+                                    <p className="font-medium text-sm">${shippingCost?.toFixed(2)}</p>
+                                </div>
+                                <div className="flex justify-between items-center gap-2">
+                                    <p className="font-medium text-sm text-gray-600 leading-8">Discount</p>
+                                    <p className="font-medium text-sm">${cart?.cartDiscount?.toFixed(2)}</p>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-4 my-5">
-                                <input type="text" className="px-4 py-2 font-semibold text-base border border-e-0 border-gray-300 rounded-s-sm outline-0 col-span-3" />
-                                <button className="uppercase font-semibold text-base text-white bg-[#25a5d8] rounded-e-sm cursor-pointer col-span-1">Apply</button>
-                            </div>
+                            {cart?.cartDiscount && cart?.appliedCoupon ?
+                                <div className="bg-green-100 py-3 px-6 mt-5 mb-1.5 font-inter flex justify-between items-center">
+                                    <h2 className="text-sm text-green-600 font-bold">Coupon Applied</h2>
+                                    <span className="text-sm text-red-500 font-bold">{cart?.appliedCoupon}</span>
+                                </div>
+                                :
+                                <form onSubmit={handleSubmit(applyCoupon)} className="grid grid-cols-4 mt-5 mb-1.5">
+                                    <input {...register("couponCode", { required: true })} type="text" className="px-4 py-2 font-semibold text-base border border-e-0 border-gray-300 focus:border-cyan-500 duration-500 rounded-s-sm outline-0 col-span-3" />
+                                    <button type="submit" className="uppercase font-semibold text-base text-white bg-[#25a5d8] hover:bg-cyan-700 duration-500 rounded-e-sm cursor-pointer col-span-1">Apply</button>
+                                </form>
+                            }
                             <div className="flex justify-between items-center gap-2">
                                 <p className="font-bold text-xl text-[#151515] leading-12">Total</p>
-                                <p className="font-bold text-xl text-red-600">${cart?.cartTotalPrice?.toFixed(2) || "00.00"}</p>
+                                <p className="font-bold text-xl text-red-600">${((cart?.cartTotalPrice + shippingCost) - cart?.cartDiscount).toFixed(2) || "00.00"}</p>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Link to="/" className="w-full inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">CONTINUE SHOPPING <RiShoppingBasketLine /></Link>

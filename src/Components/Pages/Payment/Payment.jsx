@@ -19,6 +19,7 @@ const Payment = () => {
     const [account, , isPending, isError] = useMyAccount();
     const [cart] = useCart();
     const [method, setMethod] = useState("");
+    const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
 
 
     return (
@@ -90,12 +91,16 @@ const Payment = () => {
                             <div className="mb-6">
                                 <div className="flex justify-between items-center gap-2">
                                     <p className="font-medium text-sm text-gray-600 leading-8">SubTotal <span>({cart?.cart?.length} items and shipping fee included)</span></p>
-                                    <p className="font-medium text-sm">${cart?.cartTotalPrice?.toFixed(2) || "00.00"}</p>
+                                    <p className="font-medium text-sm">${(cart?.cartTotalPrice + shippingCost).toFixed(2)}</p>
+                                </div>
+                                <div className="flex justify-between items-center gap-2">
+                                    <p className="font-medium text-sm text-gray-600 leading-8">Discount</p>
+                                    <p className="font-medium text-sm">${cart?.cartDiscount?.toFixed(2)}</p>
                                 </div>
                             </div>
                             <div className="flex justify-between items-center gap-2">
                                 <p className="font-bold text-xl text-[#151515] leading-12">Total Amount</p>
-                                <p className="font-bold text-xl text-red-600">${cart?.cartTotalPrice?.toFixed(2) || "00.00"}</p>
+                                <p className="font-bold text-xl text-red-600">${((cart?.cartTotalPrice + shippingCost) - cart?.cartDiscount).toFixed(2)}</p>
                             </div>
                         </div>
                     </div>

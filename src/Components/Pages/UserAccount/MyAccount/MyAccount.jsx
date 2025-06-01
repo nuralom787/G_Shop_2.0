@@ -61,7 +61,7 @@ const MyAccount = () => {
                                 </span>
                             </h3>
                             <div className="divider before:bg-black after:bg-black mt-1.5 mb-3.5 h-[2px]"></div>
-                            {account.addresses.length ?
+                            {account?.addresses?.length ?
                                 <div>
                                     {
                                         account.addresses.slice(0, 1).map(address => <div key={address._id} className="flex flex-col md:flex-row">

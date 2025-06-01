@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useCart from "../../../Hooks/useCart";
 import useMyAccount from "../../../Hooks/useMyAccount";
 import { toast } from "react-toastify";
+import useProducts from "../../../Hooks/useProducts";
 
 const CardPaymentForm = () => {
     const [clientSecret, setClientSecret] = useState("");
@@ -14,6 +15,7 @@ const CardPaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
+    const [products] = useProducts();
     const [cart] = useCart();
     const [account] = useMyAccount();
 
@@ -49,6 +51,16 @@ const CardPaymentForm = () => {
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
+            billing_details: {
+                email: account.email,
+                name: account.addresses[0].fullName,
+                phone: account.addresses[0].phoneNumber,
+                address: {
+                    state: account.addresses[0].region,
+                    city: account.addresses[0].city,
+                    line1: account.addresses[0].address
+                }
+            }
         });
 
         if (error) {
@@ -58,6 +70,7 @@ const CardPaymentForm = () => {
             console.log('[PaymentMethod]', paymentMethod);
             setError("");
         };
+
 
         // Confirm Payment.
         const { paymentIntent, error: paymentError } = await stripe.confirmCardPayment(clientSecret, {
@@ -76,12 +89,45 @@ const CardPaymentForm = () => {
         if (paymentError) {
             console.log('Payment error', paymentError);
             setError(error.message);
-        } else {
+        }
+        else {
             console.log('Payment Intent', paymentIntent);
             setError("");
             if (paymentIntent.status === "succeeded") {
-                toast.success(`Your Order Confirm Successfully. Your Order Id is: ${paymentIntent.id}`)
-            }
+                toast.success(`Your Order Confirm Successfully. Your Order Id is: ${paymentIntent.id}`, {
+                    position: "top-center",
+                    autoClose: 4500
+                })
+            };
+
+
+            //--------------------------------------- 
+            //          Store Order Information. 
+            // --------------------------------------
+
+
+            // create cart for order information.
+            let newCart = [];
+            for (let item of cart.cart) {
+                const newItem = products.products.find(product => product._id === item._id);
+                newItem.quantity = item.quantity;
+                newCart = [...newCart, newItem];
+            };
+
+            // create user information for  order information.
+            const order_information = {
+                customer_information: {
+                    customer_name: account.displayName,
+                    customer_phoneNumber: account.phoneNumber,
+                    customer_email: account.email,
+                    customer_uid: account.uid,
+                    customer_id: account._id
+                },
+                cart: newCart,
+                "shipping&billing": account.addresses[0]
+            };
+
+            console.log(order_information);
         };
     };
 
