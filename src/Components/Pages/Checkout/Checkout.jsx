@@ -137,7 +137,7 @@ const Checkout = () => {
                             {cart?.cartDiscount && cart?.appliedCoupon ?
                                 <div className="bg-green-100 py-3 px-6 mt-5 mb-1.5 font-inter flex justify-between items-center">
                                     <h2 className="text-sm text-green-600 font-bold">Coupon Applied</h2>
-                                    <span className="text-sm text-red-500 font-bold">{cart?.appliedCoupon}</span>
+                                    <span className="text-sm text-red-500 font-bold uppercase">{cart?.appliedCoupon}</span>
                                 </div>
                                 :
                                 <form onSubmit={handleSubmit(applyCoupon)} className="grid grid-cols-4 mt-5 mb-1.5">

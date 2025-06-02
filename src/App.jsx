@@ -22,6 +22,7 @@ import UpdateProfile from './Components/Pages/UserAccount/UpdatePages/UpdateProf
 import UpdateAddress from './Components/Pages/UserAccount/UpdatePages/UpdateAddress/UpdateAddress';
 import Checkout from './Components/Pages/Checkout/Checkout';
 import Payment from './Components/Pages/Payment/Payment';
+import Invoice from './Components/Pages/Invoice/Invoice';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                 <Route path='/user/cart' element={<PrivetRoute><Cart /></PrivetRoute>}></Route>
                 <Route path='/user/checkout' element={<PrivetRoute><Checkout /></PrivetRoute>}></Route>
                 <Route path='/user/payment' element={<PrivetRoute><Payment /></PrivetRoute>}></Route>
+                <Route path='/order/invoice/:id' element={<PrivetRoute><Invoice /></PrivetRoute>}></Route>
                 <Route path='/user' element={<PrivetRoute><Dashboard /></PrivetRoute>}>
                   <Route path='/user/my-account' element={<MyAccount />}></Route>
                   <Route path='/user/profile' element={<Profile />}></Route>
