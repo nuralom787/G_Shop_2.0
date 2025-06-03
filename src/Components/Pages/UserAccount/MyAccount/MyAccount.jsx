@@ -103,7 +103,7 @@ const MyAccount = () => {
                     }
                 </div>
             </section>
-            <section className="bg-white p-4 rounded mt-3">
+            <section className="bg-white p-8 rounded mt-3">
                 <h3 className="mb-4 font-semibold text-[#151515] text-lg">Recent Orders</h3>
                 {odIsPending || odIsError ?
                     <div className="flex justify-center items-center my-32">
@@ -117,31 +117,47 @@ const MyAccount = () => {
                     </div>
                     :
                     <div>
-                        {!orders.orders.length ?
+                        {!orders?.orders?.length ?
                             <div className="flex justify-center items-center p-20">
                                 <p className="font-medium text-sm text-gray-400">No Orders Found!!</p>
                             </div>
                             :
                             <div>
-                                <div className="overflow-x-auto">
-                                    <table className="table dark:bg-white">
+                                <div className="overflow-x-auto rounded-box border border-gray-200">
+                                    <table className="table t dark:bg-white">
                                         <thead className="dark:text-black bg-gray-200">
                                             <tr>
-                                                <th>Sl</th>
-                                                <th>Order#</th>
-                                                <th>Placed od</th>
-                                                <th className="text-center">Status</th>
-                                                <th className="text-end">Total Amount</th>
+                                                <th className="uppercase text-center">Sl</th>
+                                                <th className="uppercase text-center">Invoice</th>
+                                                <th className="uppercase text-center">Order Time</th>
+                                                <th className="uppercase text-center">Method</th>
+                                                <th className="uppercase text-center">Status</th>
+                                                <th className="uppercase text-center">Total</th>
+                                                <th className="uppercase text-center">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="">
+                                        <tbody className="font-inter">
                                             {
-                                                orders.orders.slice(0, 3).map((order, idx) => <tr key={order._id}>
-                                                    <td>{idx + 1}</td>
-                                                    <td>{order._id.slice(0, 11).toUpperCase()}</td>
-                                                    <td>{new Date(order.orderTime).toLocaleDateString()}</td>
-                                                    <td className="text-center">{order.status}</td>
-                                                    <td className="text-end">${order.grandTotal.toFixed(2)}/-</td>
+                                                orders.orders.map((order, idx) => <tr className="border-y border-gray-200" key={order._id}>
+                                                    <td className="font-bold text-center">{idx + 1}</td>
+                                                    <td className="font-bold text-center">{order.invoice}</td>
+                                                    <td className="font-semibold text-center leading-7">
+                                                        {new Date(order.createdAt).toLocaleString("en-BD", {
+                                                            month: "long",
+                                                            day: "2-digit",
+                                                            year: "numeric"
+                                                        })}  {new Date(order.createdAt).toLocaleString("en-BD", {
+                                                            hour: "2-digit",
+                                                            minute: "2-digit",
+                                                            hour12: true
+                                                        })}
+                                                    </td>
+                                                    <td className="text-center font-semibold">{order.paymentMethod}</td>
+                                                    <td className="text-center font-semibold">{order.status}</td>
+                                                    <td className="text-center font-bold">${order.total.toFixed(2)}</td>
+                                                    <td className="text-center">
+                                                        <Link className="font-semibold text-xs bg-emerald-100 text-emerald-600 px-3.5 py-1.5 rounded-full" to={`/order/invoice/${order._id}`}>Details</Link>
+                                                    </td>
                                                 </tr>)
                                             }
                                         </tbody>
