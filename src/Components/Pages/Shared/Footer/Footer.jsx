@@ -9,7 +9,7 @@ import { NavLink } from 'react-router';
 
 const Footer = () => {
     return (
-        <section className='bg-white'>
+        <section className='footer bg-white'>
             <div className='max-w-screen-2xl mx-auto px-6'>
                 <div className='p-6'>
                     <ul className='flex justify-between items-center font-poppins text-[#151515] text-base font-semibold'>

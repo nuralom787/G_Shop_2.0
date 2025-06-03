@@ -124,7 +124,7 @@ const MyAccount = () => {
                             :
                             <div>
                                 <div className="overflow-x-auto rounded-box border border-gray-200">
-                                    <table className="table t dark:bg-white">
+                                    <table className="table whitespace-nowrap dark:bg-white table-auto min-w-full border border-gray-100 divide-y divide-gray-200">
                                         <thead className="dark:text-black bg-gray-200">
                                             <tr>
                                                 <th className="uppercase text-center">Sl</th>
@@ -136,9 +136,9 @@ const MyAccount = () => {
                                                 <th className="uppercase text-center">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="font-inter">
+                                        <tbody className="font-inter divide-y divide-gray-100">
                                             {
-                                                orders.orders.map((order, idx) => <tr className="border-y border-gray-200" key={order._id}>
+                                                orders.orders.map((order, idx) => <tr key={order._id}>
                                                     <td className="font-bold text-center">{idx + 1}</td>
                                                     <td className="font-bold text-center">{order.invoice}</td>
                                                     <td className="font-semibold text-center leading-7">
@@ -156,7 +156,7 @@ const MyAccount = () => {
                                                     <td className="text-center font-semibold">{order.status}</td>
                                                     <td className="text-center font-bold">${order.total.toFixed(2)}</td>
                                                     <td className="text-center">
-                                                        <Link className="font-semibold text-xs bg-emerald-100 text-emerald-600 px-3.5 py-1.5 rounded-full" to={`/order/invoice/${order._id}`}>Details</Link>
+                                                        <Link className="font-semibold text-xs bg-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white duration-500 px-3.5 py-1.5 rounded-full" to={`/order/invoice/${order._id}`}>Details</Link>
                                                     </td>
                                                 </tr>)
                                             }

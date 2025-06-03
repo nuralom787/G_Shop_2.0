@@ -28,7 +28,7 @@ const InfoNav = () => {
     };
 
     return (
-        <section>
+        <section className="info-nav">
             <div className="max-w-screen-2xl mx-auto px-6 text-[#151515] py-2 flex justify-between items-center">
                 <span className="inline-flex items-center gap-1 text-xs">
                     <MdOutlinePhoneInTalk /> We are available 24/7, Need help? <a href="tel:+880123456789" className="text-[#28A745] font-semibold hover:underline">+880 12345-6789</a>

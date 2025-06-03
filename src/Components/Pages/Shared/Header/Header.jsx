@@ -35,7 +35,7 @@ const Header = () => {
     };
 
     return (
-        <section className='sticky top-0 z-20'>
+        <section className='header sticky top-0 z-20'>
             {/* Header */}
             <div className="bg-[#63e075]">
                 <div className="max-w-screen-2xl mx-auto px-6 text-[#151515] py-4 grid grid-cols-10 gap-10">

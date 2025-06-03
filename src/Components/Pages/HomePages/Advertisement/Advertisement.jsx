@@ -7,7 +7,7 @@ import playStore from '../../../Images/play-store.svg';
 
 const Advertisement = () => {
     return (
-        <section className='bg-gray-200'>
+        <section className='advertisement bg-gray-200'>
             <div className="max-w-screen-2xl mx-auto px-6 py-24">
                 <div className="flex justify-between items-center gap-10">
                     <img className='w-md' src={logo1} alt="" />

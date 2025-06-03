@@ -121,7 +121,7 @@ const CardPaymentForm = () => {
                         customer_id: account._id
                     },
                     cart: newCart,
-                    "shipping&billing": account.addresses[0],
+                    sbAddress: account.addresses[0],
                     status: "Pending",
                     subtotal: cart.cartTotalPrice,
                     shippingCost: shippingCost,
