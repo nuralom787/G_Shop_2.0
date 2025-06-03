@@ -9,6 +9,7 @@ import { IoWalletOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { IoBagHandle } from "react-icons/io5";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
@@ -189,8 +190,9 @@ const Cart = () => {
                                 <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                             </div>
                         }
-                        <ul className="w-3/5 space-y-2">
-                            {/* <li className="text-black text-sm font-medium inline-flex items-center gap-2 w-full bg-white px-4 py-3">
+                        {cart?.cart?.length ?
+                            <ul className="w-3/5 space-y-2">
+                                {/* <li className="text-black text-sm font-medium inline-flex items-center gap-2 w-full bg-white px-4 py-3">
                                 <input
                                     type="checkbox"
                                     checked={isAllSelected && cart.cartTotalItem > 0}
@@ -201,49 +203,55 @@ const Cart = () => {
                                 />
                                 Select All ({cart.cartTotalItem || 0} Item's)
                             </li> */}
-                            {
-                                cart?.cart?.map(product => <li
-                                    key={product._id}
-                                    className="flex justify-between items-center gap-6 text-black bg-white px-4 py-6"
-                                >
-                                    <div className="flex justify-start items-center gap-6 w-4/6">
-                                        {/* <input
+                                {
+                                    cart?.cart?.map(product => <li
+                                        key={product._id}
+                                        className="flex justify-between items-center gap-6 text-black bg-white px-4 py-6"
+                                    >
+                                        <div className="flex justify-start items-center gap-6 w-4/6">
+                                            {/* <input
                                             type="checkbox"
                                             checked={selectedProducts.includes(product._id)}
                                             onChange={(e) => handleSelectProduct(e, product._id)}
                                             name={product.title} id={product._id}
                                             className="appearance-none w-4 h-4 bg-white checked:bg-green-500 border-2 border-gray-300 rounded cursor-pointer" /> */}
-                                        <img src={product.image} alt="" className="w-20 h-20 rounded-full border-4 border-gray-300" />
-                                        <div>
-                                            <h3 className="font-medium text-base">{product.title}</h3>
+                                            <img src={product.image} alt="" className="w-20 h-20 rounded-full border-4 border-gray-300" />
+                                            <div>
+                                                <h3 className="font-medium text-base">{product.title}</h3>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-col justify-center items-center w-2/6 space-y-2">
-                                        <p className="text-xl font-semibold text-[#00a63e]">${product.price.toFixed(2)}</p>
-                                        {product.originalPrice > product.price && <p className="text-base line-through leading-6">${(product.originalPrice).toFixed(2)}</p>}
-                                        <div className="inline-flex justify-end items-center gap-4 text-2xl">
-                                            {fab ?
-                                                <button onClick={handleFab} className="outline-0 cursor-pointer text-red-500"><FaHeart /></button>
-                                                :
-                                                <button onClick={handleFab} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><FaRegHeart /></button>
-                                            }
-                                            <button onClick={() => handleDelete(product._id)} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><RiDeleteBin5Line /></button>
+                                        <div className="flex flex-col justify-center items-center w-2/6 space-y-2">
+                                            <p className="text-xl font-semibold text-[#00a63e]">${product.price.toFixed(2)}</p>
+                                            {product.originalPrice > product.price && <p className="text-base line-through leading-6">${(product.originalPrice).toFixed(2)}</p>}
+                                            <div className="inline-flex justify-end items-center gap-4 text-2xl">
+                                                {fab ?
+                                                    <button onClick={handleFab} className="outline-0 cursor-pointer text-red-500"><FaHeart /></button>
+                                                    :
+                                                    <button onClick={handleFab} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><FaRegHeart /></button>
+                                                }
+                                                <button onClick={() => handleDelete(product._id)} className="outline-0 cursor-pointer text-gray-500 hover:text-red-500 duration-300"><RiDeleteBin5Line /></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex justify-end items-center gap-6 w-2/6">
-                                        <div className='border-2 border-gray-300 rounded-md flex justify-between items-center w-full'>
-                                            <button disabled={product.quantity === 1 && true} className={`px-4 py-4 border-r-2 border-gray-300 ${product.quantity === 1 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:text-red-700`} onClick={() => handleQuantity("-1", product._id)}>
-                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                            </button>
-                                            <p className="text-base font-semibold">{product.quantity}</p>
-                                            <button className="px-4 py-4 border-l-2 border-gray-300 hover:text-green-700 cursor-pointer" onClick={() => handleQuantity("+1", product._id)}>
-                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                            </button>
+                                        <div className="flex justify-end items-center gap-6 w-2/6">
+                                            <div className='border-2 border-gray-300 rounded-md flex justify-between items-center w-full'>
+                                                <button disabled={product.quantity === 1 && true} className={`px-4 py-4 border-r-2 border-gray-300 ${product.quantity === 1 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:text-red-700`} onClick={() => handleQuantity("-1", product._id)}>
+                                                    <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                                </button>
+                                                <p className="text-base font-semibold">{product.quantity}</p>
+                                                <button className="px-4 py-4 border-l-2 border-gray-300 hover:text-green-700 cursor-pointer" onClick={() => handleQuantity("+1", product._id)}>
+                                                    <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>)
-                            }
-                        </ul>
+                                    </li>)
+                                }
+                            </ul>
+                            :
+                            <div className="w-3/5 p-32 font-inter bg-white text-center">
+                                <IoBagHandle className="text-gray-500 text-7xl font-semibold mx-auto" />
+                                <p className="text-gray-500 text-xl font-semibold leading-14">Your cart is empty!</p>
+                            </div>
+                        }
                         <div className="w-2/5 bg-white text-[#151515] p-6 sticky top-36">
                             <h1 className="text-xl font-semibold leading-8">Order Summery</h1>
                             <div className="divider before:bg-black after:bg-black my-2"></div>
@@ -278,7 +286,7 @@ const Cart = () => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Link to="/" className="w-full inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">CONTINUE SHOPPING <RiShoppingBasketLine /></Link>
-                                <Link to="/user/checkout" className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">PROCEED TO CHECKOUT <IoWalletOutline /></Link>
+                                <Link to={cart?.cart?.length ? "/user/checkout" : ""} className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-8 text-center">PROCEED TO CHECKOUT <IoWalletOutline /></Link>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
 const useCoupons = () => {
@@ -9,7 +9,8 @@ const useCoupons = () => {
         queryFn: async () => {
             const res = await axiosPublic.get("/coupons")
             return res.data;
-        }
+        },
+        placeholderData: keepPreviousData
     });
 
 

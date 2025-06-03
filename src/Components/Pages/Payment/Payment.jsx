@@ -12,6 +12,7 @@ import BkashPayment from "../PayOptions/Bkashpayment";
 import NagadPayment from "../PayOptions/NagadPayment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { toast } from "react-toastify";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PROMISE);
 
@@ -42,24 +43,57 @@ const Payment = () => {
                     <div className="flex justify-between items-start gap-3">
                         <div className="w-3/5 text-black">
                             <h3 className="font-semibold text-xl">Select your payment method.</h3>
-                            <div className="grid grid-cols-4 pt-5">
-                                <button onClick={() => setMethod("card")} className={`text-center cursor-pointer p-6 ${method === "card" ? "bg-white" : "bg-transparent"}`}>
-                                    <img src={card} alt="" className="h-16 w-16 mx-auto" />
-                                    <h5 className="text-sm font-medium leading-9">Credit/Debit Card</h5>
-                                </button>
-                                <button onClick={() => setMethod("bkash")} className={`text-center cursor-pointer p-6 ${method === "bkash" ? "bg-white" : "bg-transparent"}`}>
-                                    <img src={bkash} alt="" className="h-16 w-16 mx-auto" />
-                                    <h5 className="text-sm font-medium leading-9">Bkash</h5>
-                                </button>
-                                <button disabled onClick={() => setMethod("nagad")} className={`text-center cursor-pointer p-6 grayscale ${method === "nagad" ? "bg-white" : "bg-transparent"}`}>
-                                    <img src={nagad} alt="" className="h-16 w-16 mx-auto" />
-                                    <h5 className="text-sm font-medium leading-9">Nagad</h5>
-                                </button>
-                                <button onClick={() => setMethod("cod")} className={`text-center cursor-pointer p-6 ${method === "cod" ? "bg-white" : "bg-transparent"}`}>
-                                    <img src={doller} alt="" className="h-16 w-16 mx-auto" />
-                                    <h5 className="text-sm font-medium leading-9">Cash on Delivery</h5>
-                                </button>
-                            </div>
+                            {cart?.cart?.length ?
+                                <div className="grid grid-cols-4 pt-5">
+                                    <button onClick={() => setMethod("card")} className={`text-center cursor-pointer p-6 ${method === "card" ? "bg-white" : "bg-transparent"}`}>
+                                        <img src={card} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Credit/Debit Card</h5>
+                                    </button>
+                                    <button onClick={() => setMethod("bkash")} className={`text-center cursor-pointer p-6 ${method === "bkash" ? "bg-white" : "bg-transparent"}`}>
+                                        <img src={bkash} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Bkash</h5>
+                                    </button>
+                                    <button disabled onClick={() => setMethod("nagad")} className={`text-center cursor-pointer p-6 grayscale ${method === "nagad" ? "bg-white" : "bg-transparent"}`}>
+                                        <img src={nagad} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Nagad</h5>
+                                    </button>
+                                    <button onClick={() => setMethod("cod")} className={`text-center cursor-pointer p-6 ${method === "cod" ? "bg-white" : "bg-transparent"}`}>
+                                        <img src={doller} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Cash on Delivery</h5>
+                                    </button>
+                                </div>
+                                :
+                                <div className="grid grid-cols-4 pt-5">
+                                    <button
+                                        onClick={() => toast.error("Your cart is empty! please add some product to your cart and try to make a payment again.", { style: { width: "500px", padding: "25px", color: "red", fontWeight: "600" } })}
+                                        className={`text-center p-6 grayscale`}
+                                    >
+                                        <img src={card} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Credit/Debit Card</h5>
+                                    </button>
+                                    <button
+                                        onClick={() => toast.error("Your cart is empty! please add some product to your cart and try to make a payment again.", { style: { width: "500px", padding: "25px", color: "red", fontWeight: "600" } })}
+                                        className={`text-center p-6 grayscale`}
+                                    >
+                                        <img src={bkash} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Bkash</h5>
+                                    </button>
+                                    <button
+                                        onClick={() => toast.error("Your cart is empty! please add some product to your cart and try to make a payment again.", { style: { width: "500px", padding: "25px", color: "red", fontWeight: "600" } })}
+                                        className={`text-center p-6 grayscale`}
+                                    >
+                                        <img src={nagad} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Nagad</h5>
+                                    </button>
+                                    <button
+                                        onClick={() => toast.error("Your cart is empty! please add some product to your cart and try to make a payment again.", { style: { width: "500px", padding: "25px", color: "red", fontWeight: "600" } })}
+                                        className={`text-center p-6 grayscale`}
+                                    >
+                                        <img src={doller} alt="" className="h-16 w-16 mx-auto" />
+                                        <h5 className="text-sm font-medium leading-9">Cash on Delivery</h5>
+                                    </button>
+                                </div>
+                            }
                             {method === "card" &&
                                 <Elements stripe={stripePromise}>
                                     <CardPaymentForm />

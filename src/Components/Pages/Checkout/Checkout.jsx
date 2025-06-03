@@ -8,6 +8,7 @@ import { MdOutlinePayments } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { IoBagHandle } from "react-icons/io5";
 
 
 const Checkout = () => {
@@ -95,27 +96,34 @@ const Checkout = () => {
                             </div>
 
                             {/* Selected Products For Checkout */}
-                            <ul className="space-y-2">
-                                {
-                                    cart?.cart?.map(product => <li
-                                        key={product._id}
-                                        className="flex justify-between items-center gap-6 text-black bg-white px-4 py-6"
-                                    >
-                                        <div className="flex justify-start items-center gap-6 w-4/6">
-                                            <img src={product.image} alt="" className="w-20 h-20 rounded-full border-4 border-gray-300" />
-                                            <h3 className="font-medium text-xl">{product.title}</h3>
-                                        </div>
-                                        <div className="text-center w-2/6">
-                                            <p className="text-xl font-semibold text-[#00a63e]">${product.price.toFixed(2)}</p>
-                                            {product.originalPrice > product.price && <p className="text-base line-through leading-7">${(product.originalPrice).toFixed(2)}</p>}
-                                            {product.discount > 0 && <p className="text-base">-{Math.ceil(product.discount)}%</p>}
-                                        </div>
-                                        <div className="text-center w-2/6">
-                                            <p><span className="text-gray-400">Qty:</span> {product.quantity}</p>
-                                        </div>
-                                    </li>)
-                                }
-                            </ul>
+                            {cart?.cart?.length ?
+                                <ul className="space-y-2">
+                                    {
+                                        cart?.cart?.map(product => <li
+                                            key={product._id}
+                                            className="flex justify-between items-center gap-6 text-black bg-white px-4 py-6"
+                                        >
+                                            <div className="flex justify-start items-center gap-6 w-4/6">
+                                                <img src={product.image} alt="" className="w-20 h-20 rounded-full border-4 border-gray-300" />
+                                                <h3 className="font-medium text-xl">{product.title}</h3>
+                                            </div>
+                                            <div className="text-center w-2/6">
+                                                <p className="text-xl font-semibold text-[#00a63e]">${product.price.toFixed(2)}</p>
+                                                {product.originalPrice > product.price && <p className="text-base line-through leading-7">${(product.originalPrice).toFixed(2)}</p>}
+                                                {product.discount > 0 && <p className="text-base">-{Math.ceil(product.discount)}%</p>}
+                                            </div>
+                                            <div className="text-center w-2/6">
+                                                <p><span className="text-gray-400">Qty:</span> {product.quantity}</p>
+                                            </div>
+                                        </li>)
+                                    }
+                                </ul>
+                                :
+                                <div className="p-32 font-inter bg-white text-center">
+                                    <IoBagHandle className="text-gray-500 text-7xl font-semibold mx-auto" />
+                                    <p className="text-gray-500 text-xl font-semibold leading-14">Your cart is empty!</p>
+                                </div>
+                            }
                         </div>
                         <div className="w-2/5 bg-white text-[#151515] p-6 sticky top-36">
                             <h1 className="text-xl font-semibold leading-8">Order Summery</h1>

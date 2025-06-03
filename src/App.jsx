@@ -32,7 +32,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <HelmetProvider>
-          <ToastContainer />
+          <ToastContainer position='top-center' />
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<Main />}>
