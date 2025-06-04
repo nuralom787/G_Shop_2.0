@@ -21,7 +21,7 @@ const Invoice = () => {
     useEffect(() => {
         axiosSecure.get(`/order/invoice?email=${account?.email}&id=${id}`)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 setOrder(res.data);
                 setLoading(false);
             })

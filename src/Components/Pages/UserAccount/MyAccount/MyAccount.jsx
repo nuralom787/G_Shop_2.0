@@ -140,8 +140,8 @@ const MyAccount = () => {
                                             {
                                                 orders.orders.map((order, idx) => <tr key={order._id}>
                                                     <td className="font-bold text-center">{idx + 1}</td>
-                                                    <td className="font-bold text-center">{order.invoice}</td>
-                                                    <td className="font-semibold text-center leading-7">
+                                                    <td className="font-medium text-center">{order.invoice}</td>
+                                                    <td className="font-medium text-center leading-7">
                                                         {new Date(order.createdAt).toLocaleString("en-BD", {
                                                             month: "long",
                                                             day: "2-digit",
@@ -152,8 +152,13 @@ const MyAccount = () => {
                                                             hour12: true
                                                         })}
                                                     </td>
-                                                    <td className="text-center font-semibold">{order.paymentMethod}</td>
-                                                    <td className="text-center font-semibold">{order.status}</td>
+                                                    <td className="text-center font-medium">{order.paymentMethod}</td>
+                                                    <td className="text-center font-medium">
+                                                        {order.status === "Pending" && <span className="text-orange-600 font-semibold">Pending</span>}
+                                                        {order.status === "Processing" && <span className="text-indigo-600 font-semibold">Processing</span>}
+                                                        {order.status === "Delivered" && <span className="text-emerald-600 font-semibold">Delivered</span>}
+                                                        {order.status === "Cancel" && <span className="text-red-600 font-semibold">Cancel</span>}
+                                                    </td>
                                                     <td className="text-center font-bold">${order.total.toFixed(2)}</td>
                                                     <td className="text-center">
                                                         <Link className="font-semibold text-xs bg-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white duration-500 px-3.5 py-1.5 rounded-full" to={`/order/invoice/${order._id}`}>Details</Link>
