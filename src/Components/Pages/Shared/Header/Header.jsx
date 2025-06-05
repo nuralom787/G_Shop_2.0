@@ -38,25 +38,27 @@ const Header = () => {
         <section className='header sticky top-0 z-20'>
             {/* Header */}
             <div className="bg-[#63e075]">
-                <div className="max-w-screen-2xl mx-auto px-6 text-[#151515] py-4 grid grid-cols-10 gap-10">
-                    <img className="w-16 col-span-2" src={logo} alt="" />
-                    <form onSubmit={handleSubmit(onSubmit)} className="col-span-6 w-full bg-white rounded-md inline-flex justify-between items-center">
+                <div className="max-w-screen-2xl mx-auto px-3 lg:px-6 text-[#151515] py-4 grid grid-cols-1 lg:grid-cols-10 gap-10">
+                    <img className="w-16 col-span-2 hidden lg:block" src={logo} alt="" />
+                    <form onSubmit={handleSubmit(onSubmit)}
+                        className="col-span-6 w-full bg-white rounded-md inline-flex justify-between items-center"
+                    >
                         <label htmlFor="search" className="grow">
                             <input
                                 {...register("search")}
-                                className="w-full grow px-6 py-4 rounded-md outline-0 bg-white text-[#151515] font-semibold"
+                                className="w-full grow px-3 lg:px-6 py-2 lg:py-4 rounded-md outline-0 bg-white text-[#151515] font-semibold"
                                 type="search"
                                 placeholder="Search for any products..."
                             />
                         </label>
-                        <button type="submit" className="px-6 py-4 cursor-pointer">
+                        <button type="submit" className="px-3 lg:px-6 py-2 lg:py-4 cursor-pointer">
                             <svg stroke="currentColor" fill="#151515" strokeWidth="0" viewBox="0 0 512 512" height="1.5rem" width="1.5rem" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="none" strokeMiterlimit="10" strokeWidth="32" d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"></path>
                                 <path fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M338.29 338.29L448 448"></path>
                             </svg>
                         </button>
                     </form>
-                    <ul className="col-span-2 flex justify-end items-center gap-10 text-white text-3xl">
+                    <ul className="col-span-2 hidden lg:flex justify-end items-center gap-10 text-white text-3xl">
                         <li>
                             <Link to="/user/cart" className="relative">
                                 <FiShoppingCart className="text-4xl" />
@@ -91,7 +93,7 @@ const Header = () => {
             </div>
 
             {/* Navigation Bar */}
-            <div className="bg-white">
+            <div className="bg-white hidden lg:block">
                 <div className="max-w-screen-2xl mx-auto px-6 text-[#151515] py-4 flex justify-between items-center">
                     <div className="space-x-6 font-semibold font-poppins text-sm">
                         <div className="dropdown">

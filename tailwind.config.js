@@ -1,15 +1,11 @@
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite';
-
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     content: [
-        "./src/**/*.{js,jsx,ts,tsx}",
-        "./public/index.html",
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
     ],
-    theme: {},
-    plugins: [
-        react(),
-        tailwindcss()
-    ],
+    theme: {
+        extend: {},
+    },
+    plugins: []
 }

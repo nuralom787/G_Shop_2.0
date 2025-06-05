@@ -7,7 +7,7 @@ const DiscountProducts = () => {
     const discountedProducts = products?.products?.filter(product => product.discount > 0);
 
     return (
-        <section className="max-w-screen-2xl mx-auto px-6">
+        <section className="max-w-screen-2xl mx-auto px-4 lg:px-6">
             <div className="font-poppins text-center">
                 <h2 className="text-2xl text-[#151515] font-semibold leading-10">Latest Discounted Products</h2>
                 <p className="text-base text-gray-500 font-medium">
@@ -26,7 +26,7 @@ const DiscountProducts = () => {
                         />
                     </div>
                     :
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                         {
                             discountedProducts?.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                 <NavLink className="group" to={`/product/${product._id}`}>

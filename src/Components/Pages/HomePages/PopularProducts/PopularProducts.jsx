@@ -8,7 +8,7 @@ const PopularProducts = () => {
 
 
     return (
-        <section className="max-w-screen-2xl mx-auto px-6">
+        <section className="max-w-screen-2xl mx-auto px-4 lg:px-6">
             <div className="font-poppins text-center">
                 <h2 className="text-2xl text-[#151515] font-semibold leading-10">Popular Products for Daily Shopping</h2>
                 <p className="text-base text-gray-500 font-medium">
@@ -27,7 +27,7 @@ const PopularProducts = () => {
                         />
                     </div>
                     :
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                         {
                             products.products.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                 <NavLink className="group" to={`/product/${product._id}`}>
@@ -52,18 +52,18 @@ const PopularProducts = () => {
                     </div>
                 }
             </div>
-            <div className="bg-[#63e075] p-14 rounded-lg">
-                <div className="bg-white p-14 rounded-lg flex justify-between items-center gap-14">
-                    <div className="font-poppins text-[#151515] space-y-2">
-                        <h3 className="text-lg">Organic Products and Food</h3>
-                        <h1 className="text-2xl font-bold">Quick Delivery to Your Home</h1>
+            <div className="bg-[#63e075] p-7 lg:p-14 rounded-lg">
+                <div className="bg-white p-5 lg:p-14 rounded-lg flex justify-between items-center gap-14">
+                    <div className="w-full md:w-2/4 font-poppins text-[#151515] space-y-2">
+                        <h3 className="text-base lg:text-lg">Organic Products and Food</h3>
+                        <h1 className="text-xl lg:text-2xl font-bold">Quick Delivery to Your Home</h1>
                         <p className="text-sm">
                             There are many products you will find in our shop, Choose your daily necessary product from our G-shop
                             and get some special offers. See Our latest discounted products from here and get a special discount.
                         </p>
-                        <button className="bg-[#63e075] text-white font-semibold text-xs px-6 py-2 mt-6 rounded-full cursor-pointer">Download App</button>
+                        <button className="bg-[#63e075] text-white font-semibold text-xs px-6 py-2 mt-3 lg:mt-6 rounded-full cursor-pointer">Download App</button>
                     </div>
-                    <img className="w-lg" src={delivery} alt="" />
+                    <img className="w-2/4 hidden md:block" src={delivery} alt="" />
                 </div>
             </div>
         </section>

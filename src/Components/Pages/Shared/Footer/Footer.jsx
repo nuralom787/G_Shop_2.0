@@ -9,74 +9,70 @@ import { NavLink } from 'react-router';
 
 const Footer = () => {
     return (
-        <section className='footer bg-white'>
-            <div className='max-w-screen-2xl mx-auto px-6'>
-                <div className='p-6'>
-                    <ul className='flex justify-between items-center font-poppins text-[#151515] text-base font-semibold'>
-                        <li className="inline-flex items-center gap-4">
-                            <FiTruck className='text-[#63e075] text-xl' /> Free Shipping From €500.00
-                        </li>
-                        <li className="inline-flex items-center gap-4">
-                            <MdPhoneInTalk className='text-[#63e075] text-xl' /> Support 24/7 At Anytime
-                        </li>
-                        <li className="inline-flex items-center gap-4">
-                            <FiCreditCard className='text-[#63e075] text-xl' /> Secure Payment Totally Safe
-                        </li>
-                        <li className="inline-flex items-center gap-4">
-                            <GoGift className='text-[#63e075] text-xl' /> Latest Offer Upto 20% Off
-                        </li>
-                    </ul>
-                </div>
+        <section className='invoice-footer bg-white'>
+            <div className='hidden lg:block py-10 max-w-screen-2xl mx-auto px-4 lg:px-6'>
+                <ul className='flex justify-center items-center gap-8 font-poppins text-[#151515] text-sm font-semibold'>
+                    <li className="inline-flex items-center gap-4">
+                        <FiTruck className='text-[#63e075] text-xl' /> Free Shipping From €500.00
+                    </li>
+                    <li className="inline-flex items-center gap-4">
+                        <MdPhoneInTalk className='text-[#63e075] text-xl' /> Support 24/7 At Anytime
+                    </li>
+                    <li className="inline-flex items-center gap-4">
+                        <FiCreditCard className='text-[#63e075] text-xl' /> Secure Payment Totally Safe
+                    </li>
+                    <li className="inline-flex items-center gap-4">
+                        <GoGift className='text-[#63e075] text-xl' /> Latest Offer Upto 20% Off
+                    </li>
+                </ul>
             </div>
-            <div className="py-10 border-t-2 border-gray-300">
-                <div className="max-w-screen-2xl mx-auto px-6">
-                    <div className="font-poppins text-[#151515] grid grid-cols-2 md:grid-cols-4 gap-2">
-                        <div>
-                            <h2 className='text-base font-semibold mb-6'>Company</h2>
-                            <ul>
-                                <li>About Us</li>
-                                <li>Contact Us</li>
-                                <li>Career</li>
-                                <li>Latest News</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2 className='text-base font-semibold mb-6'>Latest News</h2>
-                            <ul>
-                                <li>About Us</li>
-                                <li>Contact Us</li>
-                                <li>Career</li>
-                                <li>Latest News</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2 className='text-base font-semibold mb-6'>My Account</h2>
-                            <ul>
-                                <li>About Us</li>
-                                <li>Contact Us</li>
-                                <li>Career</li>
-                                <li>Latest News</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <NavLink className="mb-3 block" to="/">
-                                <img className='w-24' src={logo} alt="" />
-                            </NavLink>
-                            <p className='leading-7 text-sm font-light'>
-                                987 Andre Plain Suite High Street 838, Lake Hestertown, USA.
-                                <br />
-                                <span>Tel: +880123456789</span>
-                                <br />
-                                <span>Email: support@gshop.com</span>
-                            </p>
-                        </div>
+            <div className="py-10">
+                <div className="font-poppins text-[#151515] grid grid-cols-2 md:grid-cols-4 gap-4 max-w-screen-2xl mx-auto px-4 lg:px-6">
+                    <div>
+                        <h2 className='text-base font-semibold mb-6'>Company</h2>
+                        <ul>
+                            <li>About Us</li>
+                            <li>Contact Us</li>
+                            <li>Career</li>
+                            <li>Latest News</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 className='text-base font-semibold mb-6'>Latest News</h2>
+                        <ul>
+                            <li>About Us</li>
+                            <li>Contact Us</li>
+                            <li>Career</li>
+                            <li>Latest News</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 className='text-base font-semibold mb-6'>My Account</h2>
+                        <ul>
+                            <li>About Us</li>
+                            <li>Contact Us</li>
+                            <li>Career</li>
+                            <li>Latest News</li>
+                        </ul>
+                    </div>
+                    <div className=''>
+                        <NavLink className="mb-3 block" to="/">
+                            <img className='w-24' src={logo} alt="" />
+                        </NavLink>
+                        <p className='leading-7 text-sm font-light'>
+                            987 Andre Plain Suite High Street 838, Lake Hestertown, USA.
+                            <br />
+                            <span>Tel: +880123456789</span>
+                            <br />
+                            <span>Email: support@gshop.com</span>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div className="border-t-2 border-gray-300">
-                <div className='bg-gray-100 max-w-screen-2xl mx-auto px-8 py-12 rounded-lg flex justify-between items-center gap-6'>
+            <div className='bg-gray-100 py-12'>
+                <div className='flex justify-between items-center max-w-screen-2xl mx-auto px-4 lg:px-6'>
                     <div className='font-poppins'>
-                        <h3 className='text-xl text-[#151515] font-normal my-5'>Flow Us</h3>
+                        <h3 className='text-xl text-[#151515] font-normal mb-5'>Flow Us</h3>
                         <div className='flex items-center gap-3'>
                             <svg viewBox="0 0 64 64" width="34" height="34">
                                 <circle cx="32" cy="32" r="32" fill="#0965FE"></circle>
@@ -96,17 +92,17 @@ const Footer = () => {
                             </svg>
                         </div>
                     </div>
-                    <div className='text-center font-poppins'>
+                    <div className='hidden lg:block text-center font-poppins'>
                         <p className='font-medium leading-10 text-sm text-gray-900'>Call Us Today</p>
                         <h1 className='font-semibold text-2xl text-[#63e075]'>+880123456789</h1>
                     </div>
-                    <div className='w-76'>
+                    <div className='hidden lg:block w-76'>
                         <img src={payMethod} alt="" />
                     </div>
                 </div>
             </div>
-            <div className='max-w-screen-2xl mx-auto px-6 text-center py-6 font-poppins'>
-                <p className='text-black text-sm font-semibold'>
+            <div className='text-center py-6 font-poppins'>
+                <p className='text-black text-xs md:text-sm font-semibold'>
                     Copyright 2024 <span className='text-[#63e075] hover:underline cursor-pointer'>@Nur-Dev</span>, All rights reserved.
                 </p>
             </div>

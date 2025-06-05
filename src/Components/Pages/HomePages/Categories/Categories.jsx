@@ -8,12 +8,12 @@ const Categories = () => {
 
 
     return (
-        <section className="max-w-screen-2xl mx-auto px-6">
+        <section className="max-w-screen-2xl mx-auto px-4 lg:px-6">
             <div className="text-center font-poppins">
                 <h1 className="text-xl text-[#151515] font-semibold">Featured Categories</h1>
-                <p className="text-sm text-gray-500 font-medium leading-10">Choose your necessary products from this feature categories.</p>
+                <p className="text-sm text-gray-500 font-medium leading-6 lg:leading-10">Choose your necessary products from this feature categories.</p>
             </div>
-            <div className="py-14">
+            <div className="py-8 lg:py-14">
                 {isPending || isError ?
                     <div className="flex justify-center items-center my-32">
                         <ScaleLoader
