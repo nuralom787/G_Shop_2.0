@@ -160,7 +160,7 @@ const Search = () => {
                                         <h1 className="text-[#151515] text-xl font-medium">Sorry, we can not find any product 😞</h1>
                                     </div>
                                     :
-                                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                                         {
                                             matchProduct?.slice(0, visibleCount).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                                 <Link className="group" to={`/product/${product._id}`}>

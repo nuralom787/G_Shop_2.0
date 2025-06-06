@@ -166,7 +166,7 @@ const CardPaymentForm = () => {
 
 
     return (
-        <form onSubmit={onSubmit} className='bg-white p-10'>
+        <form onSubmit={onSubmit} className='bg-white p-5 lg:p-10'>
             <div className="flex items-center gap-4">
                 <img className="h-10 w-10" src={visa} alt="" />
                 <img className="h-10 w-10" src={masterCard} alt="" />
@@ -197,13 +197,13 @@ const CardPaymentForm = () => {
             <div className="my-6">
                 {loading ?
                     <button
-                        className="bg-orange-500 text-white py-2.5 px-6 rounded text-sm"
+                        className="w-full lg:w-fit bg-orange-500 text-white py-2.5 px-6 rounded text-sm"
                         type="submit" disabled>
                         Processing.. <span className="loading loading-spinner loading-sm"></span>
                     </button>
                     :
                     <button
-                        className="bg-orange-400 hover:bg-orange-500 duration-500 text-white py-2.5 px-6 rounded cursor-pointer text-sm"
+                        className="w-full lg:w-fit bg-orange-400 hover:bg-orange-500 duration-500 text-white py-2.5 px-6 rounded cursor-pointer text-sm"
                         type="submit" disabled={!stripe || !clientSecret}>
                         Pay Now
                     </button>

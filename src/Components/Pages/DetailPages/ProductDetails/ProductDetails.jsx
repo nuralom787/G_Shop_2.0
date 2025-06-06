@@ -48,7 +48,7 @@ const ProductDetails = () => {
             <Helmet>
                 <title>G-Shop | {isPending || isError ? " " : product?.title}</title>
             </Helmet>
-            <section className="max-w-screen-2xl mx-auto px-6">
+            <section className="max-w-screen-2xl mx-auto px-2 lg:px-6">
                 {isPending || isError ?
                     <div className="flex justify-center items-center my-32">
                         <ScaleLoader
@@ -61,10 +61,10 @@ const ProductDetails = () => {
                     </div>
                     :
                     <div>
-                        <div className="bg-white rounded-xl p-10">
-                            <div className="grid grid-cols-3 gap-6 font-poppins text-[#151515]">
+                        <div className="bg-white rounded-xl p-4 lg:p-10">
+                            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 font-poppins text-[#151515]">
                                 <div>
-                                    <img src={product.image} alt="" />
+                                    <img className="mx-auto" src={product.image} alt="" />
                                 </div>
                                 <div className="space-y-6">
                                     <h1 className="font-bold text-3xl">{product.title}</h1>
@@ -151,7 +151,7 @@ const ProductDetails = () => {
                                     />
                                 </div>
                                 :
-                                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                                     {
                                         relatedProduct.slice(0, 18).map(product => <div className="bg-white rounded-md relative" key={product._id}>
                                             <Link className="group" to={`/product/${product._id}`}>
