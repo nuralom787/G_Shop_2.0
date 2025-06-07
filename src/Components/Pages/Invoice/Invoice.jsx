@@ -33,7 +33,7 @@ const Invoice = () => {
 
 
     return (
-        <section className="bg-white py-16 print:py-0">
+        <section className="bg-white py-8 lg:py-16 print:py-0">
             <Helmet>
                 <title>G-Shop | Invoice</title>
             </Helmet>
@@ -56,7 +56,7 @@ const Invoice = () => {
                             </p>
                         </div>
                         <section className="invoice">
-                            <div className="bg-indigo-50 print:bg-transparent p-8 rounded-t-xl">
+                            <div className="bg-indigo-50 print:bg-transparent p-5 lg:p-8 rounded-t-xl">
                                 <div className="flex flex-col md:flex-row print:flex-row justify-between items-start md:items-center gap-2 md:gap-6 border-b border-gray-50 pb-2 md:pb-4">
                                     <div>
                                         <h1 className="uppercase text-2xl font-bold">Invoice</h1>
@@ -92,7 +92,7 @@ const Invoice = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="px-8 my-10">
+                            <div className="px-5 lg:px-8 my-10">
                                 <div className="-my-2 overflow-x-auto">
                                     <table className="table-auto min-w-full border border-gray-100 divide-y divide-gray-200">
                                         <thead className="bg-gray-50">
@@ -117,7 +117,7 @@ const Invoice = () => {
                                     </table>
                                 </div>
                             </div>
-                            <div className="border-t border-b border-gray-100 p-10 bg-emerald-50 print:bg-transparent print:border-0">
+                            <div className="border-t border-b border-gray-100 p-5 lg:p-10 bg-emerald-50 print:bg-transparent print:border-0">
                                 <div className="flex lg:flex-row md:flex-row flex-col justify-between print:grid print:grid-cols-2 pt-4">
                                     <div className="mb-3 md:mb-0 lg:mb-0 flex flex-col sm:flex-wrap">
                                         <span className="mb-1 font-bold text-sm uppercase text-gray-600 block">Payment Method</span>

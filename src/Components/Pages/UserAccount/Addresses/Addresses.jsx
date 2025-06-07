@@ -34,6 +34,7 @@ const Addresses = () => {
                                     <th>Address</th>
                                     <th>Post Code</th>
                                     <th>Phone Number</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody className="">

@@ -9,10 +9,10 @@ const Dashboard = () => {
 
     return (
         <section className="bg-gray-300 py-10">
-            <section className="max-w-screen-2xl mx-auto px-6 font-poppins">
-                <div className="flex items-start gap-6 text-[#151515]">
+            <section className="max-w-screen-2xl mx-auto px-3 lg:px-6 font-poppins">
+                <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-6 text-[#151515]">
                     {/* Navigation Panel. */}
-                    <div className="bg-white w-1/4 p-6 rounded sticky top-36 navigation font-inter">
+                    <div className="bg-white w-full lg:w-1/4 p-6 rounded lg:sticky lg:top-36 navigation font-inter">
                         <NavLink to="/user/my-account" className="font-semibold text-lg">My Account</NavLink>
                         <ul className="ms-5 my-2">
                             <li className="text-sm text-gray-500 leading-7 hover:text-cyan-600 w-fit">
@@ -28,7 +28,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Outlet */}
-                    <div className="w-3/4 rounded">
+                    <div className="w-full lg:w-3/4 rounded">
                         <Outlet />
                     </div>
                 </div>

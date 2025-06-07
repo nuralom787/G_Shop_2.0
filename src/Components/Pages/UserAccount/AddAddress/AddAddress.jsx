@@ -123,7 +123,7 @@ const AddAddress = () => {
                     </div>
                 }
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="px-12 pb-12 pt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="px-2 lg:px-8 pb-6 pt-5 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                         <label>
                             <p className={`text-xs font-medium text-gray-600 my-1.5 ${errors.fullName && "text-red-500"}`}>Full Name</p>
                             <input
@@ -244,15 +244,15 @@ const AddAddress = () => {
                             {errors.address && <span className="text-red-500 text-xs font-medium px-2 py-1">You can't leave this field empty.</span>}
                         </label>
                     </div>
-                    <div className="text-end px-12 py-8 space-x-4 font-inter">
+                    <div className="text-end px-0 lg:px-12 py-4 lg:py-8 space-y-4 lg:space-x-4 font-inter">
                         <button
                             onClick={() => window.history.back()}
-                            className="px-8 py-3 bg-gray-300 rounded border border-gray-400 text-gray-600 cursor-pointer text-sm font-semibold"
+                            className="w-full lg:w-fit px-8 py-3 bg-gray-300 rounded border border-gray-400 text-gray-600 cursor-pointer text-sm font-semibold"
                             type="button">
                             Cancel
                         </button>
                         <button
-                            className="px-8 py-3 bg-orange-400 rounded border border-orange-400 text-white cursor-pointer text-sm font-semibold"
+                            className="w-full lg:w-fit px-8 py-3 bg-orange-400 rounded border border-orange-400 text-white cursor-pointer text-sm font-semibold"
                             type="submit">
                             Save
                         </button>

@@ -64,7 +64,7 @@ const MyAccount = () => {
                             {account?.addresses?.length ?
                                 <div>
                                     {
-                                        account.addresses.slice(0, 1).map(address => <div key={address._id} className="flex flex-col md:flex-row">
+                                        account.addresses.slice(0, 1).map(address => <div key={address._id} className="flex flex-col md:flex-row gap-5 md:gap-0">
                                             <div className="grow space-y-1">
                                                 <p className="text-sm text-gray-400">DEFAULT SHIPPING ADDRESS</p>
                                                 <h3 className="font-semibold text-base">{address.fullName}</h3>
@@ -74,7 +74,7 @@ const MyAccount = () => {
                                                 </p>
                                                 <span>(+88) {address.phoneNumber}</span>
                                             </div>
-                                            <div className="ps-3 border-s border-s-gray-300 grow space-y-1">
+                                            <div className="md:ps-3 md:border-s border-s-gray-300 grow space-y-1">
                                                 <p className="text-sm text-gray-400">DEFAULT BILLING ADDRESS</p>
                                                 <h3 className="font-semibold text-base">{address.fullName}</h3>
                                                 <p className="text-sm">
@@ -103,7 +103,7 @@ const MyAccount = () => {
                     }
                 </div>
             </section>
-            <section className="bg-white p-8 rounded mt-3">
+            <section className="bg-white p-4 lg:p-8 rounded mt-3">
                 <h3 className="mb-4 font-semibold text-[#151515] text-lg">Recent Orders</h3>
                 {odIsPending || odIsError ?
                     <div className="flex justify-center items-center my-32">
@@ -124,7 +124,7 @@ const MyAccount = () => {
                             :
                             <div>
                                 <div className="overflow-x-auto rounded-box border border-gray-200">
-                                    <table className="table whitespace-nowrap dark:bg-white table-auto min-w-full border border-gray-100 divide-y divide-gray-200">
+                                    <table className="table whitespace-nowrap text-xs dark:bg-white table-auto min-w-full border border-gray-100 divide-y divide-gray-200">
                                         <thead className="dark:text-black bg-gray-200">
                                             <tr>
                                                 <th className="uppercase text-center">Sl</th>
