@@ -13,17 +13,85 @@ import NagadPayment from "../PayOptions/NagadPayment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { toast } from "react-toastify";
+import useProducts from "../../../Hooks/useProducts";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
+import { FaArrowRight } from "react-icons/fa";
+
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PROMISE);
 
 const Payment = () => {
+    const axiosSecure = useAxiosSecure();
     const [account, , isPending, isError] = useMyAccount();
-    const [cart] = useCart();
+    const [products] = useProducts();
+    const [cart, refetch] = useCart();
     const [method, setMethod] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
 
 
-    // 
+    // Make Cod Payment.
+    const confirmOrder = () => {
+        setLoading(true);
+
+        let newCart = [];
+        for (let item of cart.cart) {
+            const newItem = products.products.find(product => product._id === item._id);
+            newItem.quantity = item.quantity;
+            newCart = [...newCart, newItem];
+        };
+
+        // create order information.
+        const order_information = {
+            customerInfo: {
+                customer_name: account.displayName,
+                customer_phoneNumber: account.phoneNumber,
+                customer_email: account.email,
+                customer_uid: account.uid,
+                customer_id: account._id
+            },
+            cart: newCart,
+            sbAddress: account.addresses[0],
+            status: "Pending",
+            subtotal: cart.cartTotalPrice,
+            shippingCost: shippingCost,
+            discount: cart.cartDiscount,
+            appliedCoupon: cart.cartDiscount > 0 ? cart.appliedCoupon : null,
+            total: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
+            paymentMethod: "COD",
+            paymentInfo: {
+                paymentType: "Cash-on-delivery"
+            },
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            invoice: null,
+            orderId: null
+        };
+
+        // 
+        axiosSecure.post("/add-order", order_information)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    toast.success(`Your order ${res.data.orderId.split("-")[1]} has been pleased successfully. your invoice id is: ${res.data.invoice}.`, {
+                        position: "top-center",
+                        autoClose: 6000,
+                        style: { fontWeight: "600", color: "#151515", width: "500px", padding: "20px" }
+                    });
+                    refetch();
+                    navigate(`/order/invoice/${res.data.insertedId}`)
+                    setLoading(false);
+                };
+            })
+            .catch(err => {
+                console.log(err);
+                setLoading(false);
+            });
+    };
+
+    // Change Payment Method Function. 
     const handleMethod = (e) => {
         if (e.target.value === "card") {
             setMethod("card");
@@ -34,12 +102,12 @@ const Payment = () => {
         } else {
             setMethod("cod");
         }
-    }
+    };
 
     return (
         <section className="bg-gray-300 py-10">
             <Helmet>
-                <title>G-Shop | Payment</title>
+                <title>G-Shop | PAYMENT {method && `- ${method?.toUpperCase()}`}</title>
             </Helmet>
             <section className="max-w-screen-2xl mx-auto px-3.5 lg:px-6 font-inter">
                 {isPending || isError ?
@@ -135,10 +203,19 @@ const Payment = () => {
                                         <li>- Before receiving, confirm that the airway bill shows that the parcel is from G-Shop</li>
                                         <li>- Before you make payment to the courier, confirm your order number, sender information and tracking number on the parcel</li>
                                     </ul>
-                                    <button
-                                        className="w-full lg:w-fit bg-orange-400 hover:bg-orange-500 duration-300 text-white px-12 py-2.5 mt-8 rounded font-semibold text-base cursor-pointer">
-                                        Confirm Order
-                                    </button>
+                                    {loading ?
+                                        <button
+                                            disabled
+                                            className="w-full lg:w-fit bg-orange-400 text-white px-12 py-2.5 mt-8 rounded font-semibold text-base">
+                                            Processing.. <span className="loading loading-spinner loading-sm"></span>
+                                        </button>
+                                        :
+                                        <button
+                                            onClick={confirmOrder}
+                                            className="w-full lg:w-fit bg-orange-400 hover:bg-orange-500 duration-300 text-white px-12 py-2.5 mt-8 rounded font-semibold text-base cursor-pointer inline-flex justify-center items-center gap-4">
+                                            Confirm Order <FaArrowRight />
+                                        </button>
+                                    }
                                 </div>
                             }
                         </div>

@@ -119,7 +119,7 @@ const Checkout = () => {
                                     }
                                 </ul>
                                 :
-                                <div className="w-full lg:w-3/5 p-16 lg:p-32 font-inter bg-white text-center">
+                                <div className="p-16 lg:p-32 font-inter bg-white text-center">
                                     <IoBagHandle className="text-gray-500 text-7xl font-semibold mx-auto" />
                                     <p className="text-gray-500 text-xl font-semibold leading-14">Your cart is empty!</p>
                                 </div>
