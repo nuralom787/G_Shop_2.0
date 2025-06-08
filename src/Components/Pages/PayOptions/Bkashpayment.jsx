@@ -1,21 +1,31 @@
+import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useCart from "../../../Hooks/useCart";
 import useMyAccount from "../../../Hooks/useMyAccount";
 
 const BkashPayment = () => {
     const axiosSecure = useAxiosSecure();
     const [account] = useMyAccount();
+    const [cart, , isPending, isError] = useCart();
+    const [loading, setLoading] = useState(false);
+    const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
 
     const payWithBkash = () => {
-        axiosSecure.get("/create_payment")
-            .then(data => {
-                // console.log(data.data);
-                if (data.data.bkashURL) {
-                    window.location.href = data.data.bkashURL;
-                };
-            })
-            .catch(error => {
-                console.error(error.message)
-            })
+        if (!isPending || !isError) {
+            setLoading(true);
+            const price = parseFloat((cart.cartTotalPrice + shippingCost) - cart.cartDiscount);
+            axiosSecure.post("/create_payment", { price: price })
+                .then(res => {
+                    // console.log(res.data);
+                    if (res.data.bkashURL && res.data.paymentID && res.data.statusMessage === "Successful") {
+                        window.location.href = res.data.bkashURL;
+                    };
+                })
+                .catch(error => {
+                    console.error(error.message);
+                    setLoading(false);
+                })
+        }
     };
 
 
@@ -29,9 +39,15 @@ const BkashPayment = () => {
                     <li>Ensure you are able to receive your OTP (one-time-password) on your mobile and have bKash PIN</li>
                 </ol>
             </div>
-            <button onClick={payWithBkash} className="my-4 w-full lg:w-fit bg-orange-400 hover:bg-orange-500 duration-500 text-white py-2.5 px-6 rounded cursor-pointer text-sm">
-                Pay Now
-            </button>
+            {loading ?
+                <button disabled className="my-4 w-full lg:w-fit bg-orange-400 text-white py-2.5 px-6 rounded text-sm">
+                    Processing.. <span className="loading loading-spinner loading-sm"></span>
+                </button>
+                :
+                <button onClick={payWithBkash} className="my-4 w-full lg:w-fit bg-orange-400 hover:bg-orange-500 duration-500 text-white py-2.5 px-6 rounded cursor-pointer text-sm">
+                    Pay Now
+                </button>
+            }
         </section>
     );
 };
