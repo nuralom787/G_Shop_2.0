@@ -13,7 +13,8 @@ const BkashPayment = () => {
     const payWithBkash = () => {
         if (!isPending || !isError) {
             setLoading(true);
-            const price = parseFloat((cart.cartTotalPrice + shippingCost) - cart.cartDiscount);
+            // const price = parseFloat((cart.cartTotalPrice + shippingCost) - cart.cartDiscount);
+            const price = parseFloat(cart.cartTotalPrice);
             axiosSecure.post("/create_payment", { price: price })
                 .then(res => {
                     // console.log(res.data);

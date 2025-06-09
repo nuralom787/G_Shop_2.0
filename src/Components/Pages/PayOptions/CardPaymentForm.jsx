@@ -25,7 +25,7 @@ const CardPaymentForm = () => {
 
     // Load Client Secret.
     useEffect(() => {
-        axiosSecure.post("/create-payment-intent", { price: cart.cartTotalPrice })
+        axiosSecure.post("/create-payment-intent", { price: parseFloat((cart.cartTotalPrice + shippingCost) - cart.cartDiscount) })
             .then(res => {
                 setClientSecret(res.data.clientSecret);
                 console.log(res.data.clientSecret);

@@ -6,7 +6,7 @@ import card from '../../Images/credit-card.png';
 import bkash from '../../Images/bkash.png';
 import nagad from '../../Images/nagad.png';
 import doller from '../../Images/dollar.png';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardPaymentForm from "../PayOptions/CardPaymentForm";
 import BkashPayment from "../PayOptions/Bkashpayment";
 import NagadPayment from "../PayOptions/NagadPayment";
@@ -15,13 +15,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import { toast } from "react-toastify";
 import useProducts from "../../../Hooks/useProducts";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PROMISE);
 
 const Payment = () => {
+    const location = useLocation();
     const axiosSecure = useAxiosSecure();
     const [account, , isPending, isError] = useMyAccount();
     const [products] = useProducts();
@@ -30,6 +31,97 @@ const Payment = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
+
+    const searchData = new URLSearchParams(location.search);
+    const paymentID = searchData.get("paymentID");
+    const status = searchData.get("status");
+    const trxID = searchData.get("trxID");
+    const transactionStatus = searchData.get("transactionStatus");
+    const invoiceId = searchData.get("invoiceId");
+    const newId = "#" + invoiceId;
+
+
+    // Store Order Information In The Database.
+    // This callback function use for bkash payments orders.
+    useEffect(() => {
+        if (paymentID && status === "cancel") {
+            toast.info("payment was canceled! please try again.")
+            // console.log(paymentData)
+        }
+        else if (paymentID && status === "failure") {
+            toast.info("payment was failed! please try again.")
+            // console.log(paymentData)
+        }
+
+
+        // Make Order information and placed order.
+        if (paymentID && status === "success") {
+            // console.log(paymentData);
+            setLoading(true);
+
+            let newCart = [];
+            for (let item of cart.cart) {
+                const newItem = products.products.find(product => product._id === item._id);
+                newItem.quantity = item.quantity;
+                newCart = [...newCart, newItem];
+            };
+
+            // create order information.
+            const order_information = {
+                customerInfo: {
+                    customer_name: account.displayName,
+                    customer_phoneNumber: account.phoneNumber,
+                    customer_email: account.email,
+                    customer_uid: account.uid,
+                    customer_id: account._id
+                },
+                cart: newCart,
+                sbAddress: account.addresses[0],
+                status: "Pending",
+                subtotal: cart.cartTotalPrice,
+                shippingCost: shippingCost,
+                discount: cart.cartDiscount,
+                appliedCoupon: cart.cartDiscount > 0 ? cart.appliedCoupon : null,
+                total: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
+                paymentMethod: "BKASH",
+                paymentInfo: {
+                    paymentID,
+                    status,
+                    trxID,
+                    transactionStatus,
+                    amount: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
+                    paymentType: "bkash"
+                },
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+                invoice: newId,
+                orderId: null
+            };
+            console.log(order_information);
+
+
+            // 
+            // axiosSecure.post("/add-order", order_information)
+            //     .then(res => {
+            //         console.log(res.data);
+            //         if (res.data.insertedId) {
+            //             toast.success(`Your order ${res.data.orderId.split("-")[1]} has been pleased successfully. your invoice id is: ${res.data.invoice}.`, {
+            //                 position: "top-center",
+            //                 autoClose: 6000,
+            //                 style: { fontWeight: "600", color: "#151515", width: "500px", padding: "20px" }
+            //             });
+            //             refetch();
+            //             navigate(`/order/invoice/${res.data.insertedId}`)
+            //             setLoading(false);
+            //         };
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //         setLoading(false);
+            //     });
+        }
+    }, []);
+
 
 
     // Make Cod Payment.
