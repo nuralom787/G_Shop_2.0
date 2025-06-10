@@ -28,7 +28,7 @@ const CardPaymentForm = () => {
         axiosSecure.post("/create-payment-intent", { price: parseFloat((cart.cartTotalPrice + shippingCost) - cart.cartDiscount) })
             .then(res => {
                 setClientSecret(res.data.clientSecret);
-                console.log(res.data.clientSecret);
+                // console.log(res.data.clientSecret);
             })
             .catch(err => {
                 console.log(err.message);
@@ -70,7 +70,7 @@ const CardPaymentForm = () => {
             console.log('[error]', error);
             setError(error.message);
         } else {
-            console.log('[PaymentMethod]', paymentMethod);
+            // console.log('[PaymentMethod]', paymentMethod);
             setError("");
         };
 
@@ -143,7 +143,7 @@ const CardPaymentForm = () => {
 
                 axiosSecure.post("/add-order", order_information)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         if (res.data.insertedId) {
                             toast.success(`Your order ${res.data.orderId.split("-")[1]} has been pleased successfully. your invoice id is: ${res.data.invoice}.`, {
                                 position: "top-center",

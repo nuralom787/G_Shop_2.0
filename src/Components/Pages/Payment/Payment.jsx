@@ -98,13 +98,13 @@ const Payment = () => {
                     invoice: newId,
                     orderId: null
                 };
-                console.log(order_information);
+                // console.log(order_information);
 
 
                 // 
                 axiosSecure.post("/add-order", order_information)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         if (res.data.insertedId) {
                             toast.success(`Your order ${res.data.orderId.split("-")[1]} has been pleased successfully. your invoice id is: ${res.data.invoice}.`, {
                                 position: "top-center",
@@ -166,7 +166,7 @@ const Payment = () => {
         // 
         axiosSecure.post("/add-order", order_information)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.insertedId) {
                     toast.success(`Your order ${res.data.orderId.split("-")[1]} has been pleased successfully. your invoice id is: ${res.data.invoice}.`, {
                         position: "top-center",

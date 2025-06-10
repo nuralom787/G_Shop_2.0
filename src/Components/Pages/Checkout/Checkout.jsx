@@ -46,7 +46,7 @@ const Checkout = () => {
         // Validate Coupon Code.
         axiosSecure.post("/apply-coupon", data)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.modifiedCount > 0) {
                     refetch();
                     toast.success(`Coupon code "${data.couponCode}" applied successfully.`, { position: "top-center", autoClose: 5000 });
