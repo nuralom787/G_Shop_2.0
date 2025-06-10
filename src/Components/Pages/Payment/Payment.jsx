@@ -25,8 +25,8 @@ const Payment = () => {
     const location = useLocation();
     const axiosSecure = useAxiosSecure();
     const [account, , isPending, isError] = useMyAccount();
-    const [products] = useProducts();
-    const [cart, refetch] = useCart();
+    const [products, , pPending, pError] = useProducts();
+    const [cart, refetch, cartPending, cartError] = useCart();
     const [method, setMethod] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -45,83 +45,84 @@ const Payment = () => {
     // This callback function use for bkash payments orders.
     useEffect(() => {
         if (paymentID && status === "cancel") {
-            toast.info("payment was canceled! please try again.")
+            // toast.info("payment was canceled! please try again.");
             // console.log(paymentData)
         }
         else if (paymentID && status === "failure") {
-            toast.info("payment was failed! please try again.")
+            // toast.info("payment was failed! please try again.")
             // console.log(paymentData)
         }
 
 
         // Make Order information and placed order.
-        if (paymentID && status === "success") {
-            // console.log(paymentData);
-            setLoading(true);
+        if (!cartPending && !cartError && !pPending && !pError) {
+            if (paymentID && status === "success") {
+                // console.log(paymentData);
+                setLoading(true);
 
-            let newCart = [];
-            for (let item of cart.cart) {
-                const newItem = products.products.find(product => product._id === item._id);
-                newItem.quantity = item.quantity;
-                newCart = [...newCart, newItem];
-            };
+                let newCart = [];
+                for (let item of cart.cart) {
+                    const newItem = products.products.find(product => product._id === item._id);
+                    newItem.quantity = item.quantity;
+                    newCart = [...newCart, newItem];
+                };
 
-            // create order information.
-            const order_information = {
-                customerInfo: {
-                    customer_name: account.displayName,
-                    customer_phoneNumber: account.phoneNumber,
-                    customer_email: account.email,
-                    customer_uid: account.uid,
-                    customer_id: account._id
-                },
-                cart: newCart,
-                sbAddress: account.addresses[0],
-                status: "Pending",
-                subtotal: cart.cartTotalPrice,
-                shippingCost: shippingCost,
-                discount: cart.cartDiscount,
-                appliedCoupon: cart.cartDiscount > 0 ? cart.appliedCoupon : null,
-                total: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
-                paymentMethod: "BKASH",
-                paymentInfo: {
-                    paymentID,
-                    status,
-                    trxID,
-                    transactionStatus,
-                    amount: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
-                    paymentType: "bkash"
-                },
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                invoice: newId,
-                orderId: null
-            };
-            console.log(order_information);
+                // create order information.
+                const order_information = {
+                    customerInfo: {
+                        customer_name: account.displayName,
+                        customer_phoneNumber: account.phoneNumber,
+                        customer_email: account.email,
+                        customer_uid: account.uid,
+                        customer_id: account._id
+                    },
+                    cart: newCart,
+                    sbAddress: account.addresses[0],
+                    status: "Pending",
+                    subtotal: cart.cartTotalPrice,
+                    shippingCost: shippingCost,
+                    discount: cart.cartDiscount,
+                    appliedCoupon: cart.cartDiscount > 0 ? cart.appliedCoupon : null,
+                    total: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
+                    paymentMethod: "BKASH",
+                    paymentInfo: {
+                        paymentID,
+                        status,
+                        trxID,
+                        transactionStatus,
+                        amount: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
+                        paymentType: "bkash"
+                    },
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                    invoice: newId,
+                    orderId: null
+                };
+                console.log(order_information);
 
 
-            // 
-            // axiosSecure.post("/add-order", order_information)
-            //     .then(res => {
-            //         console.log(res.data);
-            //         if (res.data.insertedId) {
-            //             toast.success(`Your order ${res.data.orderId.split("-")[1]} has been pleased successfully. your invoice id is: ${res.data.invoice}.`, {
-            //                 position: "top-center",
-            //                 autoClose: 6000,
-            //                 style: { fontWeight: "600", color: "#151515", width: "500px", padding: "20px" }
-            //             });
-            //             refetch();
-            //             navigate(`/order/invoice/${res.data.insertedId}`)
-            //             setLoading(false);
-            //         };
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //         setLoading(false);
-            //     });
+                // 
+                axiosSecure.post("/add-order", order_information)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            toast.success(`Your order ${res.data.orderId.split("-")[1]} has been pleased successfully. your invoice id is: ${res.data.invoice}.`, {
+                                position: "top-center",
+                                autoClose: 6000,
+                                style: { fontWeight: "600", color: "#151515", width: "500px", padding: "20px" }
+                            });
+                            refetch();
+                            navigate(`/order/invoice/${res.data.insertedId}`, { replace: true })
+                            setLoading(false);
+                        };
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        setLoading(false);
+                    });
+            }
         }
-    }, []);
-
+    }, [cart, products]);
 
 
     // Make Cod Payment.
@@ -183,6 +184,7 @@ const Payment = () => {
             });
     };
 
+
     // Change Payment Method Function. 
     const handleMethod = (e) => {
         if (e.target.value === "card") {
@@ -214,6 +216,11 @@ const Payment = () => {
                     </div>
                     :
                     <div className="flex flex-col-reverse md:flex-row justify-between items-start gap-6 lg:gap-3">
+                        {loading &&
+                            <div className="fixed inset-0 z-50 bg-black opacity-40 flex items-center justify-center">
+                                <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                        }
                         <div className="w-full lg:w-3/5 text-black">
                             <h3 className="font-semibold text-xl">Select your payment method.</h3>
                             {cart?.cart?.length ?

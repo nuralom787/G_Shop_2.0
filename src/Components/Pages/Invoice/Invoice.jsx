@@ -49,8 +49,8 @@ const Invoice = () => {
                         />
                     </div>
                     :
-                    <div className="space-y-8">
-                        <div className="invoice-head bg-emerald-100 px-8 py-6 rounded-md">
+                    <div className="">
+                        <div className="invoice-head bg-emerald-100 px-8 py-6 mb-8 rounded-md">
                             <p className="font-semibold">
                                 Thank you <span className="font-bold text-emerald-600">{order?.customerInfo?.customer_name}.</span> Your order have been received.
                             </p>
