@@ -13,6 +13,7 @@ import MyAccount from './Components/Pages/UserAccount/MyAccount/MyAccount';
 import Orders from './Components/Pages/UserAccount/Orders/Orders';
 import Cart from './Components/Pages/Cart/Cart';
 import './App.css';
+import 'react-modern-drawer/dist/index.css'
 import Dashboard from './Components/Pages/UserAccount/Dashboard/Dashboard';
 import PrivetRoute from './PrivetRoute/PrivetRoute';
 import Profile from './Components/Pages/UserAccount/Profile/Profile';

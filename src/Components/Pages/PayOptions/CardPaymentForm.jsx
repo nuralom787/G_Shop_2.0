@@ -21,7 +21,7 @@ const CardPaymentForm = () => {
     const [products] = useProducts();
     const [cart, refetch] = useCart();
     const [account] = useMyAccount();
-    const shippingCost = account?.addresses[0]?.region !== "Dhaka" ? 60 : 30;
+    const shippingCost = 60;
 
     // Load Client Secret.
     useEffect(() => {

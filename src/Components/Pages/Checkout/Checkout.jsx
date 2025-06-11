@@ -16,7 +16,7 @@ const Checkout = () => {
     const axiosSecure = useAxiosSecure();
     const [account, , isPending, isError] = useMyAccount();
     const [cart, refetch] = useCart();
-    const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
+    const shippingCost = 60;
     // const [selectedProductIds, setSelectedProductIds] = useState([]);
 
     // const selectedProducts = cart?.cart?.filter(item => selectedProductIds.includes(item._id));
@@ -85,7 +85,7 @@ const Checkout = () => {
                                     <button className="text-sm text-cyan-500 cursor-pointer">EDIT</button>
                                 </div>
                                 {
-                                    account.addresses.slice(0, 1).map(address => <div key={address._id} className="text-sm pt-4 pb-6">
+                                    account?.addresses?.slice(0, 1).map(address => <div key={address._id} className="text-sm pt-4 pb-6">
                                         <p>
                                             <span className="pr-5 font-bold italic">{address.fullName}</span>
                                             <span>{address.phoneNumber}</span>

@@ -3,6 +3,7 @@ import Footer from "../Shared/Footer/Footer";
 import Header from "../Shared/Header/Header";
 import InfoNav from "../Shared/InfoNav/InfoNav";
 import Advertisement from "../HomePages/Advertisement/Advertisement";
+import MobileTabletFooter from "../MobileTabletFooter/MobileTabletFooter";
 
 const Main = () => {
     return (
@@ -12,6 +13,7 @@ const Main = () => {
             <Outlet />
             <Advertisement />
             <Footer />
+            <MobileTabletFooter />
         </section>
     );
 };

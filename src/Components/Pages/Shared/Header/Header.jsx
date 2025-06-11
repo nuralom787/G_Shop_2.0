@@ -31,7 +31,7 @@ const Header = () => {
 
     // Set User Name First Letter as there image if image is null.
     const getInitial = () => {
-        return user?.email ? user?.email.charAt(0).toUpperCase() : '?';
+        return user?.displayName ? user?.displayName.charAt(0).toUpperCase() : '?';
     };
 
     return (

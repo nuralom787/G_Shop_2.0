@@ -101,7 +101,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className='text-center py-6 font-poppins'>
+            <div className='mb-16 lg:mb-0 text-center py-6 font-poppins'>
                 <p className='text-black text-xs md:text-sm font-semibold'>
                     Copyright 2024 <span className='text-[#63e075] hover:underline cursor-pointer'>@Nur-Dev</span>, All rights reserved.
                 </p>

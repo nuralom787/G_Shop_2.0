@@ -72,7 +72,7 @@ const Search = () => {
             <Helmet>
                 <title>G-Shop | {_id ? category : item || searchText}</title>
             </Helmet>
-            <section className="max-w-screen-2xl mx-auto px-6 font-poppins">
+            <section className="max-w-screen-2xl mx-auto px-4 lg:px-6 font-poppins">
                 {/* Search Banner */}
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 font-poppins text-center">
                     <div className="search1 bg-cover bg-center p-16 rounded-lg">
@@ -103,8 +103,30 @@ const Search = () => {
                         </div>
                         :
                         <Swiper
-                            slidesPerView={8}
+                            slidesPerView={1}
                             spaceBetween={10}
+                            breakpoints={{
+                                320: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                480: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                768: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 10,
+                                },
+                                1024: {
+                                    slidesPerView: 6,
+                                    spaceBetween: 10,
+                                },
+                                1280: {
+                                    slidesPerView: 8,
+                                    spaceBetween: 10,
+                                }
+                            }}
                             autoplay={{
                                 delay: 3000,
                             }}

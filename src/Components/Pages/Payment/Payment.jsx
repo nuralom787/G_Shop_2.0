@@ -30,7 +30,7 @@ const Payment = () => {
     const [method, setMethod] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
+    const shippingCost = 60;
 
     const searchData = new URLSearchParams(location.search);
     const paymentID = searchData.get("paymentID");

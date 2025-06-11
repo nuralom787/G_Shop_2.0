@@ -27,7 +27,7 @@ const Cart = () => {
     const [cart, refetch, isPending, isError] = useCart();
     const axiosSecure = useAxiosSecure();
     const [account, , acisPending, acisError] = useMyAccount();
-    const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
+    const shippingCost = 60;
 
 
     // Check if all products are selected
@@ -247,12 +247,12 @@ const Cart = () => {
                                 }
                             </ul>
                             :
-                            <div className="w-full lg:w-3/5 p-16 lg:p-32 font-inter bg-white text-center">
+                            <div className="w-full p-16 lg:p-32 font-inter bg-white text-center">
                                 <IoBagHandle className="text-gray-500 text-5xl lg:text-7xl font-semibold mx-auto" />
                                 <p className="text-gray-500 text-xl font-semibold leading-14">Your cart is empty!</p>
                             </div>
                         }
-                        <div className="w-full lg:w-2/5 bg-white text-[#151515] p-6 sticky top-36">
+                        <div className={`${cart?.cartTotalPrice ? "block" : "hidden"} w-full lg:w-2/5 bg-white text-[#151515] p-6 sticky top-36`}>
                             <h1 className="text-xl font-semibold leading-8">Order Summery</h1>
                             <div className="divider before:bg-black after:bg-black my-2"></div>
                             <div className="">

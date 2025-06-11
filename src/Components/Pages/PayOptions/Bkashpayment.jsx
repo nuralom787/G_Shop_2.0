@@ -8,7 +8,7 @@ const BkashPayment = () => {
     const [account] = useMyAccount();
     const [cart, , isPending, isError] = useCart();
     const [loading, setLoading] = useState(false);
-    const shippingCost = account?.addresses[0].region !== "Dhaka" ? 60 : 30;
+    const shippingCost = 60;
 
     const payWithBkash = () => {
         if (!isPending || !isError) {
