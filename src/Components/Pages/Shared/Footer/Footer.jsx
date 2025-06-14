@@ -4,7 +4,7 @@ import { FiTruck } from "react-icons/fi";
 import { MdPhoneInTalk } from "react-icons/md";
 import { FiCreditCard } from "react-icons/fi";
 import { GoGift } from "react-icons/go";
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 
 
 const Footer = () => {
@@ -49,10 +49,18 @@ const Footer = () => {
                     <div>
                         <h2 className='text-base font-semibold mb-6'>My Account</h2>
                         <ul>
-                            <li>About Us</li>
-                            <li>Contact Us</li>
-                            <li>Career</li>
-                            <li>Latest News</li>
+                            <li>
+                                <Link to="/user/my-account">My Account</Link>
+                            </li>
+                            <li>
+                                <Link to="/user/profile">My Profile</Link>
+                            </li>
+                            <li>
+                                <Link to="/user/addresses">Address Book</Link>
+                            </li>
+                            <li>
+                                <Link to="/user/orders">Orders</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className=''>

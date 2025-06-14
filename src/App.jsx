@@ -24,6 +24,7 @@ import UpdateAddress from './Components/Pages/UserAccount/UpdatePages/UpdateAddr
 import Checkout from './Components/Pages/Checkout/Checkout';
 import Payment from './Components/Pages/Payment/Payment';
 import Invoice from './Components/Pages/Invoice/Invoice';
+import AboutUs from './Components/Pages/Others/AboutUs/AboutUs';
 
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/product/:id' element={<ProductDetails />}></Route>
                 <Route path='/search' element={<Search />}></Route>
+                <Route path='/about-us' element={<AboutUs />}></Route>
+                <Route path='/contact-us' element={<Search />}></Route>
+                <Route path='/terms&condition' element={<Search />}></Route>
                 <Route path='/user/cart' element={<PrivetRoute><Cart /></PrivetRoute>}></Route>
                 <Route path='/user/checkout' element={<PrivetRoute><Checkout /></PrivetRoute>}></Route>
                 <Route path='/user/payment' element={<PrivetRoute><Payment /></PrivetRoute>}></Route>
