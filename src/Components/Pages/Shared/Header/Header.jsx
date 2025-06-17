@@ -103,7 +103,10 @@ const Header = () => {
                             </div>
                             <ul tabIndex={0} className="dropdown-content menu flex-nowrap bg-white rounded-box z-1 min-w-max max-h-screen overflow-y-auto p-2 pt-3 mt-2 shadow-sm">
                                 {categories?.categories?.map(category => <li key={category._id}>
-                                    <NavLink to={'/'} className="inline-flex justify-between items-center gap-4 my-1 hover:text-[#63e075]">
+                                    <NavLink
+                                        to={`/search?category=${encodeURIComponent(category.parent)}&_id=${category._id}`}
+                                        className="inline-flex justify-between items-center gap-4 my-1 hover:text-[#63e075]"
+                                    >
                                         <div className="inline-flex items-center gap-4 hover:text-[#63e075]">
                                             <img className="w-5 h-5 rounded-full" src={category.icon} alt="" />
                                             <span className="text-sm font-poppins font-medium">{category.parent}</span>

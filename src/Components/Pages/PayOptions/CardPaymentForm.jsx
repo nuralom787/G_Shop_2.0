@@ -122,7 +122,6 @@ const CardPaymentForm = () => {
                     },
                     cart: newCart,
                     sbAddress: account.addresses[0],
-                    status: "Pending",
                     subtotal: cart.cartTotalPrice,
                     shippingCost: shippingCost,
                     discount: cart.cartDiscount,
@@ -132,11 +131,7 @@ const CardPaymentForm = () => {
                     paymentInfo: {
                         paymentMethod,
                         paymentIntent
-                    },
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    invoice: null,
-                    orderId: null
+                    }
                 };
 
                 // console.log(order_information);

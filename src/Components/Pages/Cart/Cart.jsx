@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import useMyAccount from "../../../Hooks/useMyAccount";
 import { useForm } from "react-hook-form";
+import Scroll from "../Shared/Scroll/Scroll";
 
 
 
@@ -169,6 +170,7 @@ const Cart = () => {
 
     return (
         <section className="bg-gray-300 py-10">
+            <Scroll />
             <Helmet>
                 <title>G-Shop | Cart</title>
             </Helmet>

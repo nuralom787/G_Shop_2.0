@@ -8,6 +8,7 @@ import logo from '../../Images/brandLogo2.png';
 import { FaFileDownload } from "react-icons/fa";
 import { MdOutlineLocalPrintshop } from "react-icons/md";
 import './Invoice.css';
+import Scroll from "../Shared/Scroll/Scroll";
 
 const Invoice = () => {
     const { id } = useParams();
@@ -34,6 +35,7 @@ const Invoice = () => {
 
     return (
         <section className="bg-white py-8 lg:py-16 print:py-0">
+            <Scroll />
             <Helmet>
                 <title>G-Shop | Invoice</title>
             </Helmet>

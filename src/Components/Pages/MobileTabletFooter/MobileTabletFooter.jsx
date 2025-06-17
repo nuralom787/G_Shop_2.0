@@ -33,7 +33,7 @@ const MobileTabletFooter = () => {
     }
 
     return (
-        <section className='block lg:hidden w-full fixed bottom-0 text-white bg-[#63e075] z-50 font-inter'>
+        <section className='block lg:hidden w-full fixed bottom-0 text-white bg-[#63e075] z-50 font-inter print:hidden'>
             <ul className='flex justify-between items-center gap-3 px-6 py-3.5 font-semibold text-center'>
                 <li>
                     <button className="" onClick={handleMenu}>

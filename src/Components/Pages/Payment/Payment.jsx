@@ -17,6 +17,7 @@ import useProducts from "../../../Hooks/useProducts";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useLocation, useNavigate } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
+import Scroll from "../Shared/Scroll/Scroll";
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PROMISE);
@@ -78,7 +79,6 @@ const Payment = () => {
                     },
                     cart: newCart,
                     sbAddress: account.addresses[0],
-                    status: "Pending",
                     subtotal: cart.cartTotalPrice,
                     shippingCost: shippingCost,
                     discount: cart.cartDiscount,
@@ -93,10 +93,7 @@ const Payment = () => {
                         amount: (cart.cartTotalPrice + shippingCost) - cart.cartDiscount,
                         paymentType: "bkash"
                     },
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    invoice: newId,
-                    orderId: null
+                    invoice: newId
                 };
                 // console.log(order_information);
 
@@ -147,7 +144,6 @@ const Payment = () => {
             },
             cart: newCart,
             sbAddress: account.addresses[0],
-            status: "Pending",
             subtotal: cart.cartTotalPrice,
             shippingCost: shippingCost,
             discount: cart.cartDiscount,
@@ -156,11 +152,7 @@ const Payment = () => {
             paymentMethod: "COD",
             paymentInfo: {
                 paymentType: "Cash-on-delivery"
-            },
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-            invoice: null,
-            orderId: null
+            }
         };
 
         // 
@@ -200,6 +192,7 @@ const Payment = () => {
 
     return (
         <section className="bg-gray-300 py-10">
+            <Scroll />
             <Helmet>
                 <title>G-Shop | PAYMENT {method && `- ${method?.toUpperCase()}`}</title>
             </Helmet>

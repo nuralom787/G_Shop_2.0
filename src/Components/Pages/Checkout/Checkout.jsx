@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { IoBagHandle } from "react-icons/io5";
+import Scroll from "../Shared/Scroll/Scroll";
 
 
 const Checkout = () => {
@@ -61,6 +62,7 @@ const Checkout = () => {
 
     return (
         <section className="bg-gray-300 py-10">
+            <Scroll />
             <Helmet>
                 <title>G-Shop | Checkout</title>
             </Helmet>
