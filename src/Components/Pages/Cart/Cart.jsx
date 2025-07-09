@@ -287,8 +287,20 @@ const Cart = () => {
                                 <p className="font-bold text-xl text-red-600">${((cart?.cartTotalPrice + shippingCost) - cart?.cartDiscount).toFixed(2) || "00.00"}</p>
                             </div>
                             <div className="flex flex-col md:flex-row items-center gap-2">
-                                <Link to="/" className="w-full inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-3 md:mt-8 text-center">CONTINUE SHOPPING <RiShoppingBasketLine /></Link>
-                                <Link to={cart?.cart?.length ? "/user/checkout" : ""} className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-3 md:mt-8 text-center">PROCEED TO CHECKOUT <IoWalletOutline /></Link>
+                                <Link to="/" className="w-full inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-3 md:mt-8 text-center">
+                                    CONTINUE SHOPPING <RiShoppingBasketLine />
+                                </Link>
+                                {account?.addresses?.length ?
+                                    <Link to={cart?.cart?.length ? "/user/checkout" : ""} className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-3 md:mt-8 text-center">
+                                        PROCEED TO CHECKOUT <IoWalletOutline />
+                                    </Link>
+                                    :
+                                    <button
+                                        onClick={() => toast.info("Please Complete Your Profile Information For Placed an Order!!", { position: "top-center", autoClose: 2500 })}
+                                        className="w-full inline-flex items-center justify-center gap-1.5 bg-orange-400 hover:bg-orange-500 duration-300 text-white px-5 py-2.5 rounded font-semibold text-base mt-3 md:mt-8 text-center cursor-pointer">
+                                        PROCEED TO CHECKOUT <IoWalletOutline />
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>
